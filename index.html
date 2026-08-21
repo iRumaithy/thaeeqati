@@ -217,7 +217,7 @@ tr:last-child td{border-bottom:0}
 .releaseCard{margin-top:16px;padding:16px;border:1px solid #dfd0b6;border-radius:20px;background:#fff9ee;box-shadow:var(--shadow2)}
 .releaseCard .releaseRow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.releaseCard b{color:var(--accent2)}.releaseCard p{margin:8px 0;color:var(--muted);line-height:1.7;font-size:12px}.previewBadge{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:#fff0cf;color:#815b18;font-size:11px;font-weight:800;border:1px solid #ead19c}
 .updateNotice{margin:12px 0 2px;padding:13px 14px;border-radius:18px;border:1px solid #dfc58c;background:linear-gradient(135deg,#fff8e9,#fffdf8);box-shadow:var(--shadow2);display:flex;align-items:center;justify-content:space-between;gap:12px}
-.updateNotice.hidden{display:none!important}.updateNoticeText{min-width:0}.updateNoticeText b{display:block;color:#5b411d;font-size:13px}.updateNoticeText span{display:block;color:var(--muted);font-size:11px;line-height:1.6;margin-top:2px}.updateNotice .btn{flex:0 0 auto;padding:9px 11px;font-size:11px}.updateHero{padding:15px;border-radius:20px;background:#fff8e9;border:1px solid #e6d4ae;margin-bottom:13px}.updateHero h3{margin:6px 0;font-size:25px}.updateHero p{margin:0;color:var(--muted);line-height:1.8;font-size:12px}.backupHint{padding:12px 13px;border-radius:15px;background:#f4f0e9;border:1px solid var(--line);font-size:11px;line-height:1.8;color:#665f56}.updateActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.updateActions .later{grid-column:1/-1}.backupDone{background:#eef7f0!important;color:#406e54!important;border-color:#c9dfcf!important}
+.updateNotice.hidden{display:none!important}.updateNoticeText{min-width:0}.updateNoticeText b{display:block;color:#5b411d;font-size:13px}.updateNoticeText span{display:block;color:var(--muted);font-size:11px;line-height:1.6;margin-top:2px}.updateNotice .btn{flex:0 0 auto;padding:9px 11px;font-size:11px}.pushNotice{border-color:#c9dfcf;background:linear-gradient(135deg,#eef7f0,#fffdf8)}.pushNotice .updateNoticeText b{color:#406e54}.refreshing{animation:spinRefresh .75s linear infinite}@keyframes spinRefresh{to{transform:rotate(-360deg)}}.updateHero{padding:15px;border-radius:20px;background:#fff8e9;border:1px solid #e6d4ae;margin-bottom:13px}.updateHero h3{margin:6px 0;font-size:25px}.updateHero p{margin:0;color:var(--muted);line-height:1.8;font-size:12px}.backupHint{padding:12px 13px;border-radius:15px;background:#f4f0e9;border:1px solid var(--line);font-size:11px;line-height:1.8;color:#665f56}.updateActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.updateActions .later{grid-column:1/-1}.backupDone{background:#eef7f0!important;color:#406e54!important;border-color:#c9dfcf!important}
 @media(min-width:700px){
   .app{padding-left:24px;padding-right:24px}.topbar{margin-left:-24px;margin-right:-24px;padding-left:24px;padding-right:24px}
   .grid{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(4,1fr)}.formgrid.two{grid-template-columns:1fr 1fr}
@@ -231,11 +231,15 @@ tr:last-child td{border-bottom:0}
 <div class="app">
   <header class="topbar"><div class="topin">
     <div class="brand"><div class="brandmark" aria-label="شعار ذواق"><img src="icon-192.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="brandtext"><b>ذواق</b><small id="brandSub">THAWAQ</small></div></div>
-    <div class="topactions"><button class="iconbtn hidden" id="installBtn" title="تثبيت التطبيق" aria-label="تثبيت التطبيق">⇩</button><button class="iconbtn" id="homeBtn" title="الرئيسية">⌂</button><button class="iconbtn" id="accountBtn" title="الحساب">◉</button></div>
+    <div class="topactions"><button class="iconbtn hidden" id="installBtn" title="تثبيت التطبيق" aria-label="تثبيت التطبيق">⇩</button><button class="iconbtn" id="refreshBtn" title="تحديث" aria-label="تحديث">↻</button><button class="iconbtn" id="homeBtn" title="الرئيسية">⌂</button><button class="iconbtn" id="accountBtn" title="الحساب">◉</button></div>
   </div></header>
   <div id="updateNotice" class="updateNotice hidden">
     <div class="updateNoticeText"><b id="updateNoticeTitle">تحديث جديد متاح</b><span id="updateNoticeText"></span></div>
     <button class="btn primary" id="reviewUpdateBtn">مراجعة التحديث</button>
+  </div>
+  <div id="pushNotice" class="updateNotice pushNotice hidden">
+    <div class="updateNoticeText"><b>فعّل إشعارات التحديث خارج التطبيق</b><span id="pushNoticeText">ستصلك تنبيهات النسخ الجديدة حتى عندما يكون ذواق مغلقًا.</span></div>
+    <button class="btn secondary" id="enablePushBtn">تفعيل الإشعارات</button>
   </div>
 
   <main id="publicView">
@@ -304,6 +308,7 @@ tr:last-child td{border-bottom:0}
 <script>
 const SUPABASE_URL=window.APP_CONFIG?.SUPABASE_URL||'YOUR_SUPABASE_URL';
 const SUPABASE_KEY=window.APP_CONFIG?.SUPABASE_PUBLISHABLE_KEY||'YOUR_SUPABASE_PUBLISHABLE_KEY';
+const PUSH_PUBLIC_KEY=window.APP_CONFIG?.PUSH_PUBLIC_KEY||'';
 const MEDIA_BUCKET='blog-media';
 const CLOUD_READY=SUPABASE_URL.startsWith('https://')&&!SUPABASE_URL.includes('YOUR_')&&SUPABASE_KEY&&!SUPABASE_KEY.includes('YOUR_');
 const REMEMBER_KEY='thaeeqatiRememberMe';
@@ -464,7 +469,7 @@ async function loadCloud(){
  const {data:{session}}=await sb.auth.getSession();state.session=session;
  state.currentProfile=session?state.profiles.find(p=>p.id===session.user.id)||null:null;
  if(state.currentProfile?.is_active===false){await sb.auth.signOut();state.session=null;state.currentProfile=null;toast('هذا الحساب موقوف من إدارة المنصة')}
- route();
+ route();setTimeout(syncPushPermissionUI,0);
 }
 let deferredInstallPrompt=null;
 function setupInstallExperience(){
@@ -481,7 +486,48 @@ function setupInstallExperience(){
  };
 }
 function registerAppServiceWorker(){
- if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(r=>r.update()).catch(console.error));
+ if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(async r=>{await r.update();syncPushPermissionUI();}).catch(console.error));
+}
+function urlBase64ToUint8Array(base64String){
+ const padding='='.repeat((4-base64String.length%4)%4),base64=(base64String+padding).replace(/-/g,'+').replace(/_/g,'/');
+ const raw=atob(base64);return Uint8Array.from([...raw].map(c=>c.charCodeAt(0)))
+}
+function pushSupported(){return CLOUD_READY&&'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window&&!!PUSH_PUBLIC_KEY}
+async function syncPushPermissionUI(){
+ const box=$('#pushNotice'),btn=$('#enablePushBtn'),txt=$('#pushNoticeText');if(!box||!btn||!txt)return;
+ if(!state.currentProfile||!pushSupported()){box.classList.add('hidden');return}
+ const isiOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+ if(isiOS&&!IS_STANDALONE){box.classList.remove('hidden');btn.textContent='طريقة التفعيل';txt.textContent='على الآيفون يجب إضافة ذواق إلى الشاشة الرئيسية أولًا، ثم فتح التطبيق وتفعيل الإشعارات.';return}
+ if(Notification.permission==='granted'){
+  try{const reg=await navigator.serviceWorker.ready,sub=await reg.pushManager.getSubscription();if(sub){box.classList.add('hidden');return}}catch{}
+ }
+ box.classList.remove('hidden');btn.textContent=Notification.permission==='denied'?'الإشعارات محظورة':'تفعيل الإشعارات';
+ txt.textContent=Notification.permission==='denied'?'فعّل الإشعارات من إعدادات الجهاز/المتصفح ثم اضغط تحديث.':'ستصلك تنبيهات التحديثات خارج التطبيق، ويمكنك أخذ نسخة احتياطية قبل التحديث.';
+}
+async function enablePushNotifications(){
+ if(!state.currentProfile)return openAuth('login');
+ if(!pushSupported())return toast('هذا الجهاز لا يدعم إشعارات الويب');
+ const isiOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+ if(isiOS&&!IS_STANDALONE){alert('على الآيفون:\n1) افتح الموقع في Safari\n2) مشاركة → إضافة إلى الشاشة الرئيسية\n3) افتح تطبيق ذواق من الشاشة الرئيسية\n4) اضغط «تفعيل الإشعارات»');return}
+ if(Notification.permission==='denied')return toast('الإشعارات محظورة من إعدادات الجهاز');
+ try{
+  const permission=await Notification.requestPermission();if(permission!=='granted')return syncPushPermissionUI();
+  const reg=await navigator.serviceWorker.ready;let sub=await reg.pushManager.getSubscription();
+  if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array(PUSH_PUBLIC_KEY)});
+  const {data,error}=await sb.functions.invoke('push-notifications',{body:{action:'register',subscription:sub.toJSON(),userAgent:navigator.userAgent}});
+  if(error||!data?.ok)throw error||new Error(data?.error||'register failed');
+  await sb.functions.invoke('push-notifications',{body:{action:'test-self'}});
+  await syncPushPermissionUI();toast('تم تفعيل إشعارات التحديث خارج التطبيق');
+ }catch(e){console.error(e);toast('تعذر تفعيل الإشعارات')}
+}
+async function refreshApp(){
+ const btn=$('#refreshBtn');if(btn?.classList.contains('refreshing'))return;btn?.classList.add('refreshing');
+ try{
+  if('serviceWorker' in navigator){const reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update()}
+  if(CLOUD_READY)await loadCloud();
+  await fetch(`./index.html?refresh=${Date.now()}`,{cache:'no-store'}).catch(()=>null);
+  toast('تم جلب آخر تحديث');setTimeout(()=>location.reload(),350);
+ }catch(e){console.error(e);toast('تعذر التحديث')}finally{setTimeout(()=>btn?.classList.remove('refreshing'),800)}
 }
 async function init(){
  setupInstallExperience();registerAppServiceWorker();
@@ -493,6 +539,7 @@ async function init(){
  } else {localLoad();route()}
  $('#demoNote').classList.toggle('hidden',CLOUD_READY);
  $('#brandSub').innerHTML=`<span class="cloud"><span class="dot ${CLOUD_READY?'on':''}"></span>${CLOUD_READY?'متزامن مباشر':'نسخة تجريبية محلية'}</span>`;
+ await syncPushPermissionUI();
 }
 function route(){
  refreshReleaseUI();
@@ -569,7 +616,7 @@ $('#dashTypeSegment').onclick=e=>{const b=e.target.closest('button');if(!b)retur
 function renderAdmin(){
  $('#publicView').classList.add('hidden');$('#dashboardView').classList.add('hidden');$('#adminView').classList.remove('hidden');
  const users=state.profiles.filter(p=>p.role!=='admin');
- const releaseBox=state.release?.candidate_available?`<div class="releaseCard"><div class="releaseRow"><div><span class="previewBadge">${candidateMode()?'🧪 قيد الاختبار على جهاز المالك':'🔔 تحديث تجريبي بانتظار المالك'}</span><h3 style="margin:9px 0 0">v${esc(state.release.candidate_version)}</h3></div>${candidateMode()?`<button class="btn primary" onclick="approveCandidateRelease()">✓ اعتماد ونشر إشعار للمستخدمين</button>`:`<button class="btn primary" onclick="openUpdatePrompt()">نسخة احتياطية واختبار التحديث</button>`}</div><p>الإصدار الحالي للمستخدمين: <b>v${esc(state.release.stable_version)}</b><br>${esc(state.release.candidate_notes||'')}<br>لن يصل التحديث للمستخدمين حتى تعتمد النسخة بعد اختبارها.</p></div>`:`<div class="releaseCard"><div class="releaseRow"><div><span class="previewBadge">✓ آخر تحديث منشور</span><h3 style="margin:9px 0 0">v${esc(state.release?.stable_version||visibleVersion())}</h3></div></div><p>يظهر للمستخدمين إشعار بالتحديث، ويختار كل مستخدم وقت أخذ النسخة الاحتياطية ثم التحديث على جهازه.</p></div>`;
+ const releaseBox=state.release?.candidate_available?`<div class="releaseCard"><div class="releaseRow"><div><span class="previewBadge">${candidateMode()?'🧪 قيد الاختبار على جهاز المالك':'🔔 تحديث تجريبي بانتظار المالك'}</span><h3 style="margin:9px 0 0">v${esc(state.release.candidate_version)}</h3></div>${candidateMode()?`<button class="btn primary" onclick="approveCandidateRelease()">✓ اعتماد وإرسال الإشعار</button>`:`<button class="btn primary" onclick="openUpdatePrompt()">نسخة احتياطية واختبار التحديث</button>`}</div><p>الإصدار الحالي للمستخدمين: <b>v${esc(state.release.stable_version)}</b><br>${esc(state.release.candidate_notes||'')}<br>لن يصل التحديث للمستخدمين حتى تعتمد النسخة بعد اختبارها. بعد الاعتماد يصل إشعار داخل التطبيق، وخارجه لمن فعّل إشعارات ذواق.</p></div>`:`<div class="releaseCard"><div class="releaseRow"><div><span class="previewBadge">✓ آخر تحديث منشور</span><h3 style="margin:9px 0 0">v${esc(state.release?.stable_version||visibleVersion())}</h3></div></div><p>يظهر للمستخدمين إشعار بالتحديث، ويختار كل مستخدم وقت أخذ النسخة الاحتياطية ثم التحديث على جهازه.</p></div>`;
  $('#adminHero').innerHTML=`<h1>لوحة مالك المنصة</h1><p>إدارة المستخدمين ومراقبة نمو المحتوى. صفحات المستخدمين مستقلة، وكل مستخدم يعدّل محتواه فقط.</p><div class="dashactions"><button class="btn secondary" onclick="setRoute({dashboard:'1'})">لوحة حسابي</button><button class="btn ghost" onclick="logout()">تسجيل الخروج</button></div>${releaseBox}<div class="cards"><div class="metric"><b>${users.length}</b><span>مستخدم</span></div><div class="metric"><b>${users.filter(x=>x.is_active!==false).length}</b><span>حساب نشط</span></div><div class="metric"><b>${visiblePlaces(state.places).length}</b><span>مكان مضاف</span></div><div class="metric"><b>${state.items.length}</b><span>صنف مقيّم</span></div></div>`;
  $('#usersTable').innerHTML=users.map(u=>`<tr><td><b>${esc(u.display_name)}</b><br><span style="color:var(--muted)">@${esc(u.username)}</span></td><td><button class="btn ghost" style="padding:7px 9px" onclick="copyProfile('${esc(u.username)}')">نسخ الرابط</button></td><td>${ownerPlaces(u.id).length}</td><td><span class="status ${u.is_active!==false?'onstatus':'offstatus'}">${u.is_active!==false?'نشط':'موقوف'}</span></td><td>${dateAr(u.created_at)}</td><td><div class="inlineactions"><button class="btn secondary" onclick="setRoute({u:'${esc(u.username)}'})">عرض</button><button class="btn ${u.is_active!==false?'danger':'secondary'}" onclick="toggleUser('${u.id}',${u.is_active!==false})">${u.is_active!==false?'إيقاف':'تفعيل'}</button></div></td></tr>`).join('')||`<tr><td colspan="6">لا يوجد مستخدمون بعد.</td></tr>`;
 }
@@ -580,11 +627,14 @@ async function approveCandidateRelease(){
  if(!confirm(`اعتماد الإصدار v${v}؟ سيصل للمستخدمين إشعار بوجود تحديث، لكن لن يتفعّل لديهم حتى يختاروا أخذ نسخة احتياطية ثم يضغطوا «تحديث الآن».`))return;
  const {error}=await sb.from('app_release').update({stable_version:v,candidate_available:false,updated_at:new Date().toISOString()}).eq('id','main');
  if(error){console.error(error);return toast('تعذر اعتماد التحديث')}
- await loadCloud();toast(`تم نشر إشعار v${v} للمستخدمين`)
+ try{await sb.functions.invoke('push-notifications',{body:{action:'process-admin'}})}catch(e){console.warn('push delivery',e)}
+ await loadCloud();toast(`تم نشر إشعار v${v} داخل التطبيق وخارجه للمشتركين`)
 }
 async function copyProfile(username){try{await navigator.clipboard.writeText(shareUrl(username));toast('تم نسخ رابط الصفحة')}catch{prompt('انسخ الرابط:',shareUrl(username))}}
 $('#homeBtn').onclick=()=>{if(state.currentProfile)setRoute({u:state.currentProfile.username});else if(state.viewProfile)setRoute({u:state.viewProfile.username});else setRoute({})};
 $('#accountBtn').onclick=()=>state.currentProfile?setRoute({dashboard:'1'}):show('authModal');
+$('#refreshBtn').onclick=()=>refreshApp();
+$('#enablePushBtn').onclick=()=>enablePushNotifications();
 $('#addPlaceBtn').onclick=()=>openPlaceForm();
 $('#reviewUpdateBtn').onclick=()=>openUpdatePrompt();
 $('#backupBeforeUpdateBtn').onclick=()=>downloadBackupBeforeUpdate();

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'thawaq-shell-v2.0-candidate-r2';
+const CACHE_NAME = 'thawaq-shell-v2.0-candidate-r3';
 const APP_SHELL = [
   './',
   './index.html',
@@ -52,4 +52,35 @@ self.addEventListener('fetch', event => {
       }))
     );
   }
+});
+
+
+self.addEventListener('push', event => {
+  let data = {};
+  try { data = event.data ? event.data.json() : {}; } catch { data = { body: event.data?.text?.() || '' }; }
+  const title = data.title || 'ذواق';
+  const options = {
+    body: data.body || 'لديك إشعار جديد من ذواق.',
+    icon: './icon-192.png',
+    badge: './icon-192.png',
+    tag: data.tag || `thawaq-${data.version || 'notice'}`,
+    renotify: true,
+    data: { url: data.url || './?dashboard=1', version: data.version || '', kind: data.kind || '' }
+  };
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  const target = new URL(event.notification.data?.url || './?dashboard=1', self.location.origin).href;
+  event.waitUntil((async () => {
+    const list = await clients.matchAll({ type: 'window', includeUncontrolled: true });
+    for (const client of list) {
+      if ('focus' in client) {
+        try { await client.navigate(target); } catch {}
+        return client.focus();
+      }
+    }
+    return clients.openWindow ? clients.openWindow(target) : undefined;
+  })());
 });
