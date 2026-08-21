@@ -235,8 +235,7 @@ tr:last-child td{border-bottom:0}
     <section class="section">
       <div class="sectionhead"><div><h2 id="listTitle">الأعلى تقييمًا</h2><p>تجارب مرتبة حسب رأي صاحب الصفحة</p></div></div>
       <div class="filters" id="cityFilters"></div>
-      <div id="typeGroup" class="hidden">
-        <div class="categoryLabel">اختر نوع المكان داخل المدينة</div>
+      <div id="typeGroup">
         <div class="segment" id="typeSegment"><button data-type="restaurant" class="active">🍽️ المطاعم</button><button data-type="cafe">☕ الكوفيات</button></div>
       </div>
       <div class="grid" id="placeGrid"></div>
@@ -248,8 +247,7 @@ tr:last-child td{border-bottom:0}
     <section class="section">
       <div class="sectionhead"><div><h2>أماكني</h2><p>إدارة كل المطاعم والكوفيات التي قيّمتها</p></div><button class="btn primary" id="addPlaceBtn">＋ إضافة تجربة</button></div>
       <div class="filters" id="dashCityFilters"></div>
-      <div id="dashTypeGroup" class="hidden">
-        <div class="categoryLabel">التصنيف داخل المدينة</div>
+      <div id="dashTypeGroup">
         <div class="segment" id="dashTypeSegment"><button data-type="restaurant" class="active">🍽️ المطاعم</button><button data-type="cafe">☕ الكوفيات</button></div>
       </div>
       <div class="grid" id="dashGrid"></div>
@@ -260,13 +258,13 @@ tr:last-child td{border-bottom:0}
     <section class="dashboardhero" id="adminHero"></section>
     <section class="section"><div class="sectionhead"><div><h2>المستخدمون</h2><p>إدارة حسابات المنصة وصفحاتهم العامة</p></div></div><div class="tablewrap"><table><thead><tr><th>المستخدم</th><th>الرابط</th><th>الأماكن</th><th>الحالة</th><th>تاريخ الانضمام</th><th>إدارة</th></tr></thead><tbody id="usersTable"></tbody></table></div></section>
   </main>
-  <div class="footerVersion">ذواق • v1.8</div>
+  <div class="footerVersion">ذواق • v1.9</div>
 </div>
 
 <div class="modalwrap" id="authModal"><div class="modal"><div class="modalhead"><h3>الدخول إلى ذواق</h3><button class="close" data-close="authModal">×</button></div><div class="tabs"><button class="active" data-auth-tab="login">تسجيل الدخول</button><button data-auth-tab="signup">إنشاء حساب</button></div>
   <div id="loginPane">
     <div class="formgrid">
-      <div class="field"><label>اسم المستخدم أو البريد الإلكتروني</label><input id="loginIdentifier" type="text" dir="ltr" autocomplete="username" placeholder="irumaithy أو name@example.com"></div>
+      <div class="field"><label>اسم المستخدم أو البريد الإلكتروني</label><input id="loginIdentifier" type="text" dir="ltr" autocomplete="username" placeholder="username أو name@example.com"></div>
       <div class="field"><label>كلمة المرور</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
       <div class="rememberRow"><label for="rememberMe"><input id="rememberMe" type="checkbox" checked> إبقائي مسجّلًا على هذا الجهاز</label><span class="hint">اختياري</span></div>
     </div>
@@ -424,10 +422,11 @@ function setRoute(params={}){const u=new URL(location.href);u.search='';Object.e
 window.onpopstate=route;
 
 function normalizeCityType(places,city,type){
- if(city==='all')return type;
- const cp=places.filter(x=>x.city===city);
+ const cp=city==='all'?places:places.filter(x=>x.city===city);
  if(cp.some(x=>x.type===type))return type;
- return cp.some(x=>x.type==='restaurant')?'restaurant':'cafe';
+ if(cp.some(x=>x.type==='restaurant'))return 'restaurant';
+ if(cp.some(x=>x.type==='cafe'))return 'cafe';
+ return type;
 }
 function renderPublic(){
  $('#publicView').classList.remove('hidden');$('#dashboardView').classList.add('hidden');$('#adminView').classList.add('hidden');
@@ -439,14 +438,13 @@ function renderPublic(){
  const cities=[...new Set(places.map(x=>x.city).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ar'));
  if(state.selectedCity!=='all'&&!cities.includes(state.selectedCity))state.selectedCity='all';
  $('#cityFilters').innerHTML=`<button class="chip ${state.selectedCity==='all'?'active':''}" data-city="all">كل المدن</button>`+cities.map(c=>`<button class="chip ${state.selectedCity===c?'active':''}" data-city="${esc(c)}">${esc(c)}</button>`).join('');
- $$('#cityFilters .chip').forEach(b=>b.onclick=()=>{state.selectedCity=b.dataset.city;if(state.selectedCity!=='all')state.selectedType=normalizeCityType(places,state.selectedCity,state.selectedType);renderPublic()});
- const typed=state.selectedCity!=='all';
- $('#typeGroup').classList.toggle('hidden',!typed);
- if(typed)state.selectedType=normalizeCityType(places,state.selectedCity,state.selectedType);
+ $$('#cityFilters .chip').forEach(b=>b.onclick=()=>{state.selectedCity=b.dataset.city;state.selectedType=normalizeCityType(places,state.selectedCity,state.selectedType);renderPublic()});
+ $('#typeGroup').classList.remove('hidden');
+ state.selectedType=normalizeCityType(places,state.selectedCity,state.selectedType);
  $$('#typeSegment button').forEach(b=>b.classList.toggle('active',b.dataset.type===state.selectedType));
- let list=places.filter(x=>state.selectedCity==='all'||(x.city===state.selectedCity&&x.type===state.selectedType));
+ let list=places.filter(x=>(state.selectedCity==='all'||x.city===state.selectedCity)&&x.type===state.selectedType);
  list.sort((a,b)=>finalRating(b)-finalRating(a)||new Date(b.created_at)-new Date(a.created_at));
- $('#listTitle').textContent=state.selectedCity==='all'?`اختيارات ${p.display_name}`:`${state.selectedType==='cafe'?'كوفيات':'مطاعم'} ${p.display_name} في ${state.selectedCity}`;
+ $('#listTitle').textContent=state.selectedCity==='all'?`${state.selectedType==='cafe'?'كوفيات':'مطاعم'} ${p.display_name} في كل المدن`:`${state.selectedType==='cafe'?'كوفيات':'مطاعم'} ${p.display_name} في ${state.selectedCity}`;
  $('#placeGrid').innerHTML=list.length?list.map(placeCard).join(''):`<div class="empty">لا توجد تقييمات في هذا القسم حتى الآن.</div>`;bindPlaceCards('#placeGrid');
 }
 function placeCard(p){
@@ -463,12 +461,11 @@ function renderDashboard(){
  const cities=[...new Set(places.map(x=>x.city).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ar'));
  if(state.dashCity!=='all'&&!cities.includes(state.dashCity))state.dashCity='all';
  $('#dashCityFilters').innerHTML=`<button class="chip ${state.dashCity==='all'?'active':''}" data-city="all">كل المدن</button>`+cities.map(c=>`<button class="chip ${state.dashCity===c?'active':''}" data-city="${esc(c)}">${esc(c)}</button>`).join('');
- $$('#dashCityFilters .chip').forEach(b=>b.onclick=()=>{state.dashCity=b.dataset.city;if(state.dashCity!=='all')state.dashType=normalizeCityType(places,state.dashCity,state.dashType);renderDashboard()});
- const typed=state.dashCity!=='all';
- $('#dashTypeGroup').classList.toggle('hidden',!typed);
- if(typed)state.dashType=normalizeCityType(places,state.dashCity,state.dashType);
+ $$('#dashCityFilters .chip').forEach(b=>b.onclick=()=>{state.dashCity=b.dataset.city;state.dashType=normalizeCityType(places,state.dashCity,state.dashType);renderDashboard()});
+ $('#dashTypeGroup').classList.remove('hidden');
+ state.dashType=normalizeCityType(places,state.dashCity,state.dashType);
  $$('#dashTypeSegment button').forEach(b=>b.classList.toggle('active',b.dataset.type===state.dashType));
- let list=places.filter(x=>state.dashCity==='all'||(x.city===state.dashCity&&x.type===state.dashType));
+ let list=places.filter(x=>(state.dashCity==='all'||x.city===state.dashCity)&&x.type===state.dashType);
  list.sort((a,b)=>new Date(b.updated_at)-new Date(a.updated_at));
  $('#dashGrid').innerHTML=list.length?list.map(placeCard).join(''):`<div class="empty">لا توجد أماكن في هذا القسم حتى الآن.</div>`;bindPlaceCards('#dashGrid');
  $('#cityOptions').innerHTML=cities.map(c=>`<option value="${esc(c)}"></option>`).join('');
