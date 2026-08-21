@@ -219,6 +219,8 @@ tr:last-child td{border-bottom:0}
 .updateNotice{margin:12px 0 2px;padding:13px 14px;border-radius:18px;border:1px solid #dfc58c;background:linear-gradient(135deg,#fff8e9,#fffdf8);box-shadow:var(--shadow2);display:flex;align-items:center;justify-content:space-between;gap:12px}
 .updateNotice.hidden{display:none!important}.updateNoticeText{min-width:0}.updateNoticeText b{display:block;color:#5b411d;font-size:13px}.updateNoticeText span{display:block;color:var(--muted);font-size:11px;line-height:1.6;margin-top:2px}.updateNotice .btn{flex:0 0 auto;padding:9px 11px;font-size:11px}.pushNotice{border-color:#c9dfcf;background:linear-gradient(135deg,#eef7f0,#fffdf8)}.pushNotice .updateNoticeText b{color:#406e54}.refreshing{animation:spinRefresh .75s linear infinite}@keyframes spinRefresh{to{transform:rotate(-360deg)}}.updateHero{padding:15px;border-radius:20px;background:#fff8e9;border:1px solid #e6d4ae;margin-bottom:13px}.updateHero h3{margin:6px 0;font-size:25px}.updateHero p{margin:0;color:var(--muted);line-height:1.8;font-size:12px}.backupHint{padding:12px 13px;border-radius:15px;background:#f4f0e9;border:1px solid var(--line);font-size:11px;line-height:1.8;color:#665f56}.updateActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.updateActions .later{grid-column:1/-1}.backupDone{background:#eef7f0!important;color:#406e54!important;border-color:#c9dfcf!important}
 .liveClock{max-width:1160px;margin:7px auto 0;display:flex;align-items:center;justify-content:center;gap:7px;color:#665f56;font-size:11px;font-weight:750;letter-spacing:.1px;white-space:nowrap}.liveClock .clockDot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(201,154,74,.11)}
+
+.settingsPanel{display:grid;gap:12px}.settingsBlock{padding:14px;border:1px solid var(--line);border-radius:18px;background:#fffdf9}.settingsBlock h4{margin:0 0 6px;font-size:14px}.settingsBlock p{margin:0;color:var(--muted);font-size:11px;line-height:1.75}.settingsRow{display:flex;gap:8px;align-items:center;margin-top:10px}.settingsRow input{flex:1;min-width:0}.settingsActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.settingsActions .wide{grid-column:1/-1}.shareMode .topactions,.shareMode #updateNotice,.shareMode #pushNotice{display:none!important}.shareMode .topbar .topin{justify-content:center}.shareMode .brand{margin-inline:auto}.shareMode #footerVersion{margin-top:24px}.settingsLinkPreview{direction:ltr;text-align:left;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.refreshOnlyHint{font-size:10px;color:var(--muted);margin-top:4px;text-align:center}
 .visitsWrap{display:grid;gap:14px;margin-top:13px}.visitCard{border:1px solid var(--line);background:#fffdf9;border-radius:22px;padding:14px;box-shadow:var(--shadow2)}.visitHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}.visitHead h4{margin:3px 0;font-size:17px}.visitDate{color:var(--accent2);font-size:12px;font-weight:850}.visitActions{display:flex;gap:6px;flex-wrap:wrap}.visitActions .btn{padding:8px 10px;font-size:11px}.visitDivider{height:1px;background:var(--line);margin:13px 0}.visitReceiptThumb{width:100%;max-height:360px;object-fit:contain;border-radius:14px;margin-top:12px;background:#fff;border:1px solid var(--line)}.visitEmpty{padding:18px;text-align:center;color:var(--muted);background:#faf6ef;border:1px dashed var(--line);border-radius:16px}.visitCount{font-size:11px;color:var(--muted)}
 @media(min-width:700px){
   .app{padding-left:24px;padding-right:24px}.topbar{margin-left:-24px;margin-right:-24px;padding-left:24px;padding-right:24px}
@@ -233,8 +235,8 @@ tr:last-child td{border-bottom:0}
 <div class="app">
   <header class="topbar"><div class="topin">
     <div class="brand"><div class="brandmark" aria-label="شعار ذواق"><img src="icon-192.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="brandtext"><b>ذواق</b><small id="brandSub">THAWAQ</small></div></div>
-    <div class="topactions"><button class="iconbtn hidden" id="installBtn" title="تثبيت التطبيق" aria-label="تثبيت التطبيق">⇩</button><button class="iconbtn" id="refreshBtn" title="تحديث" aria-label="تحديث">↻</button><button class="iconbtn" id="homeBtn" title="الرئيسية">⌂</button><button class="iconbtn" id="accountBtn" title="الحساب">◉</button></div>
-  </div><div class="liveClock" id="liveClock"><span class="clockDot"></span><span id="liveDate">—</span><span>•</span><span id="liveTime">—</span></div></header>
+    <div class="topactions"><button class="iconbtn hidden" id="installBtn" title="تثبيت التطبيق" aria-label="تثبيت التطبيق">⇩</button><button class="iconbtn" id="refreshBtn" title="تحديث البيانات فقط" aria-label="تحديث البيانات">↻</button><button class="iconbtn" id="homeBtn" title="الرئيسية" aria-label="الرئيسية">⌂</button><button class="iconbtn" id="accountBtn" title="حسابي" aria-label="حسابي">◉</button><button class="iconbtn hidden" id="settingsBtn" title="الإعدادات" aria-label="الإعدادات">⚙</button></div>
+  </div><div class="liveClock hidden" id="liveClock"><span class="clockDot"></span><span id="liveDate">—</span><span>•</span><span id="liveTime">—</span></div></header>
   <div id="updateNotice" class="updateNotice hidden">
     <div class="updateNoticeText"><b id="updateNoticeTitle">تحديث جديد متاح</b><span id="updateNoticeText"></span></div>
     <button class="btn primary" id="reviewUpdateBtn">مراجعة التحديث</button>
@@ -272,7 +274,7 @@ tr:last-child td{border-bottom:0}
     <section class="dashboardhero" id="adminHero"></section>
     <section class="section"><div class="sectionhead"><div><h2>المستخدمون</h2><p>إدارة حسابات المنصة وصفحاتهم العامة</p></div></div><div class="tablewrap"><table><thead><tr><th>المستخدم</th><th>الرابط</th><th>الأماكن</th><th>الحالة</th><th>تاريخ الانضمام</th><th>إدارة</th></tr></thead><tbody id="usersTable"></tbody></table></div></section>
   </main>
-  <div class="footerVersion" id="footerVersion">ذواق • v2.0</div>
+  <div class="footerVersion" id="footerVersion" data-build="2.1">ذواق • v2.0</div>
 </div>
 
 <div class="modalwrap" id="authModal"><div class="modal"><div class="modalhead"><h3>الدخول إلى ذواق</h3><button class="close" data-close="authModal">×</button></div><div class="tabs"><button class="active" data-auth-tab="login">تسجيل الدخول</button><button data-auth-tab="signup">إنشاء حساب</button></div>
@@ -286,7 +288,7 @@ tr:last-child td{border-bottom:0}
     <div class="note" id="demoNote" style="margin-top:12px">للتجربة المحلية: <b>abdullah</b> / <b>user</b> أو <b>admin</b> / <b>admin</b>.</div>
     <div class="formactions"><button class="btn primary" id="loginBtn">دخول</button></div>
   </div>
-  <div id="signupPane" class="hidden"><div class="formgrid two"><div class="field"><label>الاسم الظاهر</label><input id="signupName" placeholder="مثال: عبدالله"></div><div class="field"><label>اسم المستخدم</label><input id="signupUsername" dir="ltr" placeholder="abdullah"></div><div class="field"><label>البريد الإلكتروني</label><input id="signupEmail" type="email" dir="ltr"></div><div class="field"><label>كلمة المرور</label><input id="signupPassword" type="password" minlength="6"></div></div><div class="hint" style="margin-top:8px">اسم المستخدم يصبح جزءًا من رابطك العام، لذلك استخدم أحرفًا إنجليزية وأرقامًا فقط.</div><div class="formactions"><button class="btn primary" id="signupBtn">إنشاء حسابي</button></div></div>
+  <div id="signupPane" class="hidden"><div class="formgrid two"><div class="field"><label>الاسم الظاهر</label><input id="signupName" placeholder="مثال: عبدالله"></div><div class="field"><label>اسم المستخدم</label><input id="signupUsername" dir="ltr" placeholder="abdullah"></div><div class="field"><label>البريد الإلكتروني</label><input id="signupEmail" type="email" dir="ltr"></div><div class="field"><label>كلمة المرور</label><input id="signupPassword" type="password" minlength="6"></div></div><div class="hint" style="margin-top:8px">اسم المستخدم مخصص لتسجيل الدخول والهوية داخل التطبيق. رابط المشاركة العام منفصل ويمكن تخصيصه لاحقًا من الإعدادات.</div><div class="formactions"><button class="btn primary" id="signupBtn">إنشاء حسابي</button></div></div>
 </div></div>
 
 <div class="modalwrap" id="profileModal"><div class="modal"><div class="modalhead"><h3>تعديل ملفي</h3><button class="close" data-close="profileModal">×</button></div><div class="formgrid two"><div class="field"><label>الاسم الظاهر</label><input id="profileName"></div><div class="field"><label>اسم المستخدم</label><input id="profileUsername" dir="ltr"></div><div class="field" style="grid-column:1/-1"><label>نبذة قصيرة</label><textarea id="profileBio"></textarea></div><div class="field" style="grid-column:1/-1"><label class="upload">📷 صورة شخصية <input id="profilePhoto" type="file" accept="image/*"><img class="preview" id="profilePreview"></label></div></div><div class="formactions"><button class="btn primary" id="saveProfileBtn">حفظ</button><button class="btn secondary" data-close="profileModal">إلغاء</button></div></div></div>
@@ -296,6 +298,14 @@ tr:last-child td{border-bottom:0}
 <div class="modalwrap" id="itemModal"><div class="modal"><div class="modalhead"><h3 id="itemModalTitle">إضافة صنف</h3><button class="close" data-close="itemModal">×</button></div><input type="hidden" id="itemId"><input type="hidden" id="itemPlaceId"><input type="hidden" id="itemVisitId"><div class="formgrid two"><div class="field"><label>اسم الصنف</label><input id="itemName"></div><div class="field"><label>السعر (د.إ)</label><input id="itemPrice" type="number" min="0" step="0.01"></div><div class="field"><label>التقييم من 5</label><select id="itemRating"><option>5</option><option>4.5</option><option>4</option><option>3.5</option><option>3</option><option>2.5</option><option>2</option><option>1.5</option><option>1</option><option>0.5</option></select></div><div class="field"><label>ملاحظة مختصرة</label><input id="itemNotes" placeholder="مثال: ممتاز لكن حالي قليل"></div><div class="field" style="grid-column:1/-1"><label class="upload">📷 صورة الصنف <input id="itemPhoto" type="file" accept="image/*" capture="environment"><img class="preview" id="itemPreview"></label></div></div><div class="formactions"><button class="btn primary" id="saveItemBtn">حفظ الصنف</button><button class="btn secondary" data-close="itemModal">إلغاء</button></div></div></div>
 
 <div class="modalwrap" id="receiptModal"><div class="modal"><div class="modalhead"><h3>فاتورة الزيارة والإجمالي</h3><button class="close" data-close="receiptModal">×</button></div><input type="hidden" id="receiptPlaceId"><input type="hidden" id="receiptVisitId"><div class="formgrid"><div class="field"><label>المبلغ قبل الضريبة — اختياري</label><input id="receiptTotal" type="number" min="0" step="0.01" placeholder="إن تركته فارغًا يستخدم مجموع أصناف هذه الزيارة"></div><div class="field"><label class="upload">🧾 اختر الفاتورة من الألبوم أو الكاميرا <input id="receiptPhoto" type="file" accept="image/*"><img class="preview" id="receiptPreview"></label></div><div class="note">تُحفظ هذه الفاتورة ضمن الزيارة الحالية، وتبقى فواتير الزيارات السابقة محفوظة. بعد الحفظ يمكنك إضافة ضريبة 5% لهذه الزيارة فقط.</div></div><div class="formactions"><button class="btn primary" id="saveReceiptBtn">حفظ فاتورة الزيارة</button><button class="btn secondary" data-close="receiptModal">إلغاء</button></div></div></div>
+
+<div class="modalwrap" id="settingsModal"><div class="modal"><div class="modalhead"><h3>إعدادات ذواق</h3><button class="close" data-close="settingsModal">×</button></div>
+  <div class="settingsPanel">
+    <div class="settingsBlock"><h4>رابط صفحتي العامة</h4><p>هذا الرابط مخصص للمشاركة مع الآخرين ولا يحتوي على اسم المستخدم. يمكنك تخصيص الجزء الأخير منه، وتغيير الرابط لاحقًا عند الحاجة.</p><div class="settingsRow"><input id="publicLinkPreview" class="settingsLinkPreview" readonly><button class="btn secondary" id="copyPublicLinkBtn">نسخ</button></div><div class="field" style="margin-top:10px"><label>تخصيص الرابط</label><input id="publicSlugInput" dir="ltr" autocomplete="off" placeholder="my-food-page"></div><div class="hint" style="margin-top:6px">4–40 حرفًا: إنجليزي صغير، أرقام، - أو _. تغيير هذا الجزء يلغي الرابط السابق.</div><div class="formactions"><button class="btn primary" id="savePublicSlugBtn">حفظ الرابط</button></div></div>
+    <div class="settingsBlock hidden" id="ownerAppLinkBlock"><h4>رابط التطبيق الأصلي — للمالك</h4><p>هذا هو رابط دخول منصة ذواق الأساسي. شاركه فقط مع من تريد أن يصل إلى صفحة التطبيق الرئيسية.</p><div class="settingsRow"><input id="ownerAppLinkPreview" class="settingsLinkPreview" readonly><button class="btn secondary" id="copyOwnerAppLinkBtn">نسخ</button></div></div>
+    <div class="settingsBlock"><h4>الحساب والتطبيق</h4><p>إدارة ملفك، إشعارات التحديثات، ولوحة المالك إن كانت متاحة.</p><div class="settingsActions"><button class="btn secondary" id="settingsProfileBtn">✎ تعديل ملفي</button><button class="btn secondary" id="settingsPushBtn">🔔 الإشعارات</button><button class="btn secondary wide hidden" id="settingsAdminBtn">⚙ إدارة المنصة</button><button class="btn danger wide" id="settingsLogoutBtn">تسجيل الخروج</button></div></div>
+  </div>
+</div></div>
 
 <div class="modalwrap" id="updateModal"><div class="modal"><div class="modalhead"><h3 id="updateModalTitle">تحديث ذواق</h3><button class="close" data-close="updateModal">×</button></div>
   <div class="updateHero"><span class="previewBadge" id="updateKindBadge">✨ تحديث جديد</span><h3 id="updateVersionTitle">v2.1</h3><p id="updateNotes"></p></div>
@@ -339,15 +349,16 @@ const esc=v=>String(v??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&
 const money=v=>`${Number(v||0).toLocaleString('ar-AE',{minimumFractionDigits:0,maximumFractionDigits:2})} د.إ`;
 const dateAr=v=>v?new Date(v).toLocaleDateString('ar-AE',{year:'numeric',month:'short',day:'numeric'}):'—';
 const placeholder=t=>`data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700"><defs><linearGradient id="g"><stop stop-color="#eee6d9"/><stop offset="1" stop-color="#d9cdbb"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><text x="50%" y="50%" fill="#796c5a" font-size="44" text-anchor="middle" dominant-baseline="middle" font-family="Arial">${String(t||'ذواق').replace(/[<>&]/g,'')}</text></svg>`)}`;
-const state={profiles:[],places:[],visits:[],items:[],session:null,currentProfile:null,viewProfile:null,selectedCity:'all',selectedType:'restaurant',dashCity:'all',dashType:'restaurant',currentPlaceId:null,currentVisitId:null,lastLoginIdentifier:'',pendingUpdate:null,release:{stable_version:'2.0',candidate_version:'2.1',candidate_available:true,candidate_notes:'تاريخ ووقت حي أعلى الصفحة + اختيار الفاتورة من الألبوم أو الكاميرا + سجل زيارات متعددة لنفس المكان مع أصناف وفاتورة مستقلة لكل زيارة'}};
+const state={profiles:[],places:[],visits:[],items:[],session:null,currentProfile:null,viewProfile:null,selectedCity:'all',selectedType:'restaurant',dashCity:'all',dashType:'restaurant',currentPlaceId:null,currentVisitId:null,lastLoginIdentifier:'',pendingUpdate:null,release:{stable_version:'2.0',candidate_version:'2.1',candidate_available:true,candidate_notes:'v2.1: فصل Refresh عن التحديث، إشعارات فورية داخل وخارج التطبيق، تأكيد تسجيل الخروج، إعدادات في الشريط العلوي، وروابط عامة مستقلة وقابلة للتخصيص لكل مستخدم.'}};
 const UPDATE_ACCEPTED_KEY='thawaqAcceptedVersion';
 const BASELINE_VERSION='2.0';
+const BUILD_VERSION='2.1';
 
 function seed(){
  const now=new Date().toISOString();
  return {profiles:[
-  {id:'admin-1',email:'admin@demo.local',username:'admin',display_name:'مالك ذواق',bio:'إدارة المنصة',avatar_url:'',role:'admin',is_active:true,created_at:now},
-  {id:'user-1',email:'user@demo.local',username:'abdullah',display_name:'عبدالله',bio:'أشارك الأماكن التي تستحق التجربة من وجهة نظري ☕🍽️',avatar_url:'',role:'creator',is_active:true,created_at:now}
+  {id:'admin-1',email:'admin@demo.local',username:'admin',public_slug:'admin-page',display_name:'مالك ذواق',bio:'إدارة المنصة',avatar_url:'',role:'admin',is_active:true,created_at:now},
+  {id:'user-1',email:'user@demo.local',username:'abdullah',public_slug:'abdullah-food',display_name:'عبدالله',bio:'أشارك الأماكن التي تستحق التجربة من وجهة نظري ☕🍽️',avatar_url:'',role:'creator',is_active:true,created_at:now}
  ],places:[
   {id:'p1',owner_id:'user-1',name:'The Lighthouse',city:'أبوظبي',type:'restaurant',cover_url:'',notes:'مكان هادئ ومناسب للفطور.',rating_override:null,receipt_url:'',total_override:145,tax_enabled:true,tax_rate:5,created_at:'2026-08-18T10:00:00Z',updated_at:now},
   {id:'p2',owner_id:'user-1',name:'% Arabica',city:'دبي',type:'cafe',cover_url:'',notes:'القهوة ثابتة المستوى والخدمة سريعة.',rating_override:4.7,receipt_url:'',total_override:58,tax_enabled:false,tax_rate:5,created_at:'2026-08-15T10:00:00Z',updated_at:now}
@@ -410,16 +421,19 @@ function visibleVersion(){
  return versionNumber(accepted)<versionNumber(stable)?accepted:stable
 }
 function teaEnabled(){return versionNumber(visibleVersion())>=2}
+function v21Enabled(){return versionNumber(visibleVersion())>=2.1}
 function visiblePlaces(list){return teaEnabled()?list:list.filter(p=>p.type!=='tea')}
 function ownerPlaces(id){return visiblePlaces(state.places.filter(p=>p.owner_id===id))}
 function typePlural(type){return type==='tea'?'محلات الشاي':type==='cafe'?'كوفيات':'مطاعم'}
 function typeSingular(type){return type==='tea'?'محل شاي':type==='cafe'?'كوفي':'مطعم'}
 function typeBadge(type){return type==='tea'?'🫖 شاي':type==='cafe'?'☕ كوفي':'🍽️ مطعم'}
 function refreshReleaseUI(){
- const f=$('#footerVersion');if(f)f.textContent=`ذواق • v${visibleVersion()}${candidateMode()?' • تجريبي للمالك':''}`;
+ const pending=pendingUpdateInfo();
+ const f=$('#footerVersion');if(f)f.textContent=`ذواق • v${visibleVersion()}${candidateMode()?' • تجريبي للمالك':''}${pending?` • v${pending.version} متاح`:''}`;
  const tea=teaEnabled();
  $$('[data-type="tea"]').forEach(b=>b.classList.toggle('hidden',!tea));
  const opt=$('#placeTypeTea');if(opt){opt.hidden=!tea;opt.disabled=!tea}
+ const v21=v21Enabled();$('#settingsBtn')?.classList.toggle('hidden',!v21);$('#liveClock')?.classList.toggle('hidden',!v21);
  refreshUpdateNotice()
 }
 function refreshUpdateNotice(){
@@ -457,12 +471,21 @@ async function downloadBackupBeforeUpdate(){
   const b=$('#backupBeforeUpdateBtn');if(b){b.classList.add('backupDone');b.textContent='✓ تم تجهيز النسخة الاحتياطية'}toast('تم تجهيز النسخة الاحتياطية')
  }catch(e){if(e?.name!=='AbortError'){console.error(e);toast('تعذر إنشاء النسخة الاحتياطية')}}
 }
-function applyPendingUpdate(){
+async function applyPendingUpdate(){
  const info=state.pendingUpdate||pendingUpdateInfo();if(!info)return;
  localStorage.setItem(UPDATE_ACCEPTED_KEY,String(info.version));hide('updateModal');refreshReleaseUI();route();
- toast(info.kind==='candidate'?`بدأ اختبار v${info.version} على جهاز المالك`:`تم تحديث التطبيق إلى v${info.version}`)
+ toast(info.kind==='candidate'?`تم تفعيل v${info.version} على جهاز المالك`:`تم تحديث التطبيق إلى v${info.version}`);
+ try{
+  if('serviceWorker' in navigator){
+   const reg=await navigator.serviceWorker.getRegistration();
+   if(reg){await reg.update();let w=reg.waiting;if(!w&&reg.installing){w=reg.installing;await new Promise(r=>{if(w.state==='installed')return r();w.addEventListener('statechange',()=>{if(w.state==='installed')r()},{once:true})})}if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'})}
+  }
+ }catch(e){console.warn(e)}
+ setTimeout(()=>location.reload(),650)
 }
-function shareUrl(username){const u=new URL(location.href);u.search='';u.hash='';u.searchParams.set('u',username);return u.href}
+function profileByKey(key){const k=String(key||'').toLowerCase();return state.profiles.find(p=>String(p.id).toLowerCase()===k||String(p.username||'').toLowerCase()===k||String(p.public_slug||'').toLowerCase()===k)||null}
+function shareUrl(profileOrKey){const p=typeof profileOrKey==='object'?profileOrKey:profileByKey(profileOrKey);const u=new URL(location.origin+location.pathname);if(v21Enabled()){const slug=p?.public_slug||p?.username||String(profileOrKey||'');u.searchParams.set('share',slug)}else{u.searchParams.set('u',p?.username||String(profileOrKey||''))}return u.href}
+function isShareMode(){return new URLSearchParams(location.search).has('share')}
 function isAdmin(){return state.currentProfile?.role==='admin'}
 function canEdit(p){return !!state.currentProfile&&(state.currentProfile.id===p.owner_id||isAdmin())}
 
@@ -498,7 +521,7 @@ function setupInstallExperience(){
  };
 }
 function registerAppServiceWorker(){
- if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(async r=>{await r.update();syncPushPermissionUI();}).catch(console.error));
+ if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(()=>syncPushPermissionUI()).catch(console.error));
 }
 function urlBase64ToUint8Array(base64String){
  const padding='='.repeat((4-base64String.length%4)%4),base64=(base64String+padding).replace(/-/g,'+').replace(/_/g,'/');
@@ -535,11 +558,9 @@ async function enablePushNotifications(){
 async function refreshApp(){
  const btn=$('#refreshBtn');if(btn?.classList.contains('refreshing'))return;btn?.classList.add('refreshing');
  try{
-  if('serviceWorker' in navigator){const reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update()}
-  if(CLOUD_READY)await loadCloud();
-  await fetch(`./index.html?refresh=${Date.now()}`,{cache:'no-store'}).catch(()=>null);
-  toast('تم جلب آخر تحديث');setTimeout(()=>location.reload(),350);
- }catch(e){console.error(e);toast('تعذر التحديث')}finally{setTimeout(()=>btn?.classList.remove('refreshing'),800)}
+  if(CLOUD_READY)await loadCloud();else{localLoad();route()}
+  toast('تم تحديث البيانات فقط — لم يتم تثبيت أي تحديث');
+ }catch(e){console.error(e);toast('تعذر تحديث البيانات')}finally{setTimeout(()=>btn?.classList.remove('refreshing'),700)}
 }
 function updateLiveClock(){
  const now=new Date(),date=$('#liveDate'),time=$('#liveTime');
@@ -554,7 +575,8 @@ async function init(){
  if(CLOUD_READY){
   await loadCloud();
   sb.auth.onAuthStateChange(()=>setTimeout(loadCloud,70));
-  ['profiles','places','visits','items','app_release'].forEach(t=>sb.channel('rt-'+t).on('postgres_changes',{event:'*',schema:'public',table:t},()=>loadCloud()).subscribe())
+  ['profiles','places','visits','items'].forEach(t=>sb.channel('rt-'+t).on('postgres_changes',{event:'*',schema:'public',table:t},()=>loadCloud()).subscribe());
+  sb.channel('rt-app-release').on('postgres_changes',{event:'UPDATE',schema:'public',table:'app_release'},payload=>{state.release=payload.new||state.release;refreshReleaseUI();const info=pendingUpdateInfo();if(info){toast(`🔔 تحديث v${info.version} متاح الآن`);if(navigator.vibrate)navigator.vibrate([80,40,80])}}).subscribe()
  } else {localLoad();route()}
  $('#demoNote').classList.toggle('hidden',CLOUD_READY);
  $('#brandSub').innerHTML=`<span class="cloud"><span class="dot ${CLOUD_READY?'on':''}"></span>${CLOUD_READY?'متزامن مباشر':'نسخة تجريبية محلية'}</span>`;
@@ -562,7 +584,9 @@ async function init(){
 }
 function route(){
  refreshReleaseUI();
- const q=new URLSearchParams(location.search),wantsAdmin=q.get('admin')==='1',wantsDash=q.get('dashboard')==='1';
+ const q=new URLSearchParams(location.search),shared=q.get('share'),wantsAdmin=q.get('admin')==='1',wantsDash=q.get('dashboard')==='1';
+ document.body.classList.toggle('shareMode',!!shared);
+ if(shared){const p=state.profiles.find(x=>String(x.public_slug||'').toLowerCase()===String(shared).toLowerCase()&&x.is_active!==false);state.viewProfile=p||null;return renderPublic()}
  if(wantsAdmin&&isAdmin())return renderAdmin();
  if(wantsDash&&state.currentProfile)return renderDashboard();
  const requested=q.get('u');
@@ -594,7 +618,7 @@ function renderPublic(){
  const p=state.viewProfile;
  if(!p){$('#profileHero').innerHTML=`<div class="empty"><h2 style="color:var(--text)">هذه الصفحة غير متاحة</h2><p>قد يكون اسم المستخدم غير صحيح أو أن الحساب غير منشور.</p></div>`;$('#placeGrid').innerHTML='';$('#cityFilters').innerHTML='';$('#typeGroup').classList.add('hidden');return}
  const places=ownerPlaces(p.id),ratings=places.map(finalRating).filter(r=>r>0),avg=ratings.length?ratings.reduce((a,b)=>a+b,0)/ratings.length:0;
- $('#profileHero').innerHTML=`<div class="profiletop"><img class="avatar" src="${esc(p.avatar_url||placeholder(p.display_name))}" onerror="this.src='${placeholder(p.display_name)}'"><div class="profileinfo"><h1>${esc(p.display_name)}</h1><div class="handle">@${esc(p.username)}</div></div></div>${p.bio?`<p class="bio">${esc(p.bio)}</p>`:''}<div class="profileactions"><button class="btn secondary" onclick="copyProfile('${esc(p.username)}')">↗ مشاركة الصفحة</button>${state.currentProfile?.id===p.id?`<button class="btn primary" onclick="setRoute({dashboard:'1'})">لوحة تحكمي</button>`:''}</div><div class="stats"><div class="stat"><b>${places.length}</b><span>مكان</span></div><div class="stat"><b>${places.filter(x=>x.type==='restaurant').length}</b><span>مطعم</span></div><div class="stat"><b>${places.filter(x=>x.type==='cafe').length}</b><span>كوفي</span></div>${teaEnabled()?`<div class="stat"><b>${places.filter(x=>x.type==='tea').length}</b><span>شاي</span></div>`:''}<div class="stat"><b>${avg?avg.toFixed(1):'—'}</b><span>متوسط التقييم</span></div></div>`;
+ $('#profileHero').innerHTML=`<div class="profiletop"><img class="avatar" src="${esc(p.avatar_url||placeholder(p.display_name))}" onerror="this.src='${placeholder(p.display_name)}'"><div class="profileinfo"><h1>${esc(p.display_name)}</h1><div class="handle">@${esc(p.username)}</div></div></div>${p.bio?`<p class="bio">${esc(p.bio)}</p>`:''}<div class="profileactions"><button class="btn secondary" onclick="copyProfile('${esc(p.id)}')">↗ مشاركة الصفحة</button>${state.currentProfile?.id===p.id&&!isShareMode()?`<button class="btn primary" onclick="setRoute({dashboard:'1'})">لوحة تحكمي</button>`:''}</div><div class="stats"><div class="stat"><b>${places.length}</b><span>مكان</span></div><div class="stat"><b>${places.filter(x=>x.type==='restaurant').length}</b><span>مطعم</span></div><div class="stat"><b>${places.filter(x=>x.type==='cafe').length}</b><span>كوفي</span></div>${teaEnabled()?`<div class="stat"><b>${places.filter(x=>x.type==='tea').length}</b><span>شاي</span></div>`:''}<div class="stat"><b>${avg?avg.toFixed(1):'—'}</b><span>متوسط التقييم</span></div></div>`;
  const cities=[...new Set(places.map(x=>x.city).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ar'));
  if(state.selectedCity!=='all'&&!cities.includes(state.selectedCity))state.selectedCity='all';
  $('#cityFilters').innerHTML=`<button class="chip ${state.selectedCity==='all'?'active':''}" data-city="all">كل المدن</button>`+cities.map(c=>`<button class="chip ${state.selectedCity===c?'active':''}" data-city="${esc(c)}">${esc(c)}</button>`).join('');
@@ -608,7 +632,7 @@ function renderPublic(){
  $('#placeGrid').innerHTML=list.length?list.map(placeCard).join(''):`<div class="empty">لا توجد تقييمات في هذا القسم حتى الآن.</div>`;bindPlaceCards('#placeGrid');
 }
 function placeCard(p){
- return `<article class="place" data-id="${p.id}"><div class="placeimg"><img src="${esc(p.cover_url||placeholder(p.name))}" alt="${esc(p.name)}" onerror="this.src='${placeholder(p.name)}'"><div class="badges"><span class="badge">${typeBadge(p.type)}</span><span class="badge">📍 ${esc(p.city)}</span></div></div><div class="placebody"><h3>${esc(p.name)}</h3><div class="row"><div class="rating">${stars(finalRating(p))}<small>${p.rating_override!==null&&p.rating_override!==''?'تقييم نهائي':'متوسط الأصناف'}</small></div><span>${placeVisits(p.id).length} زيارات · ${placeItems(p.id).length} أصناف</span></div></div></article>`
+ return `<article class="place" data-id="${p.id}"><div class="placeimg"><img src="${esc(p.cover_url||placeholder(p.name))}" alt="${esc(p.name)}" onerror="this.src='${placeholder(p.name)}'"><div class="badges"><span class="badge">${typeBadge(p.type)}</span><span class="badge">📍 ${esc(p.city)}</span></div></div><div class="placebody"><h3>${esc(p.name)}</h3><div class="row"><div class="rating">${stars(finalRating(p))}<small>${p.rating_override!==null&&p.rating_override!==''?'تقييم نهائي':'متوسط الأصناف'}</small></div><span>${v21Enabled()?`${placeVisits(p.id).length} زيارات · `:''}${placeItems(p.id).length} أصناف</span></div></div></article>`
 }
 function bindPlaceCards(sel){$$(sel+' .place').forEach(c=>c.onclick=()=>openDetail(c.dataset.id))}
 $('#typeSegment').onclick=e=>{const b=e.target.closest('button');if(!b)return;state.selectedType=b.dataset.type;renderPublic()};
@@ -617,7 +641,7 @@ function renderDashboard(){
  $('#publicView').classList.add('hidden');$('#dashboardView').classList.remove('hidden');$('#adminView').classList.add('hidden');
  const p=state.currentProfile;if(!p)return;
  const places=ownerPlaces(p.id),ratings=places.map(finalRating).filter(r=>r>0),avg=ratings.length?ratings.reduce((a,b)=>a+b,0)/ratings.length:0;
- $('#dashboardHero').innerHTML=`<h1>مرحبًا ${esc(p.display_name)} 👋</h1><p>هذه مساحتك الخاصة. كل ما تضيفه هنا يظهر تلقائيًا في رابطك العام للقراءة فقط.</p><div class="dashactions"><button class="btn primary" onclick="openPlaceForm()">＋ تجربة جديدة</button><button class="btn secondary" onclick="openProfileForm()">✎ تعديل ملفي</button><button class="btn secondary" onclick="setRoute({u:'${esc(p.username)}'})">👁 مشاهدة صفحتي</button>${isAdmin()?`<button class="btn secondary" onclick="setRoute({admin:'1'})">⚙ إدارة المنصة</button>`:''}<button class="btn ghost" onclick="logout()">تسجيل الخروج</button></div><div class="sharebox"><input readonly value="${esc(shareUrl(p.username))}"><button class="btn secondary" onclick="copyProfile('${esc(p.username)}')">نسخ الرابط</button></div><div class="cards"><div class="metric"><b>${places.length}</b><span>كل الأماكن</span></div><div class="metric"><b>${places.filter(x=>x.type==='restaurant').length}</b><span>مطاعم</span></div><div class="metric"><b>${places.filter(x=>x.type==='cafe').length}</b><span>كوفيات</span></div>${teaEnabled()?`<div class="metric"><b>${places.filter(x=>x.type==='tea').length}</b><span>محلات شاي</span></div>`:''}<div class="metric"><b>${avg?avg.toFixed(1):'—'}</b><span>متوسط التقييم</span></div></div>`;
+ $('#dashboardHero').innerHTML=`<h1>مرحبًا ${esc(p.display_name)} 👋</h1><p>هذه مساحتك الخاصة. كل ما تضيفه هنا يظهر تلقائيًا في رابطك العام للقراءة فقط.</p><div class="dashactions"><button class="btn primary" onclick="openPlaceForm()">＋ تجربة جديدة</button><button class="btn secondary" onclick="openProfileForm()">✎ تعديل ملفي</button><button class="btn secondary" onclick="setRoute({u:'${esc(p.username)}'})">👁 مشاهدة صفحتي</button>${isAdmin()?`<button class="btn secondary" onclick="setRoute({admin:'1'})">⚙ إدارة المنصة</button>`:''}${v21Enabled()?`<button class="btn ghost" onclick="openSettings()">⚙ الإعدادات</button>`:`<button class="btn ghost" onclick="logout()">تسجيل الخروج</button>`}</div><div class="sharebox"><input readonly value="${esc(shareUrl(p))}"><button class="btn secondary" onclick="copyProfile('${esc(p.id)}')">نسخ الرابط</button></div><div class="cards"><div class="metric"><b>${places.length}</b><span>كل الأماكن</span></div><div class="metric"><b>${places.filter(x=>x.type==='restaurant').length}</b><span>مطاعم</span></div><div class="metric"><b>${places.filter(x=>x.type==='cafe').length}</b><span>كوفيات</span></div>${teaEnabled()?`<div class="metric"><b>${places.filter(x=>x.type==='tea').length}</b><span>محلات شاي</span></div>`:''}<div class="metric"><b>${avg?avg.toFixed(1):'—'}</b><span>متوسط التقييم</span></div></div>`;
  const cities=[...new Set(places.map(x=>x.city).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ar'));
  if(state.dashCity!=='all'&&!cities.includes(state.dashCity))state.dashCity='all';
  $('#dashCityFilters').innerHTML=`<button class="chip ${state.dashCity==='all'?'active':''}" data-city="all">كل المدن</button>`+cities.map(c=>`<button class="chip ${state.dashCity===c?'active':''}" data-city="${esc(c)}">${esc(c)}</button>`).join('');
@@ -636,8 +660,8 @@ function renderAdmin(){
  $('#publicView').classList.add('hidden');$('#dashboardView').classList.add('hidden');$('#adminView').classList.remove('hidden');
  const users=state.profiles.filter(p=>p.role!=='admin');
  const releaseBox=state.release?.candidate_available?`<div class="releaseCard"><div class="releaseRow"><div><span class="previewBadge">${candidateMode()?'🧪 قيد الاختبار على جهاز المالك':'🔔 تحديث تجريبي بانتظار المالك'}</span><h3 style="margin:9px 0 0">v${esc(state.release.candidate_version)}</h3></div>${candidateMode()?`<button class="btn primary" onclick="approveCandidateRelease()">✓ اعتماد وإرسال الإشعار</button>`:`<button class="btn primary" onclick="openUpdatePrompt()">نسخة احتياطية واختبار التحديث</button>`}</div><p>الإصدار الحالي للمستخدمين: <b>v${esc(state.release.stable_version)}</b><br>${esc(state.release.candidate_notes||'')}<br>لن يصل التحديث للمستخدمين حتى تعتمد النسخة بعد اختبارها. بعد الاعتماد يصل إشعار داخل التطبيق، وخارجه لمن فعّل إشعارات ذواق.</p></div>`:`<div class="releaseCard"><div class="releaseRow"><div><span class="previewBadge">✓ آخر تحديث منشور</span><h3 style="margin:9px 0 0">v${esc(state.release?.stable_version||visibleVersion())}</h3></div></div><p>يظهر للمستخدمين إشعار بالتحديث، ويختار كل مستخدم وقت أخذ النسخة الاحتياطية ثم التحديث على جهازه.</p></div>`;
- $('#adminHero').innerHTML=`<h1>لوحة مالك المنصة</h1><p>إدارة المستخدمين ومراقبة نمو المحتوى. صفحات المستخدمين مستقلة، وكل مستخدم يعدّل محتواه فقط.</p><div class="dashactions"><button class="btn secondary" onclick="setRoute({dashboard:'1'})">لوحة حسابي</button><button class="btn ghost" onclick="logout()">تسجيل الخروج</button></div>${releaseBox}<div class="cards"><div class="metric"><b>${users.length}</b><span>مستخدم</span></div><div class="metric"><b>${users.filter(x=>x.is_active!==false).length}</b><span>حساب نشط</span></div><div class="metric"><b>${visiblePlaces(state.places).length}</b><span>مكان مضاف</span></div><div class="metric"><b>${state.visits.length}</b><span>زيارة مسجلة</span></div><div class="metric"><b>${state.items.length}</b><span>صنف مقيّم</span></div></div>`;
- $('#usersTable').innerHTML=users.map(u=>`<tr><td><b>${esc(u.display_name)}</b><br><span style="color:var(--muted)">@${esc(u.username)}</span></td><td><button class="btn ghost" style="padding:7px 9px" onclick="copyProfile('${esc(u.username)}')">نسخ الرابط</button></td><td>${ownerPlaces(u.id).length}</td><td><span class="status ${u.is_active!==false?'onstatus':'offstatus'}">${u.is_active!==false?'نشط':'موقوف'}</span></td><td>${dateAr(u.created_at)}</td><td><div class="inlineactions"><button class="btn secondary" onclick="setRoute({u:'${esc(u.username)}'})">عرض</button><button class="btn ${u.is_active!==false?'danger':'secondary'}" onclick="toggleUser('${u.id}',${u.is_active!==false})">${u.is_active!==false?'إيقاف':'تفعيل'}</button></div></td></tr>`).join('')||`<tr><td colspan="6">لا يوجد مستخدمون بعد.</td></tr>`;
+ $('#adminHero').innerHTML=`<h1>لوحة مالك المنصة</h1><p>إدارة المستخدمين ومراقبة نمو المحتوى. صفحات المستخدمين مستقلة، وكل مستخدم يعدّل محتواه فقط.</p><div class="dashactions"><button class="btn secondary" onclick="setRoute({dashboard:'1'})">لوحة حسابي</button>${v21Enabled()?`<button class="btn ghost" onclick="openSettings()">⚙ الإعدادات</button>`:`<button class="btn ghost" onclick="logout()">تسجيل الخروج</button>`}</div>${releaseBox}<div class="cards"><div class="metric"><b>${users.length}</b><span>مستخدم</span></div><div class="metric"><b>${users.filter(x=>x.is_active!==false).length}</b><span>حساب نشط</span></div><div class="metric"><b>${visiblePlaces(state.places).length}</b><span>مكان مضاف</span></div>${v21Enabled()?`<div class="metric"><b>${state.visits.length}</b><span>زيارة مسجلة</span></div>`:''}<div class="metric"><b>${state.items.length}</b><span>صنف مقيّم</span></div></div>`;
+ $('#usersTable').innerHTML=users.map(u=>`<tr><td><b>${esc(u.display_name)}</b><br><span style="color:var(--muted)">@${esc(u.username)}</span></td><td><button class="btn ghost" style="padding:7px 9px" onclick="copyProfile('${esc(u.id)}')">نسخ الرابط</button></td><td>${ownerPlaces(u.id).length}</td><td><span class="status ${u.is_active!==false?'onstatus':'offstatus'}">${u.is_active!==false?'نشط':'موقوف'}</span></td><td>${dateAr(u.created_at)}</td><td><div class="inlineactions"><button class="btn secondary" onclick="setRoute({u:'${esc(u.username)}'})">عرض</button><button class="btn ${u.is_active!==false?'danger':'secondary'}" onclick="toggleUser('${u.id}',${u.is_active!==false})">${u.is_active!==false?'إيقاف':'تفعيل'}</button></div></td></tr>`).join('')||`<tr><td colspan="6">لا يوجد مستخدمون بعد.</td></tr>`;
 }
 async function approveCandidateRelease(){
  if(!CLOUD_READY||!isAdmin()||!state.release?.candidate_available)return;
@@ -647,11 +671,30 @@ async function approveCandidateRelease(){
  const {error}=await sb.from('app_release').update({stable_version:v,candidate_available:false,updated_at:new Date().toISOString()}).eq('id','main');
  if(error){console.error(error);return toast('تعذر اعتماد التحديث')}
  try{await sb.functions.invoke('push-notifications',{body:{action:'process-admin'}})}catch(e){console.warn('push delivery',e)}
- await loadCloud();toast(`تم نشر إشعار v${v} داخل التطبيق وخارجه للمشتركين`)
+ await loadCloud();toast(`تم نشر v${v} وإرسال الإشعار فورًا داخل التطبيق وخارجه`)
 }
-async function copyProfile(username){try{await navigator.clipboard.writeText(shareUrl(username));toast('تم نسخ رابط الصفحة')}catch{prompt('انسخ الرابط:',shareUrl(username))}}
+async function copyProfile(key){const p=profileByKey(key);const url=shareUrl(p||key);try{await navigator.clipboard.writeText(url);toast('تم نسخ رابط الصفحة العام')}catch{prompt('انسخ الرابط:',url)}}
+function openSettings(){
+ if(!state.currentProfile)return show('authModal');
+ const p=state.currentProfile;$('#publicLinkPreview').value=shareUrl(p);$('#publicSlugInput').value=p.public_slug||'';
+ $('#settingsAdminBtn').classList.toggle('hidden',!isAdmin());$('#ownerAppLinkBlock').classList.toggle('hidden',!isAdmin());
+ if(isAdmin())$('#ownerAppLinkPreview').value=`${location.origin}${location.pathname}`;
+ $('#settingsPushBtn').textContent=(typeof Notification!=='undefined'&&Notification.permission==='granted')?'🔔 الإشعارات مفعّلة':'🔔 تفعيل الإشعارات';
+ show('settingsModal')
+}
+async function savePublicSlug(){
+ const p=state.currentProfile;if(!p)return;const slug=$('#publicSlugInput').value.trim().toLowerCase();
+ if(!/^[a-z0-9][a-z0-9_-]{2,38}[a-z0-9]$/.test(slug))return toast('الرابط يجب أن يكون 4–40 حرفًا إنجليزيًا/رقمًا ويمكن استخدام - أو _');
+ if(state.profiles.some(x=>x.id!==p.id&&String(x.public_slug||'').toLowerCase()===slug))return toast('هذا الرابط مستخدم بالفعل');
+ try{
+  if(CLOUD_READY){const {error}=await sb.from('profiles').update({public_slug:slug,updated_at:new Date().toISOString()}).eq('id',p.id);if(error){if(String(error.code)==='23505')return toast('هذا الرابط مستخدم بالفعل');throw error}await loadCloud()}
+  else{p.public_slug=slug;localSave()}
+  $('#publicLinkPreview').value=shareUrl(state.currentProfile||p);toast('تم حفظ رابطك العام الجديد')
+ }catch(e){console.error(e);toast('تعذر حفظ الرابط')}
+}
 $('#homeBtn').onclick=()=>{if(state.currentProfile)setRoute({u:state.currentProfile.username});else if(state.viewProfile)setRoute({u:state.viewProfile.username});else setRoute({})};
 $('#accountBtn').onclick=()=>state.currentProfile?setRoute({dashboard:'1'}):show('authModal');
+$('#settingsBtn').onclick=()=>openSettings();
 $('#refreshBtn').onclick=()=>refreshApp();
 $('#enablePushBtn').onclick=()=>enablePushNotifications();
 $('#addPlaceBtn').onclick=()=>openPlaceForm();
@@ -659,6 +702,13 @@ $('#reviewUpdateBtn').onclick=()=>openUpdatePrompt();
 $('#backupBeforeUpdateBtn').onclick=()=>downloadBackupBeforeUpdate();
 $('#applyUpdateBtn').onclick=()=>applyPendingUpdate();
 $('#updateLaterBtn').onclick=()=>hide('updateModal');
+$('#copyPublicLinkBtn').onclick=()=>copyProfile(state.currentProfile?.id||'');
+$('#copyOwnerAppLinkBtn').onclick=async()=>{const url=`${location.origin}${location.pathname}`;try{await navigator.clipboard.writeText(url);toast('تم نسخ رابط التطبيق الأصلي')}catch{prompt('انسخ الرابط:',url)}};
+$('#savePublicSlugBtn').onclick=()=>savePublicSlug();
+$('#settingsProfileBtn').onclick=()=>{hide('settingsModal');openProfileForm()};
+$('#settingsPushBtn').onclick=()=>enablePushNotifications();
+$('#settingsAdminBtn').onclick=()=>{hide('settingsModal');setRoute({admin:'1'})};
+$('#settingsLogoutBtn').onclick=()=>logout();
 
 $$('[data-auth-tab]').forEach(b=>b.onclick=()=>{
  $$('[data-auth-tab]').forEach(x=>x.classList.toggle('active',x===b));
@@ -717,10 +767,10 @@ $('#signupBtn').onclick=async()=>{
   if(error)return toast(error.message.includes('already')?'البريد أو اسم المستخدم مستخدم بالفعل':'تعذر إنشاء الحساب');
   hide('authModal');if(data?.session){await loadCloud();setRoute({dashboard:'1'});toast('تم إنشاء حسابك')}else toast('تم إنشاء الحساب. تحقق من بريدك لتأكيده ثم سجّل الدخول.');return
  }
- const p={id:uid(),email,username,display_name,bio:'',avatar_url:'',role:'creator',is_active:true,created_at:new Date().toISOString()};
+ const p={id:uid(),email,username,public_slug:`p-${uid().replace(/-/g,'').slice(0,12)}`,display_name,bio:'',avatar_url:'',role:'creator',is_active:true,created_at:new Date().toISOString()};
  state.profiles.push(p);state.currentProfile=p;state.session=p;localStorage.setItem('thaeeqatiSessionV2',p.id);localSave();hide('authModal');setRoute({dashboard:'1'});toast('تم إنشاء حسابك التجريبي')
 };
-async function logout(){if(CLOUD_READY)await sb.auth.signOut();else{localStorage.removeItem('thaeeqatiSessionV2');sessionStorage.removeItem('thaeeqatiSessionV2')};state.session=null;state.currentProfile=null;setRoute({});toast('تم تسجيل الخروج')}
+async function logout(){if(!confirm('هل أنت متأكد من تسجيل الخروج؟'))return;if(CLOUD_READY)await sb.auth.signOut();else{localStorage.removeItem('thaeeqatiSessionV2');sessionStorage.removeItem('thaeeqatiSessionV2')};state.session=null;state.currentProfile=null;hide('settingsModal');setRoute({});toast('تم تسجيل الخروج')}
 
 function filePreview(inp,img){inp.onchange=()=>{const f=inp.files[0];if(!f)return;img.src=URL.createObjectURL(f);img.style.display='block'}}
 filePreview($('#profilePhoto'),$('#profilePreview'));filePreview($('#placePhoto'),$('#placePreview'));filePreview($('#itemPhoto'),$('#itemPreview'));filePreview($('#receiptPhoto'),$('#receiptPreview'));
@@ -822,13 +872,18 @@ function visitCard(v,p,edit){
 function openDetail(id){
  state.currentPlaceId=id;const p=state.places.find(x=>x.id===id);if(!p)return;
  const visits=placeVisits(id),edit=canEdit(p),r=finalRating(p),auto=autoRating(p);
+ if(!v21Enabled()){
+  const its=placeItems(id),v=latestVisit(id),subtotal=its.reduce((sum,i)=>sum+Number(i.price||0),0),base=v?.total_override!==null&&v?.total_override!==undefined?Number(v.total_override):subtotal,tax=v?.tax_enabled?base*Number(v.tax_rate??5)/100:0,final=base+tax;
+  $('#detailContent').innerHTML=`<div class="detailhero"><img src="${esc(p.cover_url||placeholder(p.name))}" onerror="this.src='${placeholder(p.name)}'"><button class="close" style="position:absolute;z-index:4;top:13px;left:13px" onclick="hide('detailModal')">×</button></div><div class="detailheading"><div class="badges"><span class="badge">${typeBadge(p.type)}</span><span class="badge">📍 ${esc(p.city)}</span></div><h3>${esc(p.name)}</h3><div class="rating">${stars(r)} <small>${p.rating_override!==null&&p.rating_override!==''?`متوسط الأصناف ${auto?auto.toFixed(1):'—'}`:'تقييم تلقائي من الأصناف'}</small></div></div>${edit?`<div class="detailactions"><button class="btn primary" onclick="hide('detailModal');openItemForm('${p.id}','${v?.id||''}')">＋ صنف</button>${v?`<button class="btn secondary" onclick="hide('detailModal');openReceipt('${p.id}','${v.id}')">🧾 الفاتورة</button>`:''}<button class="btn secondary" onclick="editPlace('${p.id}')">✎ تعديل</button><button class="btn danger" onclick="deletePlace('${p.id}')">حذف</button></div>`:''}${p.notes?`<p style="color:#665e55;line-height:1.8">${esc(p.notes)}</p>`:''}<div class="sectionhead"><div><h3>الأصناف</h3><p>${its.length} أصناف تم تقييمها</p></div></div><div class="items">${its.length?its.map(i=>itemCard(i,edit)).join(''):`<div class="empty">لم تتم إضافة أصناف بعد.</div>`}</div><div class="receipt"><div class="receiptr"><span>مجموع أسعار الأصناف</span><b>${money(subtotal)}</b></div>${v?.total_override!==null&&v?.total_override!==undefined?`<div class="receiptr"><span>المبلغ المسجل قبل الضريبة</span><b>${money(base)}</b></div>`:''}${v?.tax_enabled?`<div class="receiptr receiptTax"><span>الضريبة (${Number(v.tax_rate??5)}%)</span><b>＋ ${money(tax)}</b></div>`:''}<div class="receiptr"><span>الإجمالي النهائي</span><span class="total">${money(final)}</span></div>${v?.receipt_url?`<img src="${esc(v.receipt_url)}" style="width:100%;max-height:400px;object-fit:contain;border-radius:14px;margin-top:12px;background:#fff">`:''}</div>`;
+  show('detailModal');return
+ }
  $('#detailContent').innerHTML=`<div class="detailhero"><img src="${esc(p.cover_url||placeholder(p.name))}" onerror="this.src='${placeholder(p.name)}'"><button class="close" style="position:absolute;z-index:4;top:13px;left:13px" onclick="hide('detailModal')">×</button></div><div class="detailheading"><div class="badges"><span class="badge">${typeBadge(p.type)}</span><span class="badge">📍 ${esc(p.city)}</span><span class="badge">${visits.length} زيارات</span></div><h3>${esc(p.name)}</h3><div class="rating">${stars(r)} <small>${p.rating_override!==null&&p.rating_override!==''?`متوسط الأصناف ${auto?auto.toFixed(1):'—'}`:'تقييم تلقائي من جميع الأصناف'}</small></div></div>${edit?`<div class="detailactions"><button class="btn primary" onclick="addNewVisit('${p.id}')">＋ زيارة جديدة اليوم</button><button class="btn secondary" onclick="editPlace('${p.id}')">✎ تعديل المكان</button><button class="btn danger" onclick="deletePlace('${p.id}')">حذف المكان</button></div>`:''}${p.notes?`<p style="color:#665e55;line-height:1.8">${esc(p.notes)}</p>`:''}<div class="sectionhead"><div><h3>سجل الزيارات</h3><p>كل زيارة تحتفظ بتاريخها وأصنافها وفاتورتها بشكل مستقل</p></div></div><div class="visitsWrap">${visits.length?visits.map(v=>visitCard(v,p,edit)).join(''):`<div class="empty">لا توجد زيارات مسجلة بعد.</div>`}</div>`;
  show('detailModal')
 }
 function openItemView(id){
  const i=state.items.find(x=>x.id===id);if(!i)return;
  const p=state.places.find(x=>x.id===i.place_id);
- const v=state.visits.find(x=>x.id===i.visit_id);$('#itemViewContent').innerHTML=`<div class="modalhead"><div><div class="badge">${p?typeBadge(p.type):''}${p?` · ${esc(p.name)}`:''}</div>${v?`<div class="hint" style="margin-top:5px">📅 ${visitDateAr(v.visited_at)}</div>`:''}</div><button class="close" onclick="hide('itemViewModal')">×</button></div><img class="itemViewImage" src="${esc(i.photo_url||placeholder(i.name))}" alt="${esc(i.name)}" onerror="this.src='${placeholder(i.name)}'"><div class="itemViewBody"><div class="itemViewMeta"><div><h3>${esc(i.name)}</h3><div class="rating">${stars(i.rating)}</div></div><span class="price" style="font-size:20px">${money(i.price)}</span></div><div class="itemDescription"><b>الوصف / الملاحظة</b><br>${i.notes?esc(i.notes):'لا توجد ملاحظة مضافة لهذا الصنف.'}</div></div>`;
+ const v=state.visits.find(x=>x.id===i.visit_id);$('#itemViewContent').innerHTML=`<div class="modalhead"><div><div class="badge">${p?typeBadge(p.type):''}${p?` · ${esc(p.name)}`:''}</div>${v&&v21Enabled()?`<div class="hint" style="margin-top:5px">📅 ${visitDateAr(v.visited_at)}</div>`:''}</div><button class="close" onclick="hide('itemViewModal')">×</button></div><img class="itemViewImage" src="${esc(i.photo_url||placeholder(i.name))}" alt="${esc(i.name)}" onerror="this.src='${placeholder(i.name)}'"><div class="itemViewBody"><div class="itemViewMeta"><div><h3>${esc(i.name)}</h3><div class="rating">${stars(i.rating)}</div></div><span class="price" style="font-size:20px">${money(i.price)}</span></div><div class="itemDescription"><b>الوصف / الملاحظة</b><br>${i.notes?esc(i.notes):'لا توجد ملاحظة مضافة لهذا الصنف.'}</div></div>`;
  show('itemViewModal')
 }
 function itemCard(i,edit){
