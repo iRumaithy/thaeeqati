@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ذائقتي">
+<meta name="application-name" content="ذائقتي">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <meta name="theme-color" content="#f7f3eb">
 <title>ذائقتي — تقييمات المطاعم والكوفيات</title>
 <meta name="description" content="منصة شخصية لمشاركة تقييمات المطاعم والكوفيات مع الأصدقاء.">
@@ -26,10 +34,12 @@ body{
 }
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
+html.standalone-mode,html.standalone-mode body{overscroll-behavior:none}
+html.standalone-mode body{touch-action:pan-x pan-y}
 .hidden{display:none!important}
 .app{max-width:1160px;margin:auto;padding:0 16px 110px}
 .topbar{
-  position:sticky;top:0;z-index:50;margin:0 -16px;padding:12px 16px;
+  position:sticky;top:0;z-index:50;margin:0 -16px;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;
   background:rgba(250,247,241,.88);backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(222,213,200,.65)
 }
@@ -189,6 +199,20 @@ tr:last-child td{border-bottom:0}
 .cloud{display:inline-flex;align-items:center;gap:5px;color:var(--muted);font-size:10px}
 .dot{width:7px;height:7px;border-radius:50%;background:#aaa}
 .dot.on{background:var(--green);box-shadow:0 0 0 4px rgba(95,148,119,.10)}
+
+.rememberRow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;border:1px solid var(--line);background:#fffdf9;border-radius:15px;color:#5f584f}
+.rememberRow label{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:750;cursor:pointer}
+.rememberRow input{width:19px;height:19px;accent-color:var(--accent)}
+.item{cursor:pointer;transition:transform .16s ease,box-shadow .16s ease}
+.item:active{transform:scale(.993)}
+.itemOpenHint{font-size:10px;color:#938a80;margin-top:6px}
+.itemviewer{padding-top:14px}
+.itemViewImage{width:100%;height:min(52vh,480px);object-fit:contain;background:#eee7dc;border:1px solid var(--line);border-radius:22px;display:block}
+.itemViewBody{padding:16px 3px 2px}
+.itemViewBody h3{font-size:27px;margin:8px 0}
+.itemViewMeta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.itemDescription{background:#f5f0e8;border:1px solid var(--line);border-radius:18px;padding:15px;line-height:1.9;color:#5d564e;white-space:pre-wrap}
+.installHelp{line-height:1.8;text-align:right}
 .footerVersion{text-align:center;color:#9a9288;font-size:10px;margin:30px 0 0}
 @media(min-width:700px){
   .app{padding-left:24px;padding-right:24px}.topbar{margin-left:-24px;margin-right:-24px;padding-left:24px;padding-right:24px}
@@ -202,8 +226,18 @@ tr:last-child td{border-bottom:0}
 <body>
 <div class="app">
   <header class="topbar"><div class="topin">
-    <div class="brand"><div class="brandmark">ذ</div><div class="brandtext"><b>ذائقتي</b><small id="brandSub">آراء حقيقية من أشخاص تعرفهم</small></div></div>
-    <div class="topactions"><button class="iconbtn" id="homeBtn" title="الرئيسية">⌂</button><button class="iconbtn" id="accountBtn" title="الحساب">◉</button></div>
+    <div class="brand"><div class="brandmark" aria-label="شعار ذائقتي"><svg viewBox="0 0 64 64" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+<circle cx="32" cy="32" r="18" fill="#fff8ef" opacity=".9"/>
+<path d="M22 28h18a2 2 0 0 1 2 2v9a5 5 0 0 1-5 5H27a5 5 0 0 1-5-5v-9a2 2 0 0 1 2-2Z" fill="#3c2d1f"/>
+<path d="M41 31h3a4 4 0 1 1 0 8h-3" fill="none" stroke="#3c2d1f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20 46h24" stroke="#3c2d1f" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M27 22c0-3 3-3 3-6M33 22c0-3 3-3 3-6" fill="none" stroke="#6c5338" stroke-width="2.8" stroke-linecap="round"/>
+<path d="M14 23v18" stroke="#3c2d1f" stroke-width="2.8" stroke-linecap="round"/>
+<path d="M11 20v8M14 20v8M17 20v8" stroke="#3c2d1f" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M50 21c-3 1-4 4-4 7 0 2 1 4 4 5 3-1 4-3 4-5 0-3-1-6-4-7Z" fill="#3c2d1f"/>
+<path d="M50 33v8" stroke="#3c2d1f" stroke-width="2.8" stroke-linecap="round"/>
+</svg></div><div class="brandtext"><b>ذائقتي</b><small id="brandSub">آراء حقيقية من أشخاص تعرفهم</small></div></div>
+    <div class="topactions"><button class="iconbtn hidden" id="installBtn" title="تثبيت التطبيق" aria-label="تثبيت التطبيق">⇩</button><button class="iconbtn" id="homeBtn" title="الرئيسية">⌂</button><button class="iconbtn" id="accountBtn" title="الحساب">◉</button></div>
   </div></header>
 
   <main id="publicView">
@@ -236,7 +270,7 @@ tr:last-child td{border-bottom:0}
     <section class="dashboardhero" id="adminHero"></section>
     <section class="section"><div class="sectionhead"><div><h2>المستخدمون</h2><p>إدارة حسابات المنصة وصفحاتهم العامة</p></div></div><div class="tablewrap"><table><thead><tr><th>المستخدم</th><th>الرابط</th><th>الأماكن</th><th>الحالة</th><th>تاريخ الانضمام</th><th>إدارة</th></tr></thead><tbody id="usersTable"></tbody></table></div></section>
   </main>
-  <div class="footerVersion">ذائقتي • v1.4</div>
+  <div class="footerVersion">ذائقتي • v1.6</div>
 </div>
 
 <div class="modalwrap" id="authModal"><div class="modal"><div class="modalhead"><h3>الدخول إلى ذائقتي</h3><button class="close" data-close="authModal">×</button></div><div class="tabs"><button class="active" data-auth-tab="login">تسجيل الدخول</button><button data-auth-tab="signup">إنشاء حساب</button></div>
@@ -244,6 +278,7 @@ tr:last-child td{border-bottom:0}
     <div class="formgrid">
       <div class="field"><label>اسم المستخدم أو البريد الإلكتروني</label><input id="loginIdentifier" type="text" dir="ltr" autocomplete="username" placeholder="irumaithy أو name@example.com"></div>
       <div class="field"><label>كلمة المرور</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
+      <div class="rememberRow"><label for="rememberMe"><input id="rememberMe" type="checkbox" checked> إبقائي مسجّلًا على هذا الجهاز</label><span class="hint">اختياري</span></div>
     </div>
     <div class="note hidden" id="confirmNote" style="margin-top:12px">بريد هذا الحساب غير مؤكد بعد. افتح رسالة التأكيد في بريدك ثم حاول مجددًا.<div style="margin-top:9px"><button class="btn secondary" id="resendConfirmBtn">إعادة إرسال رابط التأكيد</button></div></div>
     <div class="note" id="demoNote" style="margin-top:12px">للتجربة المحلية: <b>abdullah</b> / <b>user</b> أو <b>admin</b> / <b>admin</b>.</div>
@@ -261,6 +296,7 @@ tr:last-child td{border-bottom:0}
 <div class="modalwrap" id="receiptModal"><div class="modal"><div class="modalhead"><h3>الفاتورة والإجمالي</h3><button class="close" data-close="receiptModal">×</button></div><input type="hidden" id="receiptPlaceId"><div class="formgrid"><div class="field"><label>المبلغ قبل الضريبة — اختياري</label><input id="receiptTotal" type="number" min="0" step="0.01" placeholder="إن تركته فارغًا يستخدم مجموع الأصناف"></div><div class="field"><label class="upload">🧾 تصوير / إرفاق الفاتورة <input id="receiptPhoto" type="file" accept="image/*" capture="environment"><img class="preview" id="receiptPreview"></label></div><div class="note">بعد حفظ الفاتورة يمكنك الضغط على زر <b>إضافة قيمة الضريبة</b> من تفاصيل المكان. يتم احتساب ضريبة 5% تلقائيًا وإضافتها إلى الإجمالي.</div></div><div class="formactions"><button class="btn primary" id="saveReceiptBtn">حفظ الفاتورة</button><button class="btn secondary" data-close="receiptModal">إلغاء</button></div></div></div>
 
 <div class="modalwrap" id="detailModal"><div class="modal" id="detailContent"></div></div>
+<div class="modalwrap" id="itemViewModal"><div class="modal itemviewer" id="itemViewContent"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -268,7 +304,25 @@ const SUPABASE_URL=window.APP_CONFIG?.SUPABASE_URL||'YOUR_SUPABASE_URL';
 const SUPABASE_KEY=window.APP_CONFIG?.SUPABASE_PUBLISHABLE_KEY||'YOUR_SUPABASE_PUBLISHABLE_KEY';
 const MEDIA_BUCKET='blog-media';
 const CLOUD_READY=SUPABASE_URL.startsWith('https://')&&!SUPABASE_URL.includes('YOUR_')&&SUPABASE_KEY&&!SUPABASE_KEY.includes('YOUR_');
-const sb=CLOUD_READY?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true}}):null;
+const REMEMBER_KEY='thaeeqatiRememberMe';
+const IS_STANDALONE=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+if(IS_STANDALONE){
+ document.documentElement.classList.add('standalone-mode');
+ const vp=document.querySelector('meta[name=viewport]');
+ if(vp)vp.setAttribute('content','width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover');
+ ['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
+ document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault()},{passive:false});
+}
+const authStorage={
+ getItem:key=>localStorage.getItem(key)??sessionStorage.getItem(key),
+ setItem:(key,value)=>{
+  const remember=localStorage.getItem(REMEMBER_KEY)!=='0';
+  if(remember){localStorage.setItem(key,value);sessionStorage.removeItem(key)}
+  else{sessionStorage.setItem(key,value);localStorage.removeItem(key)}
+ },
+ removeItem:key=>{localStorage.removeItem(key);sessionStorage.removeItem(key)}
+};
+const sb=CLOUD_READY?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,storage:authStorage}}):null;
 const LOGIN_ENDPOINT=CLOUD_READY?`${SUPABASE_URL}/functions/v1/login-identifier`:'';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const uid=()=>crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);
@@ -297,7 +351,7 @@ function localLoad(){
  let d;try{d=JSON.parse(localStorage.getItem('thaeeqatiMultiV2')||'null')}catch{}
  if(!d){d=seed();localStorage.setItem('thaeeqatiMultiV2',JSON.stringify(d))}
  state.profiles=d.profiles||[];state.places=(d.places||[]).map(p=>({...p,tax_enabled:!!p.tax_enabled,tax_rate:Number(p.tax_rate??5)}));state.items=d.items||[];
- const sid=localStorage.getItem('thaeeqatiSessionV2');state.session=sid?state.profiles.find(p=>p.id===sid)||null:null;state.currentProfile=state.session
+ const sid=localStorage.getItem('thaeeqatiSessionV2')||sessionStorage.getItem('thaeeqatiSessionV2');state.session=sid?state.profiles.find(p=>p.id===sid)||null:null;state.currentProfile=state.session
 }
 function localSave(){localStorage.setItem('thaeeqatiMultiV2',JSON.stringify({profiles:state.profiles,places:state.places,items:state.items}))}
 function show(id){$('#'+id).classList.add('show')}function hide(id){$('#'+id).classList.remove('show')}
@@ -332,7 +386,26 @@ async function loadCloud(){
  if(state.currentProfile?.is_active===false){await sb.auth.signOut();state.session=null;state.currentProfile=null;toast('هذا الحساب موقوف من إدارة المنصة')}
  route();
 }
+let deferredInstallPrompt=null;
+function setupInstallExperience(){
+ const btn=$('#installBtn');if(!btn)return;
+ if(IS_STANDALONE){btn.classList.add('hidden');return}
+ const isiOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+ if(isiOS)btn.classList.remove('hidden');
+ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;btn.classList.remove('hidden')});
+ window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;btn.classList.add('hidden');toast('تم تثبيت ذائقتي كتطبيق')});
+ btn.onclick=async()=>{
+  if(deferredInstallPrompt){deferredInstallPrompt.prompt();const choice=await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;if(choice?.outcome==='accepted')btn.classList.add('hidden');return}
+  if(isiOS){alert('لتثبيت ذائقتي على الآيفون:\n1) اضغط زر المشاركة في Safari\n2) اختر «إضافة إلى الشاشة الرئيسية»\n3) اضغط «إضافة»');return}
+  alert('من قائمة المتصفح اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».');
+ };
+}
+function registerAppServiceWorker(){
+ if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(r=>r.update()).catch(console.error));
+}
 async function init(){
+ setupInstallExperience();registerAppServiceWorker();
+ const remember=$('#rememberMe');if(remember)remember.checked=localStorage.getItem(REMEMBER_KEY)!=='0';
  if(CLOUD_READY){
   await loadCloud();
   sb.auth.onAuthStateChange(()=>setTimeout(loadCloud,70));
@@ -438,6 +511,7 @@ $('#loginBtn').onclick=async()=>{
  const identifier=$('#loginIdentifier').value.trim(),pass=$('#loginPassword').value;
  state.lastLoginIdentifier=identifier;$('#confirmNote').classList.add('hidden');
  if(!identifier||!pass)return toast('أدخل اسم المستخدم أو البريد وكلمة المرور');
+ const remember=$('#rememberMe')?.checked!==false;localStorage.setItem(REMEMBER_KEY,remember?'1':'0');
  if(CLOUD_READY){
   const btn=$('#loginBtn');btn.disabled=true;
   try{
@@ -457,7 +531,7 @@ $('#loginBtn').onclick=async()=>{
  if((value==='admin'||value==='admin@demo.local')&&pass==='admin')p=state.profiles.find(x=>x.role==='admin');
  if((value==='abdullah'||value==='user@demo.local')&&pass==='user')p=state.profiles.find(x=>x.username==='abdullah');
  if(!p)return toast('بيانات الدخول التجريبية غير صحيحة');
- state.session=p;state.currentProfile=p;localStorage.setItem('thaeeqatiSessionV2',p.id);hide('authModal');setRoute({dashboard:'1'});toast('تم تسجيل الدخول')
+ state.session=p;state.currentProfile=p;if(localStorage.getItem(REMEMBER_KEY)!=='0')localStorage.setItem('thaeeqatiSessionV2',p.id);else{localStorage.removeItem('thaeeqatiSessionV2');sessionStorage.setItem('thaeeqatiSessionV2',p.id)}hide('authModal');setRoute({dashboard:'1'});toast('تم تسجيل الدخول')
 };
 $('#resendConfirmBtn').onclick=async()=>{
  const identifier=state.lastLoginIdentifier||$('#loginIdentifier').value.trim();if(!identifier)return toast('أدخل اسم المستخدم أو البريد أولًا');
@@ -482,7 +556,7 @@ $('#signupBtn').onclick=async()=>{
  const p={id:uid(),email,username,display_name,bio:'',avatar_url:'',role:'creator',is_active:true,created_at:new Date().toISOString()};
  state.profiles.push(p);state.currentProfile=p;state.session=p;localStorage.setItem('thaeeqatiSessionV2',p.id);localSave();hide('authModal');setRoute({dashboard:'1'});toast('تم إنشاء حسابك التجريبي')
 };
-async function logout(){if(CLOUD_READY)await sb.auth.signOut();else localStorage.removeItem('thaeeqatiSessionV2');state.session=null;state.currentProfile=null;setRoute({});toast('تم تسجيل الخروج')}
+async function logout(){if(CLOUD_READY)await sb.auth.signOut();else{localStorage.removeItem('thaeeqatiSessionV2');sessionStorage.removeItem('thaeeqatiSessionV2')};state.session=null;state.currentProfile=null;setRoute({});toast('تم تسجيل الخروج')}
 
 function filePreview(inp,img){inp.onchange=()=>{const f=inp.files[0];if(!f)return;img.src=URL.createObjectURL(f);img.style.display='block'}}
 filePreview($('#profilePhoto'),$('#profilePreview'));filePreview($('#placePhoto'),$('#placePreview'));filePreview($('#itemPhoto'),$('#itemPreview'));filePreview($('#receiptPhoto'),$('#receiptPreview'));
@@ -585,8 +659,14 @@ function openDetail(id){
  </div>`;
  show('detailModal')
 }
+function openItemView(id){
+ const i=state.items.find(x=>x.id===id);if(!i)return;
+ const p=state.places.find(x=>x.id===i.place_id);
+ $('#itemViewContent').innerHTML=`<div class="modalhead"><div><div class="badge">${p?.type==='cafe'?'☕ كوفي':'🍽️ مطعم'}${p?` · ${esc(p.name)}`:''}</div></div><button class="close" onclick="hide('itemViewModal')">×</button></div><img class="itemViewImage" src="${esc(i.photo_url||placeholder(i.name))}" alt="${esc(i.name)}" onerror="this.src='${placeholder(i.name)}'"><div class="itemViewBody"><div class="itemViewMeta"><div><h3>${esc(i.name)}</h3><div class="rating">${stars(i.rating)}</div></div><span class="price" style="font-size:20px">${money(i.price)}</span></div><div class="itemDescription"><b>الوصف / الملاحظة</b><br>${i.notes?esc(i.notes):'لا توجد ملاحظة مضافة لهذا الصنف.'}</div></div>`;
+ show('itemViewModal')
+}
 function itemCard(i,edit){
- return `<div class="item"><img src="${esc(i.photo_url||placeholder(i.name))}" onerror="this.src='${placeholder(i.name)}'"><div><div class="row"><span class="rating">${stars(i.rating)}</span><span class="price">${money(i.price)}</span></div><h4>${esc(i.name)}</h4>${i.notes?`<div class="row"><span>${esc(i.notes)}</span></div>`:''}${edit?`<div class="inlineactions" style="margin-top:8px"><button class="btn secondary" onclick="editItem('${i.id}')">تعديل</button><button class="btn danger" onclick="deleteItem('${i.id}')">حذف</button></div>`:''}</div></div>`
+ return `<div class="item" role="button" tabindex="0" onclick="openItemView('${i.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openItemView('${i.id}')}"><img src="${esc(i.photo_url||placeholder(i.name))}" onerror="this.src='${placeholder(i.name)}'"><div><div class="row"><span class="rating">${stars(i.rating)}</span><span class="price">${money(i.price)}</span></div><h4>${esc(i.name)}</h4>${i.notes?`<div class="row"><span>${esc(i.notes)}</span></div>`:''}<div class="itemOpenHint">اضغط لعرض الصورة والوصف</div>${edit?`<div class="inlineactions" style="margin-top:8px"><button class="btn secondary" onclick="event.stopPropagation();editItem('${i.id}')">تعديل</button><button class="btn danger" onclick="event.stopPropagation();deleteItem('${i.id}')">حذف</button></div>`:''}</div></div>`
 }
 function editPlace(id){const p=state.places.find(x=>x.id===id);if(!p||!canEdit(p))return;hide('detailModal');openPlaceForm(p)}
 function editItem(id){const i=state.items.find(x=>x.id===id),p=i&&state.places.find(x=>x.id===i.place_id);if(!i||!p||!canEdit(p))return;hide('detailModal');openItemForm(p.id,i)}
