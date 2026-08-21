@@ -358,6 +358,7 @@ const state={profiles:[],places:[],visits:[],items:[],session:null,currentProfil
 const UPDATE_ACCEPTED_KEY='thawaqAcceptedVersion';
 const BASELINE_VERSION='2.0';
 const BUILD_VERSION='2.3';
+const BUILD_PATCH='r2';
 
 function seed(){
  const now=new Date().toISOString();
@@ -814,6 +815,7 @@ $('#savePlaceBtn').onclick=async()=>{
 };
 
 function openItemForm(placeId,visitId,item=null){
+ hide('detailModal');
  const chosenVisit=item?.visit_id||visitId||latestVisit(placeId)?.id||'';
  if(!chosenVisit)return toast('أنشئ زيارة أولًا');
  $('#itemModalTitle').textContent=item?'تعديل الصنف':'إضافة صنف لهذه الزيارة';$('#itemId').value=item?.id||'';$('#itemPlaceId').value=placeId;$('#itemVisitId').value=chosenVisit;$('#itemName').value=item?.name||'';$('#itemPrice').value=item?.price??'';$('#itemRating').value=String(item?.rating??5);$('#itemNotes').value=item?.notes||'';$('#itemPhoto').value='';$('#itemPreview').style.display='none';show('itemModal')
@@ -839,6 +841,7 @@ async function addNewVisit(placeId){
  }catch(e){console.error(e);toast('تعذر إضافة الزيارة')}
 }
 function openReceipt(placeId,visitId){
+ hide('detailModal');
  const p=state.places.find(x=>x.id===placeId),v=state.visits.find(x=>x.id===visitId);if(!p||!v||!canEdit(p))return;
  $('#receiptPlaceId').value=placeId;$('#receiptVisitId').value=visitId;$('#receiptTotal').value=v.total_override??'';$('#receiptPhoto').value='';$('#receiptPreview').style.display='none';show('receiptModal')
 }
