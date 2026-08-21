@@ -6,13 +6,13 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="ذائقتي">
-<meta name="application-name" content="ذائقتي">
+<meta name="apple-mobile-web-app-title" content="ذواق">
+<meta name="application-name" content="ذواق">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <meta name="theme-color" content="#f7f3eb">
-<title>ذائقتي — تقييمات المطاعم والكوفيات</title>
+<title>ذواق — THAWAQ</title>
 <meta name="description" content="منصة شخصية لمشاركة تقييمات المطاعم والكوفيات مع الأصدقاء.">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3"></script>
 <script src="config.js"></script>
@@ -226,17 +226,7 @@ tr:last-child td{border-bottom:0}
 <body>
 <div class="app">
   <header class="topbar"><div class="topin">
-    <div class="brand"><div class="brandmark" aria-label="شعار ذائقتي"><svg viewBox="0 0 64 64" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-<circle cx="32" cy="32" r="18" fill="#fff8ef" opacity=".9"/>
-<path d="M22 28h18a2 2 0 0 1 2 2v9a5 5 0 0 1-5 5H27a5 5 0 0 1-5-5v-9a2 2 0 0 1 2-2Z" fill="#3c2d1f"/>
-<path d="M41 31h3a4 4 0 1 1 0 8h-3" fill="none" stroke="#3c2d1f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M20 46h24" stroke="#3c2d1f" stroke-width="3.2" stroke-linecap="round"/>
-<path d="M27 22c0-3 3-3 3-6M33 22c0-3 3-3 3-6" fill="none" stroke="#6c5338" stroke-width="2.8" stroke-linecap="round"/>
-<path d="M14 23v18" stroke="#3c2d1f" stroke-width="2.8" stroke-linecap="round"/>
-<path d="M11 20v8M14 20v8M17 20v8" stroke="#3c2d1f" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M50 21c-3 1-4 4-4 7 0 2 1 4 4 5 3-1 4-3 4-5 0-3-1-6-4-7Z" fill="#3c2d1f"/>
-<path d="M50 33v8" stroke="#3c2d1f" stroke-width="2.8" stroke-linecap="round"/>
-</svg></div><div class="brandtext"><b>ذائقتي</b><small id="brandSub">آراء حقيقية من أشخاص تعرفهم</small></div></div>
+    <div class="brand"><div class="brandmark" aria-label="شعار ذواق"><img src="icon-192.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="brandtext"><b>ذواق</b><small id="brandSub">THAWAQ</small></div></div>
     <div class="topactions"><button class="iconbtn hidden" id="installBtn" title="تثبيت التطبيق" aria-label="تثبيت التطبيق">⇩</button><button class="iconbtn" id="homeBtn" title="الرئيسية">⌂</button><button class="iconbtn" id="accountBtn" title="الحساب">◉</button></div>
   </div></header>
 
@@ -270,10 +260,10 @@ tr:last-child td{border-bottom:0}
     <section class="dashboardhero" id="adminHero"></section>
     <section class="section"><div class="sectionhead"><div><h2>المستخدمون</h2><p>إدارة حسابات المنصة وصفحاتهم العامة</p></div></div><div class="tablewrap"><table><thead><tr><th>المستخدم</th><th>الرابط</th><th>الأماكن</th><th>الحالة</th><th>تاريخ الانضمام</th><th>إدارة</th></tr></thead><tbody id="usersTable"></tbody></table></div></section>
   </main>
-  <div class="footerVersion">ذائقتي • v1.6</div>
+  <div class="footerVersion">ذواق • v1.8</div>
 </div>
 
-<div class="modalwrap" id="authModal"><div class="modal"><div class="modalhead"><h3>الدخول إلى ذائقتي</h3><button class="close" data-close="authModal">×</button></div><div class="tabs"><button class="active" data-auth-tab="login">تسجيل الدخول</button><button data-auth-tab="signup">إنشاء حساب</button></div>
+<div class="modalwrap" id="authModal"><div class="modal"><div class="modalhead"><h3>الدخول إلى ذواق</h3><button class="close" data-close="authModal">×</button></div><div class="tabs"><button class="active" data-auth-tab="login">تسجيل الدخول</button><button data-auth-tab="signup">إنشاء حساب</button></div>
   <div id="loginPane">
     <div class="formgrid">
       <div class="field"><label>اسم المستخدم أو البريد الإلكتروني</label><input id="loginIdentifier" type="text" dir="ltr" autocomplete="username" placeholder="irumaithy أو name@example.com"></div>
@@ -329,13 +319,13 @@ const uid=()=>crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math
 const esc=v=>String(v??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));
 const money=v=>`${Number(v||0).toLocaleString('ar-AE',{minimumFractionDigits:0,maximumFractionDigits:2})} د.إ`;
 const dateAr=v=>v?new Date(v).toLocaleDateString('ar-AE',{year:'numeric',month:'short',day:'numeric'}):'—';
-const placeholder=t=>`data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700"><defs><linearGradient id="g"><stop stop-color="#eee6d9"/><stop offset="1" stop-color="#d9cdbb"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><text x="50%" y="50%" fill="#796c5a" font-size="44" text-anchor="middle" dominant-baseline="middle" font-family="Arial">${String(t||'ذائقتي').replace(/[<>&]/g,'')}</text></svg>`)}`;
+const placeholder=t=>`data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700"><defs><linearGradient id="g"><stop stop-color="#eee6d9"/><stop offset="1" stop-color="#d9cdbb"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><text x="50%" y="50%" fill="#796c5a" font-size="44" text-anchor="middle" dominant-baseline="middle" font-family="Arial">${String(t||'ذواق').replace(/[<>&]/g,'')}</text></svg>`)}`;
 const state={profiles:[],places:[],items:[],session:null,currentProfile:null,viewProfile:null,selectedCity:'all',selectedType:'restaurant',dashCity:'all',dashType:'restaurant',currentPlaceId:null,lastLoginIdentifier:''};
 
 function seed(){
  const now=new Date().toISOString();
  return {profiles:[
-  {id:'admin-1',email:'admin@demo.local',username:'admin',display_name:'مالك ذائقتي',bio:'إدارة المنصة',avatar_url:'',role:'admin',is_active:true,created_at:now},
+  {id:'admin-1',email:'admin@demo.local',username:'admin',display_name:'مالك ذواق',bio:'إدارة المنصة',avatar_url:'',role:'admin',is_active:true,created_at:now},
   {id:'user-1',email:'user@demo.local',username:'abdullah',display_name:'عبدالله',bio:'أشارك الأماكن التي تستحق التجربة من وجهة نظري ☕🍽️',avatar_url:'',role:'creator',is_active:true,created_at:now}
  ],places:[
   {id:'p1',owner_id:'user-1',name:'The Lighthouse',city:'أبوظبي',type:'restaurant',cover_url:'',notes:'مكان هادئ ومناسب للفطور.',rating_override:null,receipt_url:'',total_override:145,tax_enabled:true,tax_rate:5,created_at:'2026-08-18T10:00:00Z',updated_at:now},
@@ -393,10 +383,10 @@ function setupInstallExperience(){
  const isiOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
  if(isiOS)btn.classList.remove('hidden');
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;btn.classList.remove('hidden')});
- window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;btn.classList.add('hidden');toast('تم تثبيت ذائقتي كتطبيق')});
+ window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;btn.classList.add('hidden');toast('تم تثبيت ذواق كتطبيق')});
  btn.onclick=async()=>{
   if(deferredInstallPrompt){deferredInstallPrompt.prompt();const choice=await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;if(choice?.outcome==='accepted')btn.classList.add('hidden');return}
-  if(isiOS){alert('لتثبيت ذائقتي على الآيفون:\n1) اضغط زر المشاركة في Safari\n2) اختر «إضافة إلى الشاشة الرئيسية»\n3) اضغط «إضافة»');return}
+  if(isiOS){alert('لتثبيت ذواق على الآيفون:\n1) اضغط زر المشاركة في Safari\n2) اختر «إضافة إلى الشاشة الرئيسية»\n3) اضغط «إضافة»');return}
   alert('من قائمة المتصفح اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».');
  };
 }

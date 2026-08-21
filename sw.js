@@ -1,4 +1,4 @@
-const CACHE_NAME = 'thaeeqati-shell-v1.5';
+const CACHE_NAME = 'thawaq-shell-v1.8';
 const APP_SHELL = [
   './',
   './index.html',
