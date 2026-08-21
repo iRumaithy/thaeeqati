@@ -124,6 +124,7 @@ html.standalone-mode body{touch-action:pan-x pan-y}
 .dashboardhero h1{margin:0 0 7px;font-size:27px;position:relative;z-index:2}
 .dashboardhero p{margin:0;color:var(--muted);line-height:1.7;position:relative;z-index:2}
 .dashactions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;position:relative;z-index:2}
+.quickActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;position:relative;z-index:2}.quickAction{min-height:76px;border:1px solid var(--line);background:#fffdf9;border-radius:20px;padding:14px;text-align:right;display:flex;align-items:center;gap:11px;font-weight:800;color:var(--text);box-shadow:0 8px 20px #5b463214}.quickAction.primary{grid-column:1/-1;background:linear-gradient(135deg,#f1cd74,#d6a43b);border-color:#d8b45d}.quickAction .qicon{width:42px;height:42px;border-radius:14px;background:#f5eee3;display:grid;place-items:center;font-size:20px;flex:0 0 auto}.quickAction.primary .qicon{background:#fff8df}.quickAction small{display:block;color:var(--muted);font-weight:600;font-size:10px;margin-top:3px}.dashboardShare{margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:18px;background:#fffaf3;position:relative;z-index:2}.dashboardShare .label{font-size:11px;font-weight:800;margin-bottom:7px}.dashboardShare .row{display:flex;gap:8px;align-items:center}.dashboardShare input{flex:1;min-width:0;border:1px solid var(--line);background:white;border-radius:13px;padding:11px;direction:ltr;text-align:left;font-size:10px;color:var(--muted)}
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:17px;position:relative;z-index:2}
 .metric{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:20px;padding:15px}
 .metric b{font-size:24px;display:block;color:#3d3125}
@@ -274,10 +275,10 @@ tr:last-child td{border-bottom:0}
     <section class="dashboardhero" id="adminHero"></section>
     <section class="section"><div class="sectionhead"><div><h2>المستخدمون</h2><p>إدارة حسابات المنصة وصفحاتهم العامة</p></div></div><div class="tablewrap"><table><thead><tr><th>المستخدم</th><th>الرابط</th><th>الأماكن</th><th>الحالة</th><th>تاريخ الانضمام</th><th>إدارة</th></tr></thead><tbody id="usersTable"></tbody></table></div></section>
   </main>
-  <div class="footerVersion" id="footerVersion" data-build="2.1">ذواق • v2.0</div>
+  <div class="footerVersion" id="footerVersion" data-build="2.2">ذواق • v2.2</div>
 </div>
 
-<div class="modalwrap" id="authModal"><div class="modal"><div class="modalhead"><h3>الدخول إلى ذواق</h3><button class="close" data-close="authModal">×</button></div><div class="tabs"><button class="active" data-auth-tab="login">تسجيل الدخول</button><button data-auth-tab="signup">إنشاء حساب</button></div>
+<div class="modalwrap" id="authModal"><div class="modal"><div class="modalhead"><h3>الدخول إلى ذواق</h3><button class="close" data-close="authModal">×</button></div><div class="note" style="margin-bottom:12px">الدخول مخصص للحسابات المعتمدة من مالك المنصة. إنشاء الحسابات الجديدة يتم من لوحة المالك فقط.</div>
   <div id="loginPane">
     <div class="formgrid">
       <div class="field"><label>اسم المستخدم أو البريد الإلكتروني</label><input id="loginIdentifier" type="text" dir="ltr" autocomplete="username" placeholder="username أو name@example.com"></div>
@@ -288,9 +289,10 @@ tr:last-child td{border-bottom:0}
     <div class="note" id="demoNote" style="margin-top:12px">للتجربة المحلية: <b>abdullah</b> / <b>user</b> أو <b>admin</b> / <b>admin</b>.</div>
     <div class="formactions"><button class="btn primary" id="loginBtn">دخول</button></div>
   </div>
-  <div id="signupPane" class="hidden"><div class="formgrid two"><div class="field"><label>الاسم الظاهر</label><input id="signupName" placeholder="مثال: عبدالله"></div><div class="field"><label>اسم المستخدم</label><input id="signupUsername" dir="ltr" placeholder="abdullah"></div><div class="field"><label>البريد الإلكتروني</label><input id="signupEmail" type="email" dir="ltr"></div><div class="field"><label>كلمة المرور</label><input id="signupPassword" type="password" minlength="6"></div></div><div class="hint" style="margin-top:8px">اسم المستخدم مخصص لتسجيل الدخول والهوية داخل التطبيق. رابط المشاركة العام منفصل ويمكن تخصيصه لاحقًا من الإعدادات.</div><div class="formactions"><button class="btn primary" id="signupBtn">إنشاء حسابي</button></div></div>
 </div></div>
 
+
+<div class="modalwrap" id="adminCreateUserModal"><div class="modal"><div class="modalhead"><h3>إنشاء مستخدم جديد</h3><button class="close" data-close="adminCreateUserModal">×</button></div><div class="note">هذه العملية متاحة لمالك المنصة فقط. بعد إنشاء الحساب أرسل للمستخدم اسم المستخدم وكلمة المرور الأولية.</div><div class="formgrid two" style="margin-top:12px"><div class="field"><label>الاسم الظاهر</label><input id="adminNewDisplayName" placeholder="مثال: أحمد"></div><div class="field"><label>اسم المستخدم</label><input id="adminNewUsername" dir="ltr" placeholder="ahmed"></div><div class="field"><label>البريد الإلكتروني</label><input id="adminNewEmail" type="email" dir="ltr" placeholder="name@example.com"></div><div class="field"><label>كلمة المرور الأولية</label><input id="adminNewPassword" type="password" minlength="8" placeholder="8 أحرف على الأقل"></div></div><div class="formactions"><button class="btn primary" id="adminCreateUserBtn">إنشاء الحساب</button><button class="btn secondary" data-close="adminCreateUserModal">إلغاء</button></div></div></div>
 <div class="modalwrap" id="profileModal"><div class="modal"><div class="modalhead"><h3>تعديل ملفي</h3><button class="close" data-close="profileModal">×</button></div><div class="formgrid two"><div class="field"><label>الاسم الظاهر</label><input id="profileName"></div><div class="field"><label>اسم المستخدم</label><input id="profileUsername" dir="ltr"></div><div class="field" style="grid-column:1/-1"><label>نبذة قصيرة</label><textarea id="profileBio"></textarea></div><div class="field" style="grid-column:1/-1"><label class="upload">📷 صورة شخصية <input id="profilePhoto" type="file" accept="image/*"><img class="preview" id="profilePreview"></label></div></div><div class="formactions"><button class="btn primary" id="saveProfileBtn">حفظ</button><button class="btn secondary" data-close="profileModal">إلغاء</button></div></div></div>
 
 <div class="modalwrap" id="placeModal"><div class="modal"><div class="modalhead"><h3 id="placeModalTitle">إضافة تجربة</h3><button class="close" data-close="placeModal">×</button></div><input type="hidden" id="placeId"><div class="formgrid two"><div class="field"><label>اسم المكان</label><input id="placeName"></div><div class="field"><label>المدينة</label><input id="placeCity" list="cityOptions"><datalist id="cityOptions"></datalist></div><div class="field"><label>التصنيف</label><select id="placeType"><option value="restaurant">مطعم</option><option value="cafe">كوفي</option><option value="tea" id="placeTypeTea" hidden disabled>محل شاي</option></select></div><div class="field"><label>التقييم النهائي اليدوي — اختياري</label><input id="placeRating" type="number" min="0" max="5" step="0.1" placeholder="يترك فارغًا للحساب التلقائي"></div><div class="field" style="grid-column:1/-1"><label>ملاحظتك عن المكان</label><textarea id="placeNotes"></textarea></div><div class="field" style="grid-column:1/-1"><label class="upload">📷 صورة واجهة المكان <input id="placePhoto" type="file" accept="image/*" capture="environment"><img class="preview" id="placePreview"></label></div></div><div class="formactions"><button class="btn primary" id="savePlaceBtn">حفظ المكان</button><button class="btn secondary" data-close="placeModal">إلغاء</button></div></div></div>
@@ -301,14 +303,14 @@ tr:last-child td{border-bottom:0}
 
 <div class="modalwrap" id="settingsModal"><div class="modal"><div class="modalhead"><h3>إعدادات ذواق</h3><button class="close" data-close="settingsModal">×</button></div>
   <div class="settingsPanel">
-    <div class="settingsBlock"><h4>رابط صفحتي العامة</h4><p>هذا الرابط مخصص للمشاركة مع الآخرين ولا يحتوي على اسم المستخدم. يمكنك تخصيص الجزء الأخير منه، وتغيير الرابط لاحقًا عند الحاجة.</p><div class="settingsRow"><input id="publicLinkPreview" class="settingsLinkPreview" readonly><button class="btn secondary" id="copyPublicLinkBtn">نسخ</button></div><div class="field" style="margin-top:10px"><label>تخصيص الرابط</label><input id="publicSlugInput" dir="ltr" autocomplete="off" placeholder="my-food-page"></div><div class="hint" style="margin-top:6px">4–40 حرفًا: إنجليزي صغير، أرقام، - أو _. تغيير هذا الجزء يلغي الرابط السابق.</div><div class="formactions"><button class="btn primary" id="savePublicSlugBtn">حفظ الرابط</button></div></div>
-    <div class="settingsBlock hidden" id="ownerAppLinkBlock"><h4>رابط التطبيق الأصلي — للمالك</h4><p>هذا هو رابط دخول منصة ذواق الأساسي. شاركه فقط مع من تريد أن يصل إلى صفحة التطبيق الرئيسية.</p><div class="settingsRow"><input id="ownerAppLinkPreview" class="settingsLinkPreview" readonly><button class="btn secondary" id="copyOwnerAppLinkBtn">نسخ</button></div></div>
+    <div class="settingsBlock"><h4>رابط صفحتي العامة</h4><p>هذا رابط عرض مستقل مخصص للمشاركة. لا يحتوي على اسم مستودع التطبيق أو رابط الدخول الرئيسي، ويمكنك تخصيص الجزء الأخير منه وتغييره لاحقًا.</p><div class="settingsRow"><input id="publicLinkPreview" class="settingsLinkPreview" readonly><button class="btn secondary" id="copyPublicLinkBtn">نسخ</button></div><div class="field" style="margin-top:10px"><label>تخصيص الرابط</label><input id="publicSlugInput" dir="ltr" autocomplete="off" placeholder="my-food-page"></div><div class="hint" style="margin-top:6px">4–40 حرفًا: إنجليزي صغير، أرقام، - أو _. تغيير هذا الجزء يلغي الرابط السابق.</div><div class="formactions"><button class="btn primary" id="savePublicSlugBtn">حفظ الرابط</button></div></div>
+    <div class="settingsBlock hidden" id="ownerAppLinkBlock"><h4>رابط التطبيق الأصلي — للمالك</h4><p>هذا هو رابط دخول منصة ذواق الأساسي للمالك والمستخدمين المعتمدين. التسجيل العام مغلق، لذلك معرفة الرابط وحدها لا تسمح بإنشاء حساب.</p><div class="settingsRow"><input id="ownerAppLinkPreview" class="settingsLinkPreview" readonly><button class="btn secondary" id="copyOwnerAppLinkBtn">نسخ</button></div></div>
     <div class="settingsBlock"><h4>الحساب والتطبيق</h4><p>إدارة ملفك، إشعارات التحديثات، ولوحة المالك إن كانت متاحة.</p><div class="settingsActions"><button class="btn secondary" id="settingsProfileBtn">✎ تعديل ملفي</button><button class="btn secondary" id="settingsPushBtn">🔔 الإشعارات</button><button class="btn secondary wide hidden" id="settingsAdminBtn">⚙ إدارة المنصة</button><button class="btn danger wide" id="settingsLogoutBtn">تسجيل الخروج</button></div></div>
   </div>
 </div></div>
 
 <div class="modalwrap" id="updateModal"><div class="modal"><div class="modalhead"><h3 id="updateModalTitle">تحديث ذواق</h3><button class="close" data-close="updateModal">×</button></div>
-  <div class="updateHero"><span class="previewBadge" id="updateKindBadge">✨ تحديث جديد</span><h3 id="updateVersionTitle">v2.1</h3><p id="updateNotes"></p></div>
+  <div class="updateHero"><span class="previewBadge" id="updateKindBadge">✨ تحديث جديد</span><h3 id="updateVersionTitle">v2.2</h3><p id="updateNotes"></p></div>
   <div class="backupHint">قبل التحديث يمكنك أخذ نسخة احتياطية بصيغة JSON. للمستخدم العادي تشمل ملفه وأماكنه وزياراته وفواتيره وأصنافه، وللمالك تشمل بيانات المنصة المحمّلة بالكامل. لا تتضمن كلمات المرور.</div>
   <div class="updateActions"><button class="btn secondary" id="backupBeforeUpdateBtn">⬇ نسخة احتياطية</button><button class="btn primary" id="applyUpdateBtn">تحديث الآن</button><button class="btn ghost later" id="updateLaterBtn">لاحقًا</button></div>
 </div></div>
@@ -343,16 +345,19 @@ const authStorage={
 };
 const sb=CLOUD_READY?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,storage:authStorage}}):null;
 const LOGIN_ENDPOINT=CLOUD_READY?`${SUPABASE_URL}/functions/v1/login-identifier`:'';
+const ADMIN_USERS_ENDPOINT=CLOUD_READY?`${SUPABASE_URL}/functions/v1/admin-users`:'';
+const PUBLIC_SHARE_BASE=CLOUD_READY?`${SUPABASE_URL}/functions/v1/p/`:'';
+const PROXY_SHARE_SLUG=String(window.__THAWAQ_SHARE_SLUG__||'').trim().toLowerCase();
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const uid=()=>crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);
 const esc=v=>String(v??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));
 const money=v=>`${Number(v||0).toLocaleString('ar-AE',{minimumFractionDigits:0,maximumFractionDigits:2})} د.إ`;
 const dateAr=v=>v?new Date(v).toLocaleDateString('ar-AE',{year:'numeric',month:'short',day:'numeric'}):'—';
 const placeholder=t=>`data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700"><defs><linearGradient id="g"><stop stop-color="#eee6d9"/><stop offset="1" stop-color="#d9cdbb"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><text x="50%" y="50%" fill="#796c5a" font-size="44" text-anchor="middle" dominant-baseline="middle" font-family="Arial">${String(t||'ذواق').replace(/[<>&]/g,'')}</text></svg>`)}`;
-const state={profiles:[],places:[],visits:[],items:[],session:null,currentProfile:null,viewProfile:null,selectedCity:'all',selectedType:'restaurant',dashCity:'all',dashType:'restaurant',currentPlaceId:null,currentVisitId:null,lastLoginIdentifier:'',pendingUpdate:null,release:{stable_version:'2.0',candidate_version:'2.1',candidate_available:true,candidate_notes:'v2.1: فصل Refresh عن التحديث، إشعارات فورية داخل وخارج التطبيق، تأكيد تسجيل الخروج، إعدادات في الشريط العلوي، وروابط عامة مستقلة وقابلة للتخصيص لكل مستخدم.'}};
+const state={profiles:[],places:[],visits:[],items:[],session:null,currentProfile:null,viewProfile:null,selectedCity:'all',selectedType:'restaurant',dashCity:'all',dashType:'restaurant',currentPlaceId:null,currentVisitId:null,lastLoginIdentifier:'',pendingUpdate:null,release:{stable_version:'2.1',candidate_version:'2.2',candidate_available:true,candidate_notes:'v2.2: فتح التطبيق على الصفحة الرسمية افتراضيًا، إعادة ترتيب لوحة التحكم، إغلاق التسجيل العام، إنشاء المستخدمين عبر المالك فقط، وروابط نشر مستقلة لا تكشف مستودع التطبيق.'}};
 const UPDATE_ACCEPTED_KEY='thawaqAcceptedVersion';
 const BASELINE_VERSION='2.0';
-const BUILD_VERSION='2.1';
+const BUILD_VERSION='2.2';
 
 function seed(){
  const now=new Date().toISOString();
@@ -382,7 +387,7 @@ function localLoad(){
 }
 function localSave(){localStorage.setItem('thaeeqatiMultiV2',JSON.stringify({profiles:state.profiles,places:state.places,visits:state.visits,items:state.items}))}
 function show(id){$('#'+id).classList.add('show')}function hide(id){$('#'+id).classList.remove('show')}
-function openAuth(tab='login'){show('authModal');const b=$(`[data-auth-tab="${tab}"]`);if(b)b.click()}
+function openAuth(){show('authModal')}
 let toastTimer;function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove('show'),2500)}
 $$('[data-close]').forEach(b=>b.onclick=()=>hide(b.dataset.close));
 $$('.modalwrap').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)hide(m.id)}));
@@ -422,6 +427,7 @@ function visibleVersion(){
 }
 function teaEnabled(){return versionNumber(visibleVersion())>=2}
 function v21Enabled(){return versionNumber(visibleVersion())>=2.1}
+function v22Enabled(){return versionNumber(visibleVersion())>=2.2}
 function visiblePlaces(list){return teaEnabled()?list:list.filter(p=>p.type!=='tea')}
 function ownerPlaces(id){return visiblePlaces(state.places.filter(p=>p.owner_id===id))}
 function typePlural(type){return type==='tea'?'محلات الشاي':type==='cafe'?'كوفيات':'مطاعم'}
@@ -484,8 +490,8 @@ async function applyPendingUpdate(){
  setTimeout(()=>location.reload(),650)
 }
 function profileByKey(key){const k=String(key||'').toLowerCase();return state.profiles.find(p=>String(p.id).toLowerCase()===k||String(p.username||'').toLowerCase()===k||String(p.public_slug||'').toLowerCase()===k)||null}
-function shareUrl(profileOrKey){const p=typeof profileOrKey==='object'?profileOrKey:profileByKey(profileOrKey);const u=new URL(location.origin+location.pathname);if(v21Enabled()){const slug=p?.public_slug||p?.username||String(profileOrKey||'');u.searchParams.set('share',slug)}else{u.searchParams.set('u',p?.username||String(profileOrKey||''))}return u.href}
-function isShareMode(){return new URLSearchParams(location.search).has('share')}
+function shareUrl(profileOrKey){const p=typeof profileOrKey==='object'?profileOrKey:profileByKey(profileOrKey);const slug=p?.public_slug||p?.username||String(profileOrKey||'');if(CLOUD_READY&&slug)return `${PUBLIC_SHARE_BASE}${encodeURIComponent(slug)}`;const u=new URL(location.origin+location.pathname);u.searchParams.set('share',slug);return u.href}
+function isShareMode(){return !!PROXY_SHARE_SLUG||new URLSearchParams(location.search).has('share')}
 function isAdmin(){return state.currentProfile?.role==='admin'}
 function canEdit(p){return !!state.currentProfile&&(state.currentProfile.id===p.owner_id||isAdmin())}
 
@@ -521,6 +527,7 @@ function setupInstallExperience(){
  };
 }
 function registerAppServiceWorker(){
+ if(window.__THAWAQ_SHARE_PROXY__)return;
  if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(()=>syncPushPermissionUI()).catch(console.error));
 }
 function urlBase64ToUint8Array(base64String){
@@ -584,7 +591,7 @@ async function init(){
 }
 function route(){
  refreshReleaseUI();
- const q=new URLSearchParams(location.search),shared=q.get('share'),wantsAdmin=q.get('admin')==='1',wantsDash=q.get('dashboard')==='1';
+ const q=new URLSearchParams(location.search),shared=PROXY_SHARE_SLUG||q.get('share'),wantsAdmin=q.get('admin')==='1',wantsDash=q.get('dashboard')==='1';
  document.body.classList.toggle('shareMode',!!shared);
  if(shared){const p=state.profiles.find(x=>String(x.public_slug||'').toLowerCase()===String(shared).toLowerCase()&&x.is_active!==false);state.viewProfile=p||null;return renderPublic()}
  if(wantsAdmin&&isAdmin())return renderAdmin();
@@ -598,7 +605,7 @@ function route(){
 function renderLanding(){
  $('#publicView').classList.remove('hidden');$('#dashboardView').classList.add('hidden');$('#adminView').classList.add('hidden');
  const section=$('#publicView .section');if(section)section.classList.add('hidden');
- $('#profileHero').innerHTML=`<div style="position:relative;z-index:2"><div class="badge">☕🍽️ منصة تقييمات شخصية</div><h1 style="font-size:34px;margin:14px 0 8px">ذائقتك، برابطك الخاص.</h1><p class="bio" style="max-width:720px">${teaEnabled()?'قيّم المطاعم والكوفيات ومحلات الشاي والأصناف التي جرّبتها':'قيّم المطاعم والكوفيات والأصناف التي جرّبتها'}، ثم شارك رابطك مع أصدقائك للقراءة فقط. تصميم مريح، صور واضحة، وتحديث مباشر.</p><div class="profileactions" style="margin-top:20px"><button class="btn primary" onclick="openAuth('signup')">إنشاء حساب مجاني</button><button class="btn secondary" onclick="openAuth('login')">تسجيل الدخول</button></div><div class="stats" style="max-width:760px"><div class="stat"><b>5★</b><span>تقييم الأصناف</span></div><div class="stat"><b>🔗</b><span>رابط شخصي</span></div><div class="stat"><b>🔒</b><span>قراءة فقط للزوار</span></div><div class="stat"><b>⚡</b><span>تحديث مباشر</span></div></div></div>`;
+ $('#profileHero').innerHTML=`<div style="position:relative;z-index:2"><div class="badge">☕🍽️ منصة تقييمات شخصية</div><h1 style="font-size:34px;margin:14px 0 8px">ذائقتك، برابطك الخاص.</h1><p class="bio" style="max-width:720px">${teaEnabled()?'قيّم المطاعم والكوفيات ومحلات الشاي والأصناف التي جرّبتها':'قيّم المطاعم والكوفيات والأصناف التي جرّبتها'}، ثم شارك رابطك مع أصدقائك للقراءة فقط. تصميم مريح، صور واضحة، وتحديث مباشر.</p><div class="profileactions" style="margin-top:20px"><button class="btn primary" onclick="openAuth()">تسجيل الدخول</button></div><div class="hint" style="margin-top:10px">الحسابات الجديدة ينشئها مالك المنصة فقط.</div><div class="stats" style="max-width:760px"><div class="stat"><b>5★</b><span>تقييم الأصناف</span></div><div class="stat"><b>🔗</b><span>رابط شخصي</span></div><div class="stat"><b>🔒</b><span>قراءة فقط للزوار</span></div><div class="stat"><b>⚡</b><span>تحديث مباشر</span></div></div></div>`;
  $('#cityFilters').innerHTML='';$('#placeGrid').innerHTML='';$('#typeGroup').classList.add('hidden');
 }
 function setRoute(params={}){const u=new URL(location.href);u.search='';Object.entries(params).forEach(([k,v])=>v!==undefined&&u.searchParams.set(k,v));history.pushState({},'',u);route()}
@@ -641,7 +648,7 @@ function renderDashboard(){
  $('#publicView').classList.add('hidden');$('#dashboardView').classList.remove('hidden');$('#adminView').classList.add('hidden');
  const p=state.currentProfile;if(!p)return;
  const places=ownerPlaces(p.id),ratings=places.map(finalRating).filter(r=>r>0),avg=ratings.length?ratings.reduce((a,b)=>a+b,0)/ratings.length:0;
- $('#dashboardHero').innerHTML=`<h1>مرحبًا ${esc(p.display_name)} 👋</h1><p>هذه مساحتك الخاصة. كل ما تضيفه هنا يظهر تلقائيًا في رابطك العام للقراءة فقط.</p><div class="dashactions"><button class="btn primary" onclick="openPlaceForm()">＋ تجربة جديدة</button><button class="btn secondary" onclick="openProfileForm()">✎ تعديل ملفي</button><button class="btn secondary" onclick="setRoute({u:'${esc(p.username)}'})">👁 مشاهدة صفحتي</button>${isAdmin()?`<button class="btn secondary" onclick="setRoute({admin:'1'})">⚙ إدارة المنصة</button>`:''}${v21Enabled()?`<button class="btn ghost" onclick="openSettings()">⚙ الإعدادات</button>`:`<button class="btn ghost" onclick="logout()">تسجيل الخروج</button>`}</div><div class="sharebox"><input readonly value="${esc(shareUrl(p))}"><button class="btn secondary" onclick="copyProfile('${esc(p.id)}')">نسخ الرابط</button></div><div class="cards"><div class="metric"><b>${places.length}</b><span>كل الأماكن</span></div><div class="metric"><b>${places.filter(x=>x.type==='restaurant').length}</b><span>مطاعم</span></div><div class="metric"><b>${places.filter(x=>x.type==='cafe').length}</b><span>كوفيات</span></div>${teaEnabled()?`<div class="metric"><b>${places.filter(x=>x.type==='tea').length}</b><span>محلات شاي</span></div>`:''}<div class="metric"><b>${avg?avg.toFixed(1):'—'}</b><span>متوسط التقييم</span></div></div>`;
+ $('#dashboardHero').innerHTML=`<h1>مرحبًا ${esc(p.display_name)} 👋</h1><p>هذه مساحتك الخاصة لإدارة تجاربك. التطبيق يفتح دائمًا على صفحتك الرسمية، وتدخل لوحة التحكم فقط عندما تحتاج للتعديل.</p><div class="quickActions"><button class="quickAction primary" onclick="openPlaceForm()"><span class="qicon">＋</span><span>إضافة تجربة جديدة<small>مطعم، كوفي أو محل شاي</small></span></button><button class="quickAction" onclick="setRoute({})"><span class="qicon">👁</span><span>صفحتي الرسمية<small>العودة للواجهة العامة</small></span></button><button class="quickAction" onclick="openProfileForm()"><span class="qicon">✎</span><span>تعديل ملفي<small>الاسم والصورة والنبذة</small></span></button>${isAdmin()?`<button class="quickAction" onclick="setRoute({admin:'1'})"><span class="qicon">⚙</span><span>إدارة المنصة<small>المستخدمون والتحديثات</small></span></button>`:''}</div><div class="dashboardShare"><div class="label">رابط صفحتي للنشر</div><div class="row"><input readonly value="${esc(shareUrl(p))}"><button class="btn secondary" onclick="copyProfile('${esc(p.id)}')">نسخ</button></div></div><div class="cards"><div class="metric"><b>${places.length}</b><span>كل الأماكن</span></div><div class="metric"><b>${places.filter(x=>x.type==='restaurant').length}</b><span>مطاعم</span></div><div class="metric"><b>${places.filter(x=>x.type==='cafe').length}</b><span>كوفيات</span></div>${teaEnabled()?`<div class="metric"><b>${places.filter(x=>x.type==='tea').length}</b><span>محلات شاي</span></div>`:''}<div class="metric"><b>${avg?avg.toFixed(1):'—'}</b><span>متوسط التقييم</span></div></div>`;
  const cities=[...new Set(places.map(x=>x.city).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ar'));
  if(state.dashCity!=='all'&&!cities.includes(state.dashCity))state.dashCity='all';
  $('#dashCityFilters').innerHTML=`<button class="chip ${state.dashCity==='all'?'active':''}" data-city="all">كل المدن</button>`+cities.map(c=>`<button class="chip ${state.dashCity===c?'active':''}" data-city="${esc(c)}">${esc(c)}</button>`).join('');
@@ -660,7 +667,7 @@ function renderAdmin(){
  $('#publicView').classList.add('hidden');$('#dashboardView').classList.add('hidden');$('#adminView').classList.remove('hidden');
  const users=state.profiles.filter(p=>p.role!=='admin');
  const releaseBox=state.release?.candidate_available?`<div class="releaseCard"><div class="releaseRow"><div><span class="previewBadge">${candidateMode()?'🧪 قيد الاختبار على جهاز المالك':'🔔 تحديث تجريبي بانتظار المالك'}</span><h3 style="margin:9px 0 0">v${esc(state.release.candidate_version)}</h3></div>${candidateMode()?`<button class="btn primary" onclick="approveCandidateRelease()">✓ اعتماد وإرسال الإشعار</button>`:`<button class="btn primary" onclick="openUpdatePrompt()">نسخة احتياطية واختبار التحديث</button>`}</div><p>الإصدار الحالي للمستخدمين: <b>v${esc(state.release.stable_version)}</b><br>${esc(state.release.candidate_notes||'')}<br>لن يصل التحديث للمستخدمين حتى تعتمد النسخة بعد اختبارها. بعد الاعتماد يصل إشعار داخل التطبيق، وخارجه لمن فعّل إشعارات ذواق.</p></div>`:`<div class="releaseCard"><div class="releaseRow"><div><span class="previewBadge">✓ آخر تحديث منشور</span><h3 style="margin:9px 0 0">v${esc(state.release?.stable_version||visibleVersion())}</h3></div></div><p>يظهر للمستخدمين إشعار بالتحديث، ويختار كل مستخدم وقت أخذ النسخة الاحتياطية ثم التحديث على جهازه.</p></div>`;
- $('#adminHero').innerHTML=`<h1>لوحة مالك المنصة</h1><p>إدارة المستخدمين ومراقبة نمو المحتوى. صفحات المستخدمين مستقلة، وكل مستخدم يعدّل محتواه فقط.</p><div class="dashactions"><button class="btn secondary" onclick="setRoute({dashboard:'1'})">لوحة حسابي</button>${v21Enabled()?`<button class="btn ghost" onclick="openSettings()">⚙ الإعدادات</button>`:`<button class="btn ghost" onclick="logout()">تسجيل الخروج</button>`}</div>${releaseBox}<div class="cards"><div class="metric"><b>${users.length}</b><span>مستخدم</span></div><div class="metric"><b>${users.filter(x=>x.is_active!==false).length}</b><span>حساب نشط</span></div><div class="metric"><b>${visiblePlaces(state.places).length}</b><span>مكان مضاف</span></div>${v21Enabled()?`<div class="metric"><b>${state.visits.length}</b><span>زيارة مسجلة</span></div>`:''}<div class="metric"><b>${state.items.length}</b><span>صنف مقيّم</span></div></div>`;
+ $('#adminHero').innerHTML=`<h1>لوحة مالك المنصة</h1><p>إدارة المستخدمين ومراقبة نمو المحتوى. التسجيل العام مغلق، والحسابات الجديدة ينشئها المالك فقط.</p><div class="dashactions"><button class="btn primary" onclick="openAdminCreateUser()">＋ إنشاء مستخدم</button><button class="btn secondary" onclick="setRoute({dashboard:'1'})">لوحة حسابي</button><button class="btn ghost" onclick="openSettings()">⚙ الإعدادات</button></div>${releaseBox}<div class="cards"><div class="metric"><b>${users.length}</b><span>مستخدم</span></div><div class="metric"><b>${users.filter(x=>x.is_active!==false).length}</b><span>حساب نشط</span></div><div class="metric"><b>${visiblePlaces(state.places).length}</b><span>مكان مضاف</span></div>${v21Enabled()?`<div class="metric"><b>${state.visits.length}</b><span>زيارة مسجلة</span></div>`:''}<div class="metric"><b>${state.items.length}</b><span>صنف مقيّم</span></div></div>`;
  $('#usersTable').innerHTML=users.map(u=>`<tr><td><b>${esc(u.display_name)}</b><br><span style="color:var(--muted)">@${esc(u.username)}</span></td><td><button class="btn ghost" style="padding:7px 9px" onclick="copyProfile('${esc(u.id)}')">نسخ الرابط</button></td><td>${ownerPlaces(u.id).length}</td><td><span class="status ${u.is_active!==false?'onstatus':'offstatus'}">${u.is_active!==false?'نشط':'موقوف'}</span></td><td>${dateAr(u.created_at)}</td><td><div class="inlineactions"><button class="btn secondary" onclick="setRoute({u:'${esc(u.username)}'})">عرض</button><button class="btn ${u.is_active!==false?'danger':'secondary'}" onclick="toggleUser('${u.id}',${u.is_active!==false})">${u.is_active!==false?'إيقاف':'تفعيل'}</button></div></td></tr>`).join('')||`<tr><td colspan="6">لا يوجد مستخدمون بعد.</td></tr>`;
 }
 async function approveCandidateRelease(){
@@ -689,10 +696,10 @@ async function savePublicSlug(){
  try{
   if(CLOUD_READY){const {error}=await sb.from('profiles').update({public_slug:slug,updated_at:new Date().toISOString()}).eq('id',p.id);if(error){if(String(error.code)==='23505')return toast('هذا الرابط مستخدم بالفعل');throw error}await loadCloud()}
   else{p.public_slug=slug;localSave()}
-  $('#publicLinkPreview').value=shareUrl(state.currentProfile||p);toast('تم حفظ رابطك العام الجديد')
+  $('#publicLinkPreview').value=shareUrl(state.currentProfile||p);toast('تم حفظ رابطك العام الجديد وإلغاء الرابط السابق')
  }catch(e){console.error(e);toast('تعذر حفظ الرابط')}
 }
-$('#homeBtn').onclick=()=>{if(state.currentProfile)setRoute({u:state.currentProfile.username});else if(state.viewProfile)setRoute({u:state.viewProfile.username});else setRoute({})};
+$('#homeBtn').onclick=()=>{if(state.currentProfile)setRoute({});else if(state.viewProfile&&!isShareMode())setRoute({u:state.viewProfile.username});else setRoute({})};
 $('#accountBtn').onclick=()=>state.currentProfile?setRoute({dashboard:'1'}):show('authModal');
 $('#settingsBtn').onclick=()=>openSettings();
 $('#refreshBtn').onclick=()=>refreshApp();
@@ -710,11 +717,6 @@ $('#settingsPushBtn').onclick=()=>enablePushNotifications();
 $('#settingsAdminBtn').onclick=()=>{hide('settingsModal');setRoute({admin:'1'})};
 $('#settingsLogoutBtn').onclick=()=>logout();
 
-$$('[data-auth-tab]').forEach(b=>b.onclick=()=>{
- $$('[data-auth-tab]').forEach(x=>x.classList.toggle('active',x===b));
- $('#loginPane').classList.toggle('hidden',b.dataset.authTab!=='login');$('#signupPane').classList.toggle('hidden',b.dataset.authTab!=='signup');
- $('#confirmNote').classList.add('hidden')
-});
 function loginErrorMessage(code){
  if(code==='EMAIL_NOT_CONFIRMED')return 'يجب تأكيد البريد الإلكتروني أولًا';
  if(code==='ACCOUNT_DISABLED')return 'هذا الحساب موقوف من إدارة المنصة';
@@ -737,7 +739,7 @@ $('#loginBtn').onclick=async()=>{
    }
    const {error}=await sb.auth.setSession({access_token:data.session.access_token,refresh_token:data.session.refresh_token});
    if(error)throw error;
-   await loadCloud();hide('authModal');setRoute({dashboard:'1'});toast('تم تسجيل الدخول');
+   await loadCloud();hide('authModal');setRoute({});toast('تم تسجيل الدخول');
   }catch(e){console.error(e);toast('تعذر الاتصال بخدمة تسجيل الدخول')}finally{btn.disabled=false}
   return;
  }
@@ -745,7 +747,7 @@ $('#loginBtn').onclick=async()=>{
  if((value==='admin'||value==='admin@demo.local')&&pass==='admin')p=state.profiles.find(x=>x.role==='admin');
  if((value==='abdullah'||value==='user@demo.local')&&pass==='user')p=state.profiles.find(x=>x.username==='abdullah');
  if(!p)return toast('بيانات الدخول التجريبية غير صحيحة');
- state.session=p;state.currentProfile=p;if(localStorage.getItem(REMEMBER_KEY)!=='0')localStorage.setItem('thaeeqatiSessionV2',p.id);else{localStorage.removeItem('thaeeqatiSessionV2');sessionStorage.setItem('thaeeqatiSessionV2',p.id)}hide('authModal');setRoute({dashboard:'1'});toast('تم تسجيل الدخول')
+ state.session=p;state.currentProfile=p;if(localStorage.getItem(REMEMBER_KEY)!=='0')localStorage.setItem('thaeeqatiSessionV2',p.id);else{localStorage.removeItem('thaeeqatiSessionV2');sessionStorage.setItem('thaeeqatiSessionV2',p.id)}hide('authModal');setRoute({});toast('تم تسجيل الدخول')
 };
 $('#resendConfirmBtn').onclick=async()=>{
  const identifier=state.lastLoginIdentifier||$('#loginIdentifier').value.trim();if(!identifier)return toast('أدخل اسم المستخدم أو البريد أولًا');
@@ -756,19 +758,14 @@ $('#resendConfirmBtn').onclick=async()=>{
   toast('تم إرسال رابط التأكيد إلى بريدك')
  }catch{toast('تعذر إرسال رابط التأكيد')}
 };
-$('#signupBtn').onclick=async()=>{
- const display_name=$('#signupName').value.trim(),username=$('#signupUsername').value.trim().toLowerCase(),email=$('#signupEmail').value.trim(),password=$('#signupPassword').value;
- if(!display_name||!username||!email||!password)return toast('أكمل جميع البيانات');
- if(!/^[a-z0-9_]{3,24}$/.test(username))return toast('اسم المستخدم: 3-24 حرفًا إنجليزيًا أو رقمًا أو _');
- if(state.profiles.some(p=>p.username?.toLowerCase()===username))return toast('اسم المستخدم مستخدم بالفعل');
- if(CLOUD_READY){
-  const redirect=`${location.origin}${location.pathname}`;
-  const {data,error}=await sb.auth.signUp({email,password,options:{data:{username,display_name},emailRedirectTo:redirect}});
-  if(error)return toast(error.message.includes('already')?'البريد أو اسم المستخدم مستخدم بالفعل':'تعذر إنشاء الحساب');
-  hide('authModal');if(data?.session){await loadCloud();setRoute({dashboard:'1'});toast('تم إنشاء حسابك')}else toast('تم إنشاء الحساب. تحقق من بريدك لتأكيده ثم سجّل الدخول.');return
- }
- const p={id:uid(),email,username,public_slug:`p-${uid().replace(/-/g,'').slice(0,12)}`,display_name,bio:'',avatar_url:'',role:'creator',is_active:true,created_at:new Date().toISOString()};
- state.profiles.push(p);state.currentProfile=p;state.session=p;localStorage.setItem('thaeeqatiSessionV2',p.id);localSave();hide('authModal');setRoute({dashboard:'1'});toast('تم إنشاء حسابك التجريبي')
+function openAdminCreateUser(){if(!isAdmin())return toast('هذه الخاصية للمالك فقط');['adminNewDisplayName','adminNewUsername','adminNewEmail','adminNewPassword'].forEach(id=>{const e=$('#'+id);if(e)e.value=''});show('adminCreateUserModal')}
+$('#adminCreateUserBtn').onclick=async()=>{
+ if(!CLOUD_READY||!isAdmin())return toast('هذه الخاصية للمالك فقط');
+ const display_name=$('#adminNewDisplayName').value.trim(),username=$('#adminNewUsername').value.trim().toLowerCase(),email=$('#adminNewEmail').value.trim().toLowerCase(),password=$('#adminNewPassword').value;
+ if(!display_name||!/^[a-z0-9_]{3,24}$/.test(username)||!/^\S+@\S+\.\S+$/.test(email)||password.length<8)return toast('أكمل البيانات بشكل صحيح وكلمة المرور 8 أحرف على الأقل');
+ const {data:{session}}=await sb.auth.getSession();if(!session)return toast('أعد تسجيل الدخول');
+ const btn=$('#adminCreateUserBtn');btn.disabled=true;
+ try{const r=await fetch(ADMIN_USERS_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${session.access_token}`,'apikey':SUPABASE_KEY},body:JSON.stringify({action:'create',display_name,username,email,password})});const data=await r.json().catch(()=>({}));if(!r.ok||!data.ok){if(data.error==='USERNAME_TAKEN')return toast('اسم المستخدم مستخدم بالفعل');if(data.error==='EMAIL_TAKEN')return toast('البريد مستخدم بالفعل');return toast('تعذر إنشاء الحساب')}hide('adminCreateUserModal');await loadCloud();toast('تم إنشاء الحساب بنجاح — أرسل بيانات الدخول للمستخدم')}catch(e){console.error(e);toast('تعذر إنشاء الحساب')}finally{btn.disabled=false}
 };
 async function logout(){if(!confirm('هل أنت متأكد من تسجيل الخروج؟'))return;if(CLOUD_READY)await sb.auth.signOut();else{localStorage.removeItem('thaeeqatiSessionV2');sessionStorage.removeItem('thaeeqatiSessionV2')};state.session=null;state.currentProfile=null;hide('settingsModal');setRoute({});toast('تم تسجيل الخروج')}
 

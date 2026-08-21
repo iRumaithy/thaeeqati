@@ -1,4 +1,4 @@
-const CACHE_NAME = 'thawaq-shell-v2.1-r2';
+const CACHE_NAME = 'thawaq-shell-v2.2';
 const APP_SHELL = [
   './',
   './index.html',
@@ -69,14 +69,14 @@ self.addEventListener('push', event => {
     badge: './icon-192.png',
     tag: data.tag || `thawaq-${data.version || 'notice'}`,
     renotify: true,
-    data: { url: data.url || './?dashboard=1', version: data.version || '', kind: data.kind || '' }
+    data: { url: data.url || './', version: data.version || '', kind: data.kind || '' }
   };
   event.waitUntil(self.registration.showNotification(title, options));
 });
 
 self.addEventListener('notificationclick', event => {
   event.notification.close();
-  const target = new URL(event.notification.data?.url || './?dashboard=1', self.location.origin).href;
+  const target = new URL(event.notification.data?.url || './', self.location.origin).href;
   event.waitUntil((async () => {
     const list = await clients.matchAll({ type: 'window', includeUncontrolled: true });
     for (const client of list) {
