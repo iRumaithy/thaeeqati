@@ -218,6 +218,8 @@ tr:last-child td{border-bottom:0}
 .releaseCard .releaseRow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.releaseCard b{color:var(--accent2)}.releaseCard p{margin:8px 0;color:var(--muted);line-height:1.7;font-size:12px}.previewBadge{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:#fff0cf;color:#815b18;font-size:11px;font-weight:800;border:1px solid #ead19c}
 .updateNotice{margin:12px 0 2px;padding:13px 14px;border-radius:18px;border:1px solid #dfc58c;background:linear-gradient(135deg,#fff8e9,#fffdf8);box-shadow:var(--shadow2);display:flex;align-items:center;justify-content:space-between;gap:12px}
 .updateNotice.hidden{display:none!important}.updateNoticeText{min-width:0}.updateNoticeText b{display:block;color:#5b411d;font-size:13px}.updateNoticeText span{display:block;color:var(--muted);font-size:11px;line-height:1.6;margin-top:2px}.updateNotice .btn{flex:0 0 auto;padding:9px 11px;font-size:11px}.pushNotice{border-color:#c9dfcf;background:linear-gradient(135deg,#eef7f0,#fffdf8)}.pushNotice .updateNoticeText b{color:#406e54}.refreshing{animation:spinRefresh .75s linear infinite}@keyframes spinRefresh{to{transform:rotate(-360deg)}}.updateHero{padding:15px;border-radius:20px;background:#fff8e9;border:1px solid #e6d4ae;margin-bottom:13px}.updateHero h3{margin:6px 0;font-size:25px}.updateHero p{margin:0;color:var(--muted);line-height:1.8;font-size:12px}.backupHint{padding:12px 13px;border-radius:15px;background:#f4f0e9;border:1px solid var(--line);font-size:11px;line-height:1.8;color:#665f56}.updateActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.updateActions .later{grid-column:1/-1}.backupDone{background:#eef7f0!important;color:#406e54!important;border-color:#c9dfcf!important}
+.liveClock{max-width:1160px;margin:7px auto 0;display:flex;align-items:center;justify-content:center;gap:7px;color:#665f56;font-size:11px;font-weight:750;letter-spacing:.1px;white-space:nowrap}.liveClock .clockDot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(201,154,74,.11)}
+.visitsWrap{display:grid;gap:14px;margin-top:13px}.visitCard{border:1px solid var(--line);background:#fffdf9;border-radius:22px;padding:14px;box-shadow:var(--shadow2)}.visitHead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}.visitHead h4{margin:3px 0;font-size:17px}.visitDate{color:var(--accent2);font-size:12px;font-weight:850}.visitActions{display:flex;gap:6px;flex-wrap:wrap}.visitActions .btn{padding:8px 10px;font-size:11px}.visitDivider{height:1px;background:var(--line);margin:13px 0}.visitReceiptThumb{width:100%;max-height:360px;object-fit:contain;border-radius:14px;margin-top:12px;background:#fff;border:1px solid var(--line)}.visitEmpty{padding:18px;text-align:center;color:var(--muted);background:#faf6ef;border:1px dashed var(--line);border-radius:16px}.visitCount{font-size:11px;color:var(--muted)}
 @media(min-width:700px){
   .app{padding-left:24px;padding-right:24px}.topbar{margin-left:-24px;margin-right:-24px;padding-left:24px;padding-right:24px}
   .grid{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(4,1fr)}.formgrid.two{grid-template-columns:1fr 1fr}
@@ -232,7 +234,7 @@ tr:last-child td{border-bottom:0}
   <header class="topbar"><div class="topin">
     <div class="brand"><div class="brandmark" aria-label="شعار ذواق"><img src="icon-192.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="brandtext"><b>ذواق</b><small id="brandSub">THAWAQ</small></div></div>
     <div class="topactions"><button class="iconbtn hidden" id="installBtn" title="تثبيت التطبيق" aria-label="تثبيت التطبيق">⇩</button><button class="iconbtn" id="refreshBtn" title="تحديث" aria-label="تحديث">↻</button><button class="iconbtn" id="homeBtn" title="الرئيسية">⌂</button><button class="iconbtn" id="accountBtn" title="الحساب">◉</button></div>
-  </div></header>
+  </div><div class="liveClock" id="liveClock"><span class="clockDot"></span><span id="liveDate">—</span><span>•</span><span id="liveTime">—</span></div></header>
   <div id="updateNotice" class="updateNotice hidden">
     <div class="updateNoticeText"><b id="updateNoticeTitle">تحديث جديد متاح</b><span id="updateNoticeText"></span></div>
     <button class="btn primary" id="reviewUpdateBtn">مراجعة التحديث</button>
@@ -270,7 +272,7 @@ tr:last-child td{border-bottom:0}
     <section class="dashboardhero" id="adminHero"></section>
     <section class="section"><div class="sectionhead"><div><h2>المستخدمون</h2><p>إدارة حسابات المنصة وصفحاتهم العامة</p></div></div><div class="tablewrap"><table><thead><tr><th>المستخدم</th><th>الرابط</th><th>الأماكن</th><th>الحالة</th><th>تاريخ الانضمام</th><th>إدارة</th></tr></thead><tbody id="usersTable"></tbody></table></div></section>
   </main>
-  <div class="footerVersion" id="footerVersion">ذواق • v1.9</div>
+  <div class="footerVersion" id="footerVersion">ذواق • v2.0</div>
 </div>
 
 <div class="modalwrap" id="authModal"><div class="modal"><div class="modalhead"><h3>الدخول إلى ذواق</h3><button class="close" data-close="authModal">×</button></div><div class="tabs"><button class="active" data-auth-tab="login">تسجيل الدخول</button><button data-auth-tab="signup">إنشاء حساب</button></div>
@@ -291,13 +293,13 @@ tr:last-child td{border-bottom:0}
 
 <div class="modalwrap" id="placeModal"><div class="modal"><div class="modalhead"><h3 id="placeModalTitle">إضافة تجربة</h3><button class="close" data-close="placeModal">×</button></div><input type="hidden" id="placeId"><div class="formgrid two"><div class="field"><label>اسم المكان</label><input id="placeName"></div><div class="field"><label>المدينة</label><input id="placeCity" list="cityOptions"><datalist id="cityOptions"></datalist></div><div class="field"><label>التصنيف</label><select id="placeType"><option value="restaurant">مطعم</option><option value="cafe">كوفي</option><option value="tea" id="placeTypeTea" hidden disabled>محل شاي</option></select></div><div class="field"><label>التقييم النهائي اليدوي — اختياري</label><input id="placeRating" type="number" min="0" max="5" step="0.1" placeholder="يترك فارغًا للحساب التلقائي"></div><div class="field" style="grid-column:1/-1"><label>ملاحظتك عن المكان</label><textarea id="placeNotes"></textarea></div><div class="field" style="grid-column:1/-1"><label class="upload">📷 صورة واجهة المكان <input id="placePhoto" type="file" accept="image/*" capture="environment"><img class="preview" id="placePreview"></label></div></div><div class="formactions"><button class="btn primary" id="savePlaceBtn">حفظ المكان</button><button class="btn secondary" data-close="placeModal">إلغاء</button></div></div></div>
 
-<div class="modalwrap" id="itemModal"><div class="modal"><div class="modalhead"><h3 id="itemModalTitle">إضافة صنف</h3><button class="close" data-close="itemModal">×</button></div><input type="hidden" id="itemId"><input type="hidden" id="itemPlaceId"><div class="formgrid two"><div class="field"><label>اسم الصنف</label><input id="itemName"></div><div class="field"><label>السعر (د.إ)</label><input id="itemPrice" type="number" min="0" step="0.01"></div><div class="field"><label>التقييم من 5</label><select id="itemRating"><option>5</option><option>4.5</option><option>4</option><option>3.5</option><option>3</option><option>2.5</option><option>2</option><option>1.5</option><option>1</option><option>0.5</option></select></div><div class="field"><label>ملاحظة مختصرة</label><input id="itemNotes" placeholder="مثال: ممتاز لكن حالي قليل"></div><div class="field" style="grid-column:1/-1"><label class="upload">📷 صورة الصنف <input id="itemPhoto" type="file" accept="image/*" capture="environment"><img class="preview" id="itemPreview"></label></div></div><div class="formactions"><button class="btn primary" id="saveItemBtn">حفظ الصنف</button><button class="btn secondary" data-close="itemModal">إلغاء</button></div></div></div>
+<div class="modalwrap" id="itemModal"><div class="modal"><div class="modalhead"><h3 id="itemModalTitle">إضافة صنف</h3><button class="close" data-close="itemModal">×</button></div><input type="hidden" id="itemId"><input type="hidden" id="itemPlaceId"><input type="hidden" id="itemVisitId"><div class="formgrid two"><div class="field"><label>اسم الصنف</label><input id="itemName"></div><div class="field"><label>السعر (د.إ)</label><input id="itemPrice" type="number" min="0" step="0.01"></div><div class="field"><label>التقييم من 5</label><select id="itemRating"><option>5</option><option>4.5</option><option>4</option><option>3.5</option><option>3</option><option>2.5</option><option>2</option><option>1.5</option><option>1</option><option>0.5</option></select></div><div class="field"><label>ملاحظة مختصرة</label><input id="itemNotes" placeholder="مثال: ممتاز لكن حالي قليل"></div><div class="field" style="grid-column:1/-1"><label class="upload">📷 صورة الصنف <input id="itemPhoto" type="file" accept="image/*" capture="environment"><img class="preview" id="itemPreview"></label></div></div><div class="formactions"><button class="btn primary" id="saveItemBtn">حفظ الصنف</button><button class="btn secondary" data-close="itemModal">إلغاء</button></div></div></div>
 
-<div class="modalwrap" id="receiptModal"><div class="modal"><div class="modalhead"><h3>الفاتورة والإجمالي</h3><button class="close" data-close="receiptModal">×</button></div><input type="hidden" id="receiptPlaceId"><div class="formgrid"><div class="field"><label>المبلغ قبل الضريبة — اختياري</label><input id="receiptTotal" type="number" min="0" step="0.01" placeholder="إن تركته فارغًا يستخدم مجموع الأصناف"></div><div class="field"><label class="upload">🧾 تصوير / إرفاق الفاتورة <input id="receiptPhoto" type="file" accept="image/*" capture="environment"><img class="preview" id="receiptPreview"></label></div><div class="note">بعد حفظ الفاتورة يمكنك الضغط على زر <b>إضافة قيمة الضريبة</b> من تفاصيل المكان. يتم احتساب ضريبة 5% تلقائيًا وإضافتها إلى الإجمالي.</div></div><div class="formactions"><button class="btn primary" id="saveReceiptBtn">حفظ الفاتورة</button><button class="btn secondary" data-close="receiptModal">إلغاء</button></div></div></div>
+<div class="modalwrap" id="receiptModal"><div class="modal"><div class="modalhead"><h3>فاتورة الزيارة والإجمالي</h3><button class="close" data-close="receiptModal">×</button></div><input type="hidden" id="receiptPlaceId"><input type="hidden" id="receiptVisitId"><div class="formgrid"><div class="field"><label>المبلغ قبل الضريبة — اختياري</label><input id="receiptTotal" type="number" min="0" step="0.01" placeholder="إن تركته فارغًا يستخدم مجموع أصناف هذه الزيارة"></div><div class="field"><label class="upload">🧾 اختر الفاتورة من الألبوم أو الكاميرا <input id="receiptPhoto" type="file" accept="image/*"><img class="preview" id="receiptPreview"></label></div><div class="note">تُحفظ هذه الفاتورة ضمن الزيارة الحالية، وتبقى فواتير الزيارات السابقة محفوظة. بعد الحفظ يمكنك إضافة ضريبة 5% لهذه الزيارة فقط.</div></div><div class="formactions"><button class="btn primary" id="saveReceiptBtn">حفظ فاتورة الزيارة</button><button class="btn secondary" data-close="receiptModal">إلغاء</button></div></div></div>
 
 <div class="modalwrap" id="updateModal"><div class="modal"><div class="modalhead"><h3 id="updateModalTitle">تحديث ذواق</h3><button class="close" data-close="updateModal">×</button></div>
-  <div class="updateHero"><span class="previewBadge" id="updateKindBadge">✨ تحديث جديد</span><h3 id="updateVersionTitle">v2.0</h3><p id="updateNotes"></p></div>
-  <div class="backupHint">قبل التحديث يمكنك أخذ نسخة احتياطية بصيغة JSON. للمستخدم العادي تشمل ملفه وأماكنه وأصنافه، وللمالك تشمل بيانات المنصة المحمّلة بالكامل. لا تتضمن كلمات المرور.</div>
+  <div class="updateHero"><span class="previewBadge" id="updateKindBadge">✨ تحديث جديد</span><h3 id="updateVersionTitle">v2.1</h3><p id="updateNotes"></p></div>
+  <div class="backupHint">قبل التحديث يمكنك أخذ نسخة احتياطية بصيغة JSON. للمستخدم العادي تشمل ملفه وأماكنه وزياراته وفواتيره وأصنافه، وللمالك تشمل بيانات المنصة المحمّلة بالكامل. لا تتضمن كلمات المرور.</div>
   <div class="updateActions"><button class="btn secondary" id="backupBeforeUpdateBtn">⬇ نسخة احتياطية</button><button class="btn primary" id="applyUpdateBtn">تحديث الآن</button><button class="btn ghost later" id="updateLaterBtn">لاحقًا</button></div>
 </div></div>
 
@@ -337,9 +339,9 @@ const esc=v=>String(v??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&
 const money=v=>`${Number(v||0).toLocaleString('ar-AE',{minimumFractionDigits:0,maximumFractionDigits:2})} د.إ`;
 const dateAr=v=>v?new Date(v).toLocaleDateString('ar-AE',{year:'numeric',month:'short',day:'numeric'}):'—';
 const placeholder=t=>`data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700"><defs><linearGradient id="g"><stop stop-color="#eee6d9"/><stop offset="1" stop-color="#d9cdbb"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><text x="50%" y="50%" fill="#796c5a" font-size="44" text-anchor="middle" dominant-baseline="middle" font-family="Arial">${String(t||'ذواق').replace(/[<>&]/g,'')}</text></svg>`)}`;
-const state={profiles:[],places:[],items:[],session:null,currentProfile:null,viewProfile:null,selectedCity:'all',selectedType:'restaurant',dashCity:'all',dashType:'restaurant',currentPlaceId:null,lastLoginIdentifier:'',pendingUpdate:null,release:{stable_version:'1.9',candidate_version:'2.0',candidate_available:true,candidate_notes:'إضافة تصنيف الشاي ونظام اعتماد التحديثات مع إشعار ونسخة احتياطية قبل التفعيل'}};
+const state={profiles:[],places:[],visits:[],items:[],session:null,currentProfile:null,viewProfile:null,selectedCity:'all',selectedType:'restaurant',dashCity:'all',dashType:'restaurant',currentPlaceId:null,currentVisitId:null,lastLoginIdentifier:'',pendingUpdate:null,release:{stable_version:'2.0',candidate_version:'2.1',candidate_available:true,candidate_notes:'تاريخ ووقت حي أعلى الصفحة + اختيار الفاتورة من الألبوم أو الكاميرا + سجل زيارات متعددة لنفس المكان مع أصناف وفاتورة مستقلة لكل زيارة'}};
 const UPDATE_ACCEPTED_KEY='thawaqAcceptedVersion';
-const BASELINE_VERSION='1.9';
+const BASELINE_VERSION='2.0';
 
 function seed(){
  const now=new Date().toISOString();
@@ -349,20 +351,25 @@ function seed(){
  ],places:[
   {id:'p1',owner_id:'user-1',name:'The Lighthouse',city:'أبوظبي',type:'restaurant',cover_url:'',notes:'مكان هادئ ومناسب للفطور.',rating_override:null,receipt_url:'',total_override:145,tax_enabled:true,tax_rate:5,created_at:'2026-08-18T10:00:00Z',updated_at:now},
   {id:'p2',owner_id:'user-1',name:'% Arabica',city:'دبي',type:'cafe',cover_url:'',notes:'القهوة ثابتة المستوى والخدمة سريعة.',rating_override:4.7,receipt_url:'',total_override:58,tax_enabled:false,tax_rate:5,created_at:'2026-08-15T10:00:00Z',updated_at:now}
+ ],visits:[
+  {id:'v1',place_id:'p1',owner_id:'user-1',visited_at:'2026-08-18T10:00:00Z',receipt_url:'',total_override:145,tax_enabled:true,tax_rate:5,notes:'',created_at:'2026-08-18T10:00:00Z',updated_at:now},
+  {id:'v2',place_id:'p2',owner_id:'user-1',visited_at:'2026-08-15T10:00:00Z',receipt_url:'',total_override:58,tax_enabled:false,tax_rate:5,notes:'',created_at:'2026-08-15T10:00:00Z',updated_at:now}
  ],items:[
-  {id:'i1',place_id:'p1',owner_id:'user-1',name:'Eggs Benedict',photo_url:'',rating:4.5,price:58,notes:'صوص متوازن',created_at:now,updated_at:now},
-  {id:'i2',place_id:'p1',owner_id:'user-1',name:'French Toast',photo_url:'',rating:5,price:62,notes:'أفضل صنف',created_at:now,updated_at:now},
-  {id:'i3',place_id:'p1',owner_id:'user-1',name:'Flat White',photo_url:'',rating:4,price:25,notes:'',created_at:now,updated_at:now},
-  {id:'i4',place_id:'p2',owner_id:'user-1',name:'Spanish Latte',photo_url:'',rating:4.5,price:29,notes:'',created_at:now,updated_at:now}
+  {id:'i1',place_id:'p1',visit_id:'v1',owner_id:'user-1',name:'Eggs Benedict',photo_url:'',rating:4.5,price:58,notes:'صوص متوازن',created_at:'2026-08-18T10:10:00Z',updated_at:now},
+  {id:'i2',place_id:'p1',visit_id:'v1',owner_id:'user-1',name:'French Toast',photo_url:'',rating:5,price:62,notes:'أفضل صنف',created_at:'2026-08-18T10:15:00Z',updated_at:now},
+  {id:'i3',place_id:'p1',visit_id:'v1',owner_id:'user-1',name:'Flat White',photo_url:'',rating:4,price:25,notes:'',created_at:'2026-08-18T10:20:00Z',updated_at:now},
+  {id:'i4',place_id:'p2',visit_id:'v2',owner_id:'user-1',name:'Spanish Latte',photo_url:'',rating:4.5,price:29,notes:'',created_at:'2026-08-15T10:10:00Z',updated_at:now}
  ]};
 }
 function localLoad(){
  let d;try{d=JSON.parse(localStorage.getItem('thaeeqatiMultiV2')||'null')}catch{}
  if(!d){d=seed();localStorage.setItem('thaeeqatiMultiV2',JSON.stringify(d))}
- state.profiles=d.profiles||[];state.places=(d.places||[]).map(p=>({...p,tax_enabled:!!p.tax_enabled,tax_rate:Number(p.tax_rate??5)}));state.items=d.items||[];
+ state.profiles=d.profiles||[];state.places=(d.places||[]).map(p=>({...p,tax_enabled:!!p.tax_enabled,tax_rate:Number(p.tax_rate??5)}));
+ state.visits=(d.visits||[]).map(v=>({...v,tax_enabled:!!v.tax_enabled,tax_rate:Number(v.tax_rate??5)}));state.items=d.items||[];
+ if(!state.visits.length&&state.places.length){state.visits=state.places.map(p=>({id:uid(),place_id:p.id,owner_id:p.owner_id,visited_at:p.created_at||new Date().toISOString(),receipt_url:p.receipt_url||'',total_override:p.total_override??null,tax_enabled:!!p.tax_enabled,tax_rate:Number(p.tax_rate??5),notes:'',created_at:p.created_at||new Date().toISOString(),updated_at:p.updated_at||new Date().toISOString()}));const vm=new Map(state.visits.map(v=>[v.place_id,v.id]));state.items=state.items.map(i=>({...i,visit_id:i.visit_id||vm.get(i.place_id)||null}));localSave()}
  const sid=localStorage.getItem('thaeeqatiSessionV2')||sessionStorage.getItem('thaeeqatiSessionV2');state.session=sid?state.profiles.find(p=>p.id===sid)||null:null;state.currentProfile=state.session
 }
-function localSave(){localStorage.setItem('thaeeqatiMultiV2',JSON.stringify({profiles:state.profiles,places:state.places,items:state.items}))}
+function localSave(){localStorage.setItem('thaeeqatiMultiV2',JSON.stringify({profiles:state.profiles,places:state.places,visits:state.visits,items:state.items}))}
 function show(id){$('#'+id).classList.add('show')}function hide(id){$('#'+id).classList.remove('show')}
 function openAuth(tab='login'){show('authModal');const b=$(`[data-auth-tab="${tab}"]`);if(b)b.click()}
 let toastTimer;function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove('show'),2500)}
@@ -370,13 +377,17 @@ $$('[data-close]').forEach(b=>b.onclick=()=>hide(b.dataset.close));
 $$('.modalwrap').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)hide(m.id)}));
 function stars(r){const n=Math.round(Number(r||0)*2)/2;return `★ ${n?n.toFixed(1):'—'}`}
 function placeItems(id){return state.items.filter(i=>i.place_id===id)}
+function placeVisits(id){return state.visits.filter(v=>v.place_id===id).sort((a,b)=>new Date(b.visited_at)-new Date(a.visited_at)||new Date(b.created_at)-new Date(a.created_at))}
+function visitItems(id){return state.items.filter(i=>i.visit_id===id)}
+function latestVisit(placeId){return placeVisits(placeId)[0]||null}
 function autoRating(p){const a=placeItems(p.id).map(i=>Number(i.rating)).filter(n=>!isNaN(n));return a.length?a.reduce((x,y)=>x+y,0)/a.length:0}
 function finalRating(p){return p.rating_override!==null&&p.rating_override!==''&&p.rating_override!==undefined?Number(p.rating_override):autoRating(p)}
-function itemsSubtotal(p){return placeItems(p.id).reduce((s,i)=>s+Number(i.price||0),0)}
-function baseTotal(p){return p.total_override!==null&&p.total_override!==''&&p.total_override!==undefined?Number(p.total_override):itemsSubtotal(p)}
-function taxRate(p){return Number(p.tax_rate??5)}
-function taxAmount(p){return p.tax_enabled?baseTotal(p)*taxRate(p)/100:0}
-function totalPrice(p){return baseTotal(p)+taxAmount(p)}
+function visitSubtotal(v){return visitItems(v.id).reduce((sum,i)=>sum+Number(i.price||0),0)}
+function visitBaseTotal(v){return v.total_override!==null&&v.total_override!==''&&v.total_override!==undefined?Number(v.total_override):visitSubtotal(v)}
+function visitTaxRate(v){return Number(v.tax_rate??5)}
+function visitTaxAmount(v){return v.tax_enabled?visitBaseTotal(v)*visitTaxRate(v)/100:0}
+function visitFinalTotal(v){return visitBaseTotal(v)+visitTaxAmount(v)}
+function visitDateAr(v){if(!v)return '—';const d=new Date(v);return `${d.toLocaleDateString('ar-AE',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} • ${d.toLocaleTimeString('ar-AE',{hour:'2-digit',minute:'2-digit'})}`}
 function versionNumber(v){const n=parseFloat(String(v||'0').replace(/[^0-9.]/g,''));return Number.isFinite(n)?n:0}
 function acceptedVersion(){
  if(!state.currentProfile)return state.release?.stable_version||BASELINE_VERSION;
@@ -432,9 +443,9 @@ function openUpdatePrompt(){
 }
 function buildBackupPayload(){
  const generated_at=new Date().toISOString(),version=visibleVersion();
- if(isAdmin())return {app:'THAWAQ',backup_scope:'admin_full_platform',generated_at,version,release:state.release,profiles:state.profiles,places:state.places,items:state.items};
+ if(isAdmin())return {app:'THAWAQ',backup_scope:'admin_full_platform',generated_at,version,release:state.release,profiles:state.profiles,places:state.places,visits:state.visits,items:state.items};
  const id=state.currentProfile?.id,places=state.places.filter(p=>p.owner_id===id),placeIds=new Set(places.map(p=>p.id));
- return {app:'THAWAQ',backup_scope:'user',generated_at,version,profile:state.currentProfile,places,items:state.items.filter(i=>placeIds.has(i.place_id))}
+ return {app:'THAWAQ',backup_scope:'user',generated_at,version,profile:state.currentProfile,places,visits:state.visits.filter(v=>placeIds.has(v.place_id)),items:state.items.filter(i=>placeIds.has(i.place_id))}
 }
 async function downloadBackupBeforeUpdate(){
  if(!state.currentProfile)return toast('سجّل الدخول أولًا');
@@ -456,15 +467,16 @@ function isAdmin(){return state.currentProfile?.role==='admin'}
 function canEdit(p){return !!state.currentProfile&&(state.currentProfile.id===p.owner_id||isAdmin())}
 
 async function loadCloud(){
- const [{data:prof,error:pe},{data:pl,error:ple},{data:it,error:ie},{data:rel,error:re}]=await Promise.all([
+ const [{data:prof,error:pe},{data:pl,error:ple},{data:vi,error:ve},{data:it,error:ie},{data:rel,error:re}]=await Promise.all([
   sb.from('profiles').select('*').order('created_at',{ascending:true}),
   sb.from('places').select('*').order('created_at',{ascending:false}),
+  sb.from('visits').select('*').order('visited_at',{ascending:false}),
   sb.from('items').select('*').order('created_at',{ascending:true}),
   sb.from('app_release').select('*').eq('id','main').maybeSingle()
  ]);
- if(pe||ple||ie){console.error(pe||ple||ie);toast('تعذر تحميل البيانات');return}
+ if(pe||ple||ve||ie){console.error(pe||ple||ve||ie);toast('تعذر تحميل البيانات');return}
  if(re)console.warn('release config',re);
- state.profiles=prof||[];state.places=(pl||[]).map(p=>({...p,tax_enabled:!!p.tax_enabled,tax_rate:Number(p.tax_rate??5)}));state.items=it||[];
+ state.profiles=prof||[];state.places=(pl||[]).map(p=>({...p,tax_enabled:!!p.tax_enabled,tax_rate:Number(p.tax_rate??5)}));state.visits=(vi||[]).map(v=>({...v,tax_enabled:!!v.tax_enabled,tax_rate:Number(v.tax_rate??5)}));state.items=it||[];
  state.release=rel||state.release;
  const {data:{session}}=await sb.auth.getSession();state.session=session;
  state.currentProfile=session?state.profiles.find(p=>p.id===session.user.id)||null:null;
@@ -529,13 +541,20 @@ async function refreshApp(){
   toast('تم جلب آخر تحديث');setTimeout(()=>location.reload(),350);
  }catch(e){console.error(e);toast('تعذر التحديث')}finally{setTimeout(()=>btn?.classList.remove('refreshing'),800)}
 }
+function updateLiveClock(){
+ const now=new Date(),date=$('#liveDate'),time=$('#liveTime');
+ if(date)date.textContent=now.toLocaleDateString('ar-AE',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ if(time)time.textContent=now.toLocaleTimeString('ar-AE',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+function startLiveClock(){updateLiveClock();setInterval(updateLiveClock,1000)}
 async function init(){
+ startLiveClock();
  setupInstallExperience();registerAppServiceWorker();
  const remember=$('#rememberMe');if(remember)remember.checked=localStorage.getItem(REMEMBER_KEY)!=='0';
  if(CLOUD_READY){
   await loadCloud();
   sb.auth.onAuthStateChange(()=>setTimeout(loadCloud,70));
-  ['profiles','places','items','app_release'].forEach(t=>sb.channel('rt-'+t).on('postgres_changes',{event:'*',schema:'public',table:t},()=>loadCloud()).subscribe())
+  ['profiles','places','visits','items','app_release'].forEach(t=>sb.channel('rt-'+t).on('postgres_changes',{event:'*',schema:'public',table:t},()=>loadCloud()).subscribe())
  } else {localLoad();route()}
  $('#demoNote').classList.toggle('hidden',CLOUD_READY);
  $('#brandSub').innerHTML=`<span class="cloud"><span class="dot ${CLOUD_READY?'on':''}"></span>${CLOUD_READY?'متزامن مباشر':'نسخة تجريبية محلية'}</span>`;
@@ -589,7 +608,7 @@ function renderPublic(){
  $('#placeGrid').innerHTML=list.length?list.map(placeCard).join(''):`<div class="empty">لا توجد تقييمات في هذا القسم حتى الآن.</div>`;bindPlaceCards('#placeGrid');
 }
 function placeCard(p){
- return `<article class="place" data-id="${p.id}"><div class="placeimg"><img src="${esc(p.cover_url||placeholder(p.name))}" alt="${esc(p.name)}" onerror="this.src='${placeholder(p.name)}'"><div class="badges"><span class="badge">${typeBadge(p.type)}</span><span class="badge">📍 ${esc(p.city)}</span></div></div><div class="placebody"><h3>${esc(p.name)}</h3><div class="row"><div class="rating">${stars(finalRating(p))}<small>${p.rating_override!==null&&p.rating_override!==''?'تقييم نهائي':'متوسط الأصناف'}</small></div><span>${placeItems(p.id).length} أصناف</span></div></div></article>`
+ return `<article class="place" data-id="${p.id}"><div class="placeimg"><img src="${esc(p.cover_url||placeholder(p.name))}" alt="${esc(p.name)}" onerror="this.src='${placeholder(p.name)}'"><div class="badges"><span class="badge">${typeBadge(p.type)}</span><span class="badge">📍 ${esc(p.city)}</span></div></div><div class="placebody"><h3>${esc(p.name)}</h3><div class="row"><div class="rating">${stars(finalRating(p))}<small>${p.rating_override!==null&&p.rating_override!==''?'تقييم نهائي':'متوسط الأصناف'}</small></div><span>${placeVisits(p.id).length} زيارات · ${placeItems(p.id).length} أصناف</span></div></div></article>`
 }
 function bindPlaceCards(sel){$$(sel+' .place').forEach(c=>c.onclick=()=>openDetail(c.dataset.id))}
 $('#typeSegment').onclick=e=>{const b=e.target.closest('button');if(!b)return;state.selectedType=b.dataset.type;renderPublic()};
@@ -617,7 +636,7 @@ function renderAdmin(){
  $('#publicView').classList.add('hidden');$('#dashboardView').classList.add('hidden');$('#adminView').classList.remove('hidden');
  const users=state.profiles.filter(p=>p.role!=='admin');
  const releaseBox=state.release?.candidate_available?`<div class="releaseCard"><div class="releaseRow"><div><span class="previewBadge">${candidateMode()?'🧪 قيد الاختبار على جهاز المالك':'🔔 تحديث تجريبي بانتظار المالك'}</span><h3 style="margin:9px 0 0">v${esc(state.release.candidate_version)}</h3></div>${candidateMode()?`<button class="btn primary" onclick="approveCandidateRelease()">✓ اعتماد وإرسال الإشعار</button>`:`<button class="btn primary" onclick="openUpdatePrompt()">نسخة احتياطية واختبار التحديث</button>`}</div><p>الإصدار الحالي للمستخدمين: <b>v${esc(state.release.stable_version)}</b><br>${esc(state.release.candidate_notes||'')}<br>لن يصل التحديث للمستخدمين حتى تعتمد النسخة بعد اختبارها. بعد الاعتماد يصل إشعار داخل التطبيق، وخارجه لمن فعّل إشعارات ذواق.</p></div>`:`<div class="releaseCard"><div class="releaseRow"><div><span class="previewBadge">✓ آخر تحديث منشور</span><h3 style="margin:9px 0 0">v${esc(state.release?.stable_version||visibleVersion())}</h3></div></div><p>يظهر للمستخدمين إشعار بالتحديث، ويختار كل مستخدم وقت أخذ النسخة الاحتياطية ثم التحديث على جهازه.</p></div>`;
- $('#adminHero').innerHTML=`<h1>لوحة مالك المنصة</h1><p>إدارة المستخدمين ومراقبة نمو المحتوى. صفحات المستخدمين مستقلة، وكل مستخدم يعدّل محتواه فقط.</p><div class="dashactions"><button class="btn secondary" onclick="setRoute({dashboard:'1'})">لوحة حسابي</button><button class="btn ghost" onclick="logout()">تسجيل الخروج</button></div>${releaseBox}<div class="cards"><div class="metric"><b>${users.length}</b><span>مستخدم</span></div><div class="metric"><b>${users.filter(x=>x.is_active!==false).length}</b><span>حساب نشط</span></div><div class="metric"><b>${visiblePlaces(state.places).length}</b><span>مكان مضاف</span></div><div class="metric"><b>${state.items.length}</b><span>صنف مقيّم</span></div></div>`;
+ $('#adminHero').innerHTML=`<h1>لوحة مالك المنصة</h1><p>إدارة المستخدمين ومراقبة نمو المحتوى. صفحات المستخدمين مستقلة، وكل مستخدم يعدّل محتواه فقط.</p><div class="dashactions"><button class="btn secondary" onclick="setRoute({dashboard:'1'})">لوحة حسابي</button><button class="btn ghost" onclick="logout()">تسجيل الخروج</button></div>${releaseBox}<div class="cards"><div class="metric"><b>${users.length}</b><span>مستخدم</span></div><div class="metric"><b>${users.filter(x=>x.is_active!==false).length}</b><span>حساب نشط</span></div><div class="metric"><b>${visiblePlaces(state.places).length}</b><span>مكان مضاف</span></div><div class="metric"><b>${state.visits.length}</b><span>زيارة مسجلة</span></div><div class="metric"><b>${state.items.length}</b><span>صنف مقيّم</span></div></div>`;
  $('#usersTable').innerHTML=users.map(u=>`<tr><td><b>${esc(u.display_name)}</b><br><span style="color:var(--muted)">@${esc(u.username)}</span></td><td><button class="btn ghost" style="padding:7px 9px" onclick="copyProfile('${esc(u.username)}')">نسخ الرابط</button></td><td>${ownerPlaces(u.id).length}</td><td><span class="status ${u.is_active!==false?'onstatus':'offstatus'}">${u.is_active!==false?'نشط':'موقوف'}</span></td><td>${dateAr(u.created_at)}</td><td><div class="inlineactions"><button class="btn secondary" onclick="setRoute({u:'${esc(u.username)}'})">عرض</button><button class="btn ${u.is_active!==false?'danger':'secondary'}" onclick="toggleUser('${u.id}',${u.is_active!==false})">${u.is_active!==false?'إيقاف':'تفعيل'}</button></div></td></tr>`).join('')||`<tr><td colspan="6">لا يوجد مستخدمون بعد.</td></tr>`;
 }
 async function approveCandidateRelease(){
@@ -739,86 +758,88 @@ $('#savePlaceBtn').onclick=async()=>{
    else{const {error}=await sb.from('places').insert({...payload,owner_id:state.currentProfile.id,tax_enabled:false,tax_rate:5});if(error)throw error}
    await loadCloud()
   }else{
-   if(id)Object.assign(old,payload);else state.places.unshift({id:uid(),owner_id:state.currentProfile.id,...payload,receipt_url:'',total_override:null,tax_enabled:false,tax_rate:5,created_at:new Date().toISOString()});localSave()
+   if(id)Object.assign(old,payload);else{const now=new Date().toISOString(),newPlace={id:uid(),owner_id:state.currentProfile.id,...payload,receipt_url:'',total_override:null,tax_enabled:false,tax_rate:5,created_at:now,updated_at:now};state.places.unshift(newPlace);state.visits.unshift({id:uid(),place_id:newPlace.id,owner_id:newPlace.owner_id,visited_at:now,receipt_url:'',total_override:null,tax_enabled:false,tax_rate:5,notes:'',created_at:now,updated_at:now})}localSave()
   }
   hide('placeModal');renderDashboard();toast('تم حفظ المكان')
  }catch(e){console.error(e);toast('تعذر حفظ المكان')}finally{btn.disabled=false}
 };
 
-function openItemForm(placeId,item=null){
- $('#itemModalTitle').textContent=item?'تعديل الصنف':'إضافة صنف';$('#itemId').value=item?.id||'';$('#itemPlaceId').value=placeId;$('#itemName').value=item?.name||'';$('#itemPrice').value=item?.price??'';$('#itemRating').value=String(item?.rating??5);$('#itemNotes').value=item?.notes||'';$('#itemPhoto').value='';$('#itemPreview').style.display='none';show('itemModal')
+function openItemForm(placeId,visitId,item=null){
+ const chosenVisit=item?.visit_id||visitId||latestVisit(placeId)?.id||'';
+ if(!chosenVisit)return toast('أنشئ زيارة أولًا');
+ $('#itemModalTitle').textContent=item?'تعديل الصنف':'إضافة صنف لهذه الزيارة';$('#itemId').value=item?.id||'';$('#itemPlaceId').value=placeId;$('#itemVisitId').value=chosenVisit;$('#itemName').value=item?.name||'';$('#itemPrice').value=item?.price??'';$('#itemRating').value=String(item?.rating??5);$('#itemNotes').value=item?.notes||'';$('#itemPhoto').value='';$('#itemPreview').style.display='none';show('itemModal')
 }
 $('#saveItemBtn').onclick=async()=>{
- const id=$('#itemId').value,placeId=$('#itemPlaceId').value,p=state.places.find(x=>x.id===placeId);if(!p||!canEdit(p))return toast('لا تملك صلاحية التعديل');
+ const id=$('#itemId').value,placeId=$('#itemPlaceId').value,visitId=$('#itemVisitId').value,p=state.places.find(x=>x.id===placeId),v=state.visits.find(x=>x.id===visitId);if(!p||!v||!canEdit(p))return toast('لا تملك صلاحية التعديل');
  const name=$('#itemName').value.trim();if(!name)return toast('أدخل اسم الصنف');const old=state.items.find(x=>x.id===id),btn=$('#saveItemBtn');btn.disabled=true;
  try{
   const f=$('#itemPhoto').files[0],photo_url=f?await uploadMedia(f,'items'):(old?.photo_url||'');
   const payload={name,price:Number($('#itemPrice').value||0),rating:Number($('#itemRating').value),notes:$('#itemNotes').value.trim(),photo_url,updated_at:new Date().toISOString()};
-  if(CLOUD_READY){if(id){const {error}=await sb.from('items').update(payload).eq('id',id);if(error)throw error}else{const {error}=await sb.from('items').insert({...payload,place_id:placeId,owner_id:p.owner_id});if(error)throw error}await loadCloud()}
-  else{if(id)Object.assign(old,payload);else state.items.push({id:uid(),place_id:placeId,owner_id:p.owner_id,...payload,created_at:new Date().toISOString()});localSave()}
-  hide('itemModal');openDetail(placeId);toast('تم حفظ الصنف')
+  if(CLOUD_READY){if(id){const {error}=await sb.from('items').update(payload).eq('id',id);if(error)throw error}else{const {error}=await sb.from('items').insert({...payload,place_id:placeId,visit_id:visitId,owner_id:p.owner_id});if(error)throw error}await loadCloud()}
+  else{if(id)Object.assign(old,payload);else state.items.push({id:uid(),place_id:placeId,visit_id:visitId,owner_id:p.owner_id,...payload,created_at:new Date().toISOString()});localSave()}
+  hide('itemModal');openDetail(placeId);toast('تم حفظ الصنف بتاريخ هذه الزيارة')
  }catch(e){console.error(e);toast('تعذر حفظ الصنف')}finally{btn.disabled=false}
 };
 
-function openReceipt(placeId){
- const p=state.places.find(x=>x.id===placeId);if(!p||!canEdit(p))return;
- $('#receiptPlaceId').value=placeId;$('#receiptTotal').value=p.total_override??'';$('#receiptPhoto').value='';$('#receiptPreview').style.display='none';show('receiptModal')
+async function addNewVisit(placeId){
+ const p=state.places.find(x=>x.id===placeId);if(!p||!canEdit(p))return;const now=new Date().toISOString();
+ try{
+  if(CLOUD_READY){const {error}=await sb.from('visits').insert({place_id:placeId,owner_id:p.owner_id,visited_at:now,receipt_url:'',total_override:null,tax_enabled:false,tax_rate:5});if(error)throw error;await loadCloud()}
+  else{state.visits.unshift({id:uid(),place_id:placeId,owner_id:p.owner_id,visited_at:now,receipt_url:'',total_override:null,tax_enabled:false,tax_rate:5,notes:'',created_at:now,updated_at:now});localSave()}
+  openDetail(placeId);toast('تمت إضافة زيارة جديدة بتاريخ اليوم')
+ }catch(e){console.error(e);toast('تعذر إضافة الزيارة')}
+}
+function openReceipt(placeId,visitId){
+ const p=state.places.find(x=>x.id===placeId),v=state.visits.find(x=>x.id===visitId);if(!p||!v||!canEdit(p))return;
+ $('#receiptPlaceId').value=placeId;$('#receiptVisitId').value=visitId;$('#receiptTotal').value=v.total_override??'';$('#receiptPhoto').value='';$('#receiptPreview').style.display='none';show('receiptModal')
 }
 $('#saveReceiptBtn').onclick=async()=>{
- const id=$('#receiptPlaceId').value,p=state.places.find(x=>x.id===id);if(!p||!canEdit(p))return;
+ const placeId=$('#receiptPlaceId').value,visitId=$('#receiptVisitId').value,p=state.places.find(x=>x.id===placeId),v=state.visits.find(x=>x.id===visitId);if(!p||!v||!canEdit(p))return;
  const btn=$('#saveReceiptBtn');btn.disabled=true;
  try{
-  const f=$('#receiptPhoto').files[0],receipt_url=f?await uploadMedia(f,'receipts'):(p.receipt_url||'');
+  const f=$('#receiptPhoto').files[0],receipt_url=f?await uploadMedia(f,'receipts'):(v.receipt_url||'');
   const payload={receipt_url,total_override:$('#receiptTotal').value===''?null:Number($('#receiptTotal').value),updated_at:new Date().toISOString()};
-  if(CLOUD_READY){const {error}=await sb.from('places').update(payload).eq('id',id);if(error)throw error;await loadCloud()}else{Object.assign(p,payload);localSave()}
-  hide('receiptModal');openDetail(id);toast('تم حفظ الفاتورة')
+  if(CLOUD_READY){const {error}=await sb.from('visits').update(payload).eq('id',visitId);if(error)throw error;await loadCloud()}else{Object.assign(v,payload);localSave()}
+  hide('receiptModal');openDetail(placeId);toast('تم حفظ فاتورة هذه الزيارة مع الاحتفاظ بالفواتير السابقة')
  }catch(e){console.error(e);toast('تعذر حفظ الفاتورة')}finally{btn.disabled=false}
 };
-async function toggleTax(id){
- const p=state.places.find(x=>x.id===id);if(!p||!canEdit(p))return;
- const next=!p.tax_enabled,payload={tax_enabled:next,tax_rate:Number(p.tax_rate??5),updated_at:new Date().toISOString()};
- try{
-  if(CLOUD_READY){const {error}=await sb.from('places').update(payload).eq('id',id);if(error)throw error;await loadCloud()}
-  else{Object.assign(p,payload);localSave()}
-  openDetail(id);toast(next?'تمت إضافة الضريبة 5%':'تمت إزالة الضريبة')
- }catch(e){console.error(e);toast('تعذر تحديث الضريبة')}
+async function toggleVisitTax(visitId){
+ const v=state.visits.find(x=>x.id===visitId),p=v&&state.places.find(x=>x.id===v.place_id);if(!v||!p||!canEdit(p))return;
+ const next=!v.tax_enabled,payload={tax_enabled:next,tax_rate:Number(v.tax_rate??5),updated_at:new Date().toISOString()};
+ try{if(CLOUD_READY){const {error}=await sb.from('visits').update(payload).eq('id',visitId);if(error)throw error;await loadCloud()}else{Object.assign(v,payload);localSave()}openDetail(p.id);toast(next?'تمت إضافة الضريبة 5% لهذه الزيارة':'تمت إزالة الضريبة من هذه الزيارة')}catch(e){console.error(e);toast('تعذر تحديث الضريبة')}
 }
-
+async function deleteVisit(visitId){
+ const v=state.visits.find(x=>x.id===visitId),p=v&&state.places.find(x=>x.id===v.place_id);if(!v||!p||!canEdit(p))return;
+ if(placeVisits(p.id).length<=1)return toast('لا يمكن حذف الزيارة الوحيدة للمكان');
+ if(!confirm('حذف هذه الزيارة وفاتورتها وكل أصنافها؟'))return;
+ if(CLOUD_READY){const {error}=await sb.from('visits').delete().eq('id',visitId);if(error)return toast('تعذر حذف الزيارة');await loadCloud()}else{state.visits=state.visits.filter(x=>x.id!==visitId);state.items=state.items.filter(x=>x.visit_id!==visitId);localSave()}
+ openDetail(p.id);toast('تم حذف الزيارة')
+}
+function visitCard(v,p,edit){
+ const its=visitItems(v.id),subtotal=visitSubtotal(v),base=visitBaseTotal(v),tax=visitTaxAmount(v),final=visitFinalTotal(v);
+ return `<section class="visitCard"><div class="visitHead"><div><div class="visitDate">📅 ${visitDateAr(v.visited_at)}</div><h4>زيارة رقم ${placeVisits(p.id).slice().reverse().findIndex(x=>x.id===v.id)+1}</h4><div class="visitCount">${its.length} أصناف في هذه الزيارة</div></div>${edit?`<div class="visitActions"><button class="btn primary" onclick="openItemForm('${p.id}','${v.id}')">＋ صنف</button><button class="btn secondary" onclick="openReceipt('${p.id}','${v.id}')">🧾 فاتورة</button>${placeVisits(p.id).length>1?`<button class="btn danger" onclick="deleteVisit('${v.id}')">حذف الزيارة</button>`:''}</div>`:''}</div><div class="items">${its.length?its.map(i=>itemCard(i,edit)).join(''):`<div class="visitEmpty">لم تُضف أصناف لهذه الزيارة بعد.</div>`}</div><div class="visitDivider"></div><div class="receipt"><div class="receiptr"><span>مجموع أصناف الزيارة</span><b>${money(subtotal)}</b></div>${v.total_override!==null&&v.total_override!==''?`<div class="receiptr"><span>المبلغ المسجل قبل الضريبة</span><b>${money(base)}</b></div>`:''}${v.tax_enabled?`<div class="receiptr receiptTax"><span>الضريبة (${visitTaxRate(v)}%)</span><b>＋ ${money(tax)}</b></div>`:''}<div class="receiptr"><span>إجمالي هذه الزيارة</span><span class="total">${money(final)}</span></div>${edit?`<button class="btn ${v.tax_enabled?'secondary':'taxbtn'} taxAction" onclick="toggleVisitTax('${v.id}')">${v.tax_enabled?'إزالة قيمة الضريبة':'＋ إضافة قيمة الضريبة'}</button>`:''}${v.receipt_url?`<img class="visitReceiptThumb" src="${esc(v.receipt_url)}" alt="فاتورة الزيارة">`:`<div class="hint" style="margin-top:10px">لا توجد فاتورة مرفقة لهذه الزيارة.</div>`}</div></section>`
+}
 function openDetail(id){
  state.currentPlaceId=id;const p=state.places.find(x=>x.id===id);if(!p)return;
- const its=placeItems(id),edit=canEdit(p),r=finalRating(p),auto=autoRating(p),subtotal=itemsSubtotal(p),base=baseTotal(p),tax=taxAmount(p),final=totalPrice(p);
- $('#detailContent').innerHTML=`
- <div class="detailhero"><img src="${esc(p.cover_url||placeholder(p.name))}" onerror="this.src='${placeholder(p.name)}'"><button class="close" style="position:absolute;z-index:4;top:13px;left:13px" onclick="hide('detailModal')">×</button></div>
- <div class="detailheading"><div class="badges"><span class="badge">${typeBadge(p.type)}</span><span class="badge">📍 ${esc(p.city)}</span></div><h3>${esc(p.name)}</h3><div class="rating">${stars(r)} <small>${p.rating_override!==null&&p.rating_override!==''?`متوسط الأصناف ${auto?auto.toFixed(1):'—'}`:'تقييم تلقائي من الأصناف'}</small></div></div>
- ${edit?`<div class="detailactions"><button class="btn primary" onclick="hide('detailModal');openItemForm('${p.id}')">＋ صنف</button><button class="btn secondary" onclick="hide('detailModal');openReceipt('${p.id}')">🧾 الفاتورة</button><button class="btn secondary" onclick="editPlace('${p.id}')">✎ تعديل</button><button class="btn danger" onclick="deletePlace('${p.id}')">حذف</button></div>`:''}
- ${p.notes?`<p style="color:#665e55;line-height:1.8">${esc(p.notes)}</p>`:''}
- <div class="sectionhead"><div><h3>الأصناف</h3><p>${its.length} أصناف تم تقييمها</p></div></div>
- <div class="items">${its.length?its.map(i=>itemCard(i,edit)).join(''):`<div class="empty">لم تتم إضافة أصناف بعد.</div>`}</div>
- <div class="receipt">
-   <div class="receiptr"><span>مجموع أسعار الأصناف</span><b>${money(subtotal)}</b></div>
-   ${p.total_override!==null&&p.total_override!==''?`<div class="receiptr"><span>المبلغ المسجل قبل الضريبة</span><b>${money(base)}</b></div>`:''}
-   ${p.tax_enabled?`<div class="receiptr receiptTax"><span>الضريبة (${taxRate(p)}%)</span><b>＋ ${money(tax)}</b></div>`:''}
-   <div class="receiptr"><span>الإجمالي النهائي</span><span class="total">${money(final)}</span></div>
-   ${edit?`<button class="btn ${p.tax_enabled?'secondary':'taxbtn'} taxAction" onclick="toggleTax('${p.id}')">${p.tax_enabled?'إزالة قيمة الضريبة':'＋ إضافة قيمة الضريبة'}</button>`:''}
-   ${p.receipt_url?`<img src="${esc(p.receipt_url)}" style="width:100%;max-height:400px;object-fit:contain;border-radius:14px;margin-top:12px;background:#fff">`:''}
- </div>`;
+ const visits=placeVisits(id),edit=canEdit(p),r=finalRating(p),auto=autoRating(p);
+ $('#detailContent').innerHTML=`<div class="detailhero"><img src="${esc(p.cover_url||placeholder(p.name))}" onerror="this.src='${placeholder(p.name)}'"><button class="close" style="position:absolute;z-index:4;top:13px;left:13px" onclick="hide('detailModal')">×</button></div><div class="detailheading"><div class="badges"><span class="badge">${typeBadge(p.type)}</span><span class="badge">📍 ${esc(p.city)}</span><span class="badge">${visits.length} زيارات</span></div><h3>${esc(p.name)}</h3><div class="rating">${stars(r)} <small>${p.rating_override!==null&&p.rating_override!==''?`متوسط الأصناف ${auto?auto.toFixed(1):'—'}`:'تقييم تلقائي من جميع الأصناف'}</small></div></div>${edit?`<div class="detailactions"><button class="btn primary" onclick="addNewVisit('${p.id}')">＋ زيارة جديدة اليوم</button><button class="btn secondary" onclick="editPlace('${p.id}')">✎ تعديل المكان</button><button class="btn danger" onclick="deletePlace('${p.id}')">حذف المكان</button></div>`:''}${p.notes?`<p style="color:#665e55;line-height:1.8">${esc(p.notes)}</p>`:''}<div class="sectionhead"><div><h3>سجل الزيارات</h3><p>كل زيارة تحتفظ بتاريخها وأصنافها وفاتورتها بشكل مستقل</p></div></div><div class="visitsWrap">${visits.length?visits.map(v=>visitCard(v,p,edit)).join(''):`<div class="empty">لا توجد زيارات مسجلة بعد.</div>`}</div>`;
  show('detailModal')
 }
 function openItemView(id){
  const i=state.items.find(x=>x.id===id);if(!i)return;
  const p=state.places.find(x=>x.id===i.place_id);
- $('#itemViewContent').innerHTML=`<div class="modalhead"><div><div class="badge">${p?typeBadge(p.type):''}${p?` · ${esc(p.name)}`:''}</div></div><button class="close" onclick="hide('itemViewModal')">×</button></div><img class="itemViewImage" src="${esc(i.photo_url||placeholder(i.name))}" alt="${esc(i.name)}" onerror="this.src='${placeholder(i.name)}'"><div class="itemViewBody"><div class="itemViewMeta"><div><h3>${esc(i.name)}</h3><div class="rating">${stars(i.rating)}</div></div><span class="price" style="font-size:20px">${money(i.price)}</span></div><div class="itemDescription"><b>الوصف / الملاحظة</b><br>${i.notes?esc(i.notes):'لا توجد ملاحظة مضافة لهذا الصنف.'}</div></div>`;
+ const v=state.visits.find(x=>x.id===i.visit_id);$('#itemViewContent').innerHTML=`<div class="modalhead"><div><div class="badge">${p?typeBadge(p.type):''}${p?` · ${esc(p.name)}`:''}</div>${v?`<div class="hint" style="margin-top:5px">📅 ${visitDateAr(v.visited_at)}</div>`:''}</div><button class="close" onclick="hide('itemViewModal')">×</button></div><img class="itemViewImage" src="${esc(i.photo_url||placeholder(i.name))}" alt="${esc(i.name)}" onerror="this.src='${placeholder(i.name)}'"><div class="itemViewBody"><div class="itemViewMeta"><div><h3>${esc(i.name)}</h3><div class="rating">${stars(i.rating)}</div></div><span class="price" style="font-size:20px">${money(i.price)}</span></div><div class="itemDescription"><b>الوصف / الملاحظة</b><br>${i.notes?esc(i.notes):'لا توجد ملاحظة مضافة لهذا الصنف.'}</div></div>`;
  show('itemViewModal')
 }
 function itemCard(i,edit){
  return `<div class="item" role="button" tabindex="0" onclick="openItemView('${i.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openItemView('${i.id}')}"><img src="${esc(i.photo_url||placeholder(i.name))}" onerror="this.src='${placeholder(i.name)}'"><div><div class="row"><span class="rating">${stars(i.rating)}</span><span class="price">${money(i.price)}</span></div><h4>${esc(i.name)}</h4>${i.notes?`<div class="row"><span>${esc(i.notes)}</span></div>`:''}<div class="itemOpenHint">اضغط لعرض الصورة والوصف</div>${edit?`<div class="inlineactions" style="margin-top:8px"><button class="btn secondary" onclick="event.stopPropagation();editItem('${i.id}')">تعديل</button><button class="btn danger" onclick="event.stopPropagation();deleteItem('${i.id}')">حذف</button></div>`:''}</div></div>`
 }
 function editPlace(id){const p=state.places.find(x=>x.id===id);if(!p||!canEdit(p))return;hide('detailModal');openPlaceForm(p)}
-function editItem(id){const i=state.items.find(x=>x.id===id),p=i&&state.places.find(x=>x.id===i.place_id);if(!i||!p||!canEdit(p))return;hide('detailModal');openItemForm(p.id,i)}
+function editItem(id){const i=state.items.find(x=>x.id===id),p=i&&state.places.find(x=>x.id===i.place_id);if(!i||!p||!canEdit(p))return;hide('detailModal');openItemForm(p.id,i.visit_id,i)}
 async function deletePlace(id){
  const p=state.places.find(x=>x.id===id);if(!p||!canEdit(p)||!confirm('حذف المكان وكل الأصناف التابعة له؟'))return;
  if(CLOUD_READY){const {error}=await sb.from('places').delete().eq('id',id);if(error)return toast('تعذر الحذف');await loadCloud()}
- else{state.places=state.places.filter(x=>x.id!==id);state.items=state.items.filter(x=>x.place_id!==id);localSave()}
+ else{state.places=state.places.filter(x=>x.id!==id);state.visits=state.visits.filter(x=>x.place_id!==id);state.items=state.items.filter(x=>x.place_id!==id);localSave()}
  hide('detailModal');state.currentProfile?renderDashboard():renderPublic();toast('تم حذف المكان')
 }
 async function deleteItem(id){
